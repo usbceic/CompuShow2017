@@ -6,18 +6,18 @@ CompuSoft is a web-based appplication to nominate students and vote on the categ
 
 ## Requirements
 ```
-  * Python 3.4.6
-  * Django 1.10
-  * PostgreSQL 9.5
-  * psycopg2
-  [...keep adding requirements]
+	* Python 3.4.6
+	* Django 1.10
+	* PostgreSQL 9.5
+	* psycopg2
+	[...keep adding requirements]
 ```
 
 ## Installation
+Create postgreSQL user and database
 ```
-	# create postgreSQL user and database
-	sudo -u postgres createuser -PE -s compusoft
-	sudo -u postgres createdb -O compusoft -E UTF8 compusoft
+sudo -u postgres createuser -PE -s compusoft
+sudo -u postgres createdb -O compusoft -E UTF8 compusoft
 ```
 
 ## License
