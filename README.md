@@ -6,15 +6,18 @@ CompuSoft is a web-based appplication to nominate students and vote on the categ
 
 ## Requirements
 ```
-  - Python 3.4.6
-  - Django 1.10
-  - PostgreSQL 9.5.5
+  * Python 3.4.6
+  * Django 1.10
+  * PostgreSQL 9.5
+  * psycopg2
   [...keep adding requirements]
 ```
 
 ## Installation
 ```
-  coming soon...
+	# create postgreSQL user and database
+	sudo -u postgres createuser -PE -s compusoft
+	sudo -u postgres createdb -O compusoft -E UTF8 compusoft
 ```
 
 ## License
@@ -35,17 +38,11 @@ If you find a bug in CompuSoft, please send an email.
 
 ## Authors
 - Project Leader
-    - Jose Luis Acevedo (joseluisacevedo1995@gmail.com)
         
 - Frontend Developer
-    - Veronica Mazutiel (email)
-        
+
 - Backend Developer
-    - Edwar Yepez (email)
         
 - Pupils
-    - Gustavo Castellanos (email)
-    - David Rodriguez (email)
-        
         
 Special thanks to all who contributed in the project, particularly to CEIC 2016-2017 (usbceic@gmail.com).
