@@ -31,11 +31,11 @@ If you find a bug in CompuSoft, please send an email.
 ```
 
 ## Authors
-### Project Leader
+- Project Leader
         Jose Luis Acevedo
         joseluisacevedo1995@gmail.com
         
-### Front-end Developer
+- Front-end Developer
         Veronica Mazutiel
         [email]
         
