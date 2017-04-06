@@ -31,17 +31,17 @@ If you find a bug in CompuSoft, please send an email.
 ```
 
 ## Authors
-- Project Leader:
-        - Jose Luis Acevedo (joseluisacevedo1995@gmail.com)
+- Project Leader
+    - Jose Luis Acevedo (joseluisacevedo1995@gmail.com)
         
-- Frontend Developer:
-        - Veronica Mazutiel (email)
+- Frontend Developer
+    - Veronica Mazutiel (email)
         
 - Backend Developer
-        - Edwar Yepez (email)
+    - Edwar Yepez (email)
         
 - Pupils
-        - Gustavo Castellanos (email)
-        - David Rodriguez (email)
+    - Gustavo Castellanos (email)
+    - David Rodriguez (email)
         
 Special thanks to all who contributed in the project, particularly to CEIC (usbceic@gmail.com).
