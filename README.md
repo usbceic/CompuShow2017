@@ -25,25 +25,25 @@ Public License version 2.
 Any kind of bug reports are welcome.
 If you find a bug in CompuSoft, please send an email.
 
-                                          Jose Luis Acevedo
-                              joseluisacevedo1995@gmail.com
-                                          usbceic@gmail.com
+                                                                                                            Jose Luis Acevedo
+                                                                                                joseluisacevedo1995@gmail.com
+                                                                                                            usbceic@gmail.com
 ```
 
 ## Authors
-- Project Leader
+### Project Leader
         Jose Luis Acevedo
         joseluisacevedo1995@gmail.com
         
-- Front-end Developer
+### Front-end Developer
         Veronica Mazutiel
         [email]
         
-- Back-end Developer
+### Back-end Developer
         Edwar Yepez
         [email]
         
-- Pupils
+### Pupils
         Gustavo Castellanos
         [email]
         
