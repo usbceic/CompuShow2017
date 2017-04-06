@@ -1,12 +1,15 @@
 # CompuSoft - The Compushow 2017 Software
 
 ## Description
-Web-based appplication to nominate students and vote on the categories of the Compushow 2017 hosted by the Students Center of Computer Science, University Simón Bolívar.
+CompuSoft is a web-based appplication to nominate students and vote on the categories of the Compushow 2017 hosted by the Students Center of Computer Science, University Simón Bolívar.
 
 
 ## Requirements
 ```
-  coming soon...
+  - Python 3.4.6
+  - Django 1.10
+  - PostgreSQL 9.5.5
+  [...keep adding requirements]
 ```
 
 ## Installation
