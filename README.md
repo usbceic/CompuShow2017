@@ -44,4 +44,5 @@ If you find a bug in CompuSoft, please send an email.
     - Gustavo Castellanos (email)
     - David Rodriguez (email)
         
-Special thanks to all who contributed in the project, particularly to CEIC (usbceic@gmail.com).
+        
+Special thanks to all who contributed in the project, particularly to CEIC 2016-2017 (usbceic@gmail.com).
