@@ -1,11 +1,13 @@
-"""
-WSGI config for compusoft project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.10/howto/deployment/wsgi/
-"""
+#####################################################
+#											   		#
+#		CompuSoft - The Compushow 2017 Software	    #
+#											   		#
+#####################################################
+#													#
+#	- entry-point for WSGI-compatible web 			#
+#	  servers to serve CompuSoft.					#
+#													#
+#####################################################
 
 import os
 

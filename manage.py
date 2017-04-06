@@ -1,3 +1,14 @@
+#####################################################
+#                                                   #
+#       CompuSoft - The Compushow 2017 Software     #
+#                                                   #
+#####################################################
+#                                                   #
+#       - Command-line utility to interact          #
+#         with CompuSoft.                           #
+#                                                   #
+#####################################################
+
 #!/usr/bin/env python
 import os
 import sys

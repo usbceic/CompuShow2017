@@ -4,13 +4,14 @@
 #                                                   #
 #####################################################
 #                                                   #
-#  	   - Views file of the voting module.  			#
+#  - URL configuration file of voting module.   	#
 #                                                   #
 #####################################################
 
 
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.conf.urls import url
+from . import views
 
-def index(request):
-	return HttpResponse("VOTING MODULE: Under development...")
+urlpatterns = [
+	url(r'^$', views.index, name='index'),
+]
