@@ -9,6 +9,7 @@
 #####################################################
 
 from django.db import models
+from django.conf import settings
 from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 
@@ -23,7 +24,7 @@ class Entity(models.Model):
 
 class Person(models.Model):
 
-	person_id = models.CharField(
+	ci = models.CharField(
 		max_length=200,
 		unique=True,
 		null=True,
@@ -66,6 +67,26 @@ class Student(models.Model):
 		validators=[RegexValidator(regex='^([0-9]){2}-([0-9]){5}$')]	
 	)
 	career = models.CharField(max_length=200)
+	person = models.OneToOneField(
+		Person,
+		on_delete = models.CASCADE,
+		related_name = 'student',
+		null = True,
+	)
+	user = models.OneToOneField(
+		settings.AUTH_USER_MODEL,
+		on_delete = models.CASCADE,
+		related_name = 'student',
+		null = True,
+	)
 
 	class Meta:
 		db_table = 'student'
+
+class Category(models.Model):
+
+	name = models.CharField(max_length=200)
+	description = models.TextField(null=True)
+
+	class Meta:
+		db_Table = 'category'
