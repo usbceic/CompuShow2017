@@ -20,6 +20,11 @@ Create postgreSQL user and database
 sudo -u postgres createuser -PE -s compusoft
 sudo -u postgres createdb -O compusoft -E UTF8 compusoft
 ```
+Create admin user for admin site
+```
+python3 manage.py createsuperuser.
+Username: adminusername
+```
 
 ## License
 ```

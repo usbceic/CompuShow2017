@@ -6,10 +6,6 @@
 #                                                   #
 #  	 - Admin site file of the nomination module.    #
 #  													#
-#	   Superuser: 									#
-#			username: compusoft 					#
-#			password: ceic traditional password		#
-#                                                   #
 #####################################################
 
 from django.contrib import admin
