@@ -113,3 +113,21 @@ class Nominate(models.Model):
 
 	class Meta:
 		db_table = 'nominate'
+
+class Nominee(models.Model):
+
+	votes = models.IntegerField(default=0)
+	nominations = models.IntegerField(default=0)
+	entity = models.ForeignKey(
+		Entity,
+		on_delete = models.CASCADE,
+		null=True,
+	)
+	category = models.ForeignKey(
+		Category,
+		on_delete = models.CASCADE,
+		null=True,
+	)	
+
+	class Meta:
+		db_table = 'nominee'
