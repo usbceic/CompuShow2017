@@ -6,11 +6,12 @@ CompuSoft is a web-based appplication to nominate students and vote on the categ
 
 ## Requirements
 ```
-	* Python 3.4.6
-	* Django 1.10
-	* PostgreSQL 9.5
-	* psycopg2
-	[...keep adding requirements]
+* Python 3.4.6
+* Django 1.10
+* PostgreSQL 9.5
+* psycopg2
+* Pillow
+[...keep adding requirements]
 ```
 
 ## Installation
