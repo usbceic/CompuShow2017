@@ -89,4 +89,27 @@ class Category(models.Model):
 	description = models.TextField(null=True)
 
 	class Meta:
-		db_Table = 'category'
+		db_table = 'category'
+
+class Nominate(models.Model):
+
+	datetime = models.DateTimeField(auto_now=True)
+	active = models.BooleanField(default=True)
+	nominator = models.ForeignKey(
+		settings.AUTH_USER_MODEL,
+		on_delete = models.CASCADE,
+		null=True,
+	)
+	nominee = models.ForeignKey(
+		Entity,
+		on_delete = models.CASCADE,
+		null=True,
+	)
+	category = models.ForeignKey(
+		Category,
+		on_delete = models.CASCADE,
+		null=True,
+	)
+
+	class Meta:
+		db_table = 'nominate'
