@@ -9,6 +9,8 @@
 #####################################################
 
 from django.db import models
+from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
 
 class Entity(models.Model):
 	# Handle photos later
@@ -21,10 +23,16 @@ class Entity(models.Model):
 
 class Person(models.Model):
 
-	ssn = models.CharField(max_length=200, unique=True, null=True)
+	person_id = models.CharField(
+		max_length=200,
+		unique=True,
+		null=True,
+		validators=[RegexValidator(regex='^([0-9])+$')]
+	)
 	name = models.CharField(max_length=200)
 	surname = models.CharField(max_length=200)
 	email = models.EmailField(unique=True)
+	status = models.CharField(max_length=20, null=True)
 	entity = models.OneToOneField(
 		Entity,
 		on_delete = models.CASCADE,
@@ -48,3 +56,16 @@ class Group(models.Model):
 
 	class Meta:
 		db_table = 'group'
+
+class Student(models.Model):
+
+	student_id = models.CharField(
+		max_length=10,
+		unique=True,
+		null=True,
+		validators=[RegexValidator(regex='^([0-9]){2}-([0-9]){5}$')]	
+	)
+	career = models.CharField(max_length=200)
+
+	class Meta:
+		db_table = 'student'
