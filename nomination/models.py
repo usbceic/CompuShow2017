@@ -19,8 +19,14 @@ class Entity(models.Model):
 	#nominee_photo = models.ImageField(upload_to=something,max_length=200, null=True)
 	#winner_photo = models.ImageField(upload_to=something,max_length=200, null=True)
 
+	def __str__(self):
+		return self.id
+
 	class Meta:
 		db_table = 'entity'
+		verbose_name = "Entity"
+		verbose_name_plural = "Entities"
+
 
 class Person(models.Model):
 
@@ -41,8 +47,14 @@ class Person(models.Model):
 		null = True,
 	)
 
+	def __str__(self):
+		return self.ci
+
 	class Meta:
 		db_table = 'person'
+		verbose_name = "Person"
+		verbose_name_plural = "People"
+
 
 class Group(models.Model):
 
@@ -55,8 +67,14 @@ class Group(models.Model):
 		null = True,
 	)
 
+	def __str__(self):
+		return self.name
+
 	class Meta:
 		db_table = 'group'
+		verbose_name = "Group"
+		verbose_name_plural = "Groups"
+
 
 class Student(models.Model):
 
@@ -80,8 +98,14 @@ class Student(models.Model):
 		null = True,
 	)
 
+	def __str__(self):
+		return self.student_id
+
 	class Meta:
 		db_table = 'student'
+		verbose_name = "Student"
+		verbose_name_plural = "Students"
+
 
 class Category(models.Model):
 
@@ -90,6 +114,9 @@ class Category(models.Model):
 
 	class Meta:
 		db_table = 'category'
+		verbose_name = "Category"
+		verbose_name_plural = "Categories"
+
 
 class Nominate(models.Model):
 
@@ -111,8 +138,15 @@ class Nominate(models.Model):
 		null=True,
 	)
 
+	def __str__(self):
+		return self.id
+
 	class Meta:
 		db_table = 'nominate'
+		verbose_name = "Nomination"
+		verbose_name_plural = "Nominations"
+		unique_together = ('nominator','nominee','category')
+
 
 class Nominee(models.Model):
 
@@ -129,8 +163,15 @@ class Nominee(models.Model):
 		null=True,
 	)	
 
+	def __str__(self):
+		return self.id
+
 	class Meta:
 		db_table = 'nominee'
+		verbose_name = "Nominee"
+		verbose_name_plural = "Nominees"
+		unique_together = ('entity','category')
+
 
 class Winner(models.Model):
 
@@ -146,5 +187,11 @@ class Winner(models.Model):
 		null=True,
 	)	
 
+	def __str__(self):
+		return self.id
+
 	class Meta:
 		db_table = 'winner'
+		verbose_name = "Winner"
+		verbose_name_plural = "Winners"
+		unique_together = ('entity','category')
