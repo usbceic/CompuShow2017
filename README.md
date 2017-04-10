@@ -10,6 +10,7 @@ CompuSoft is a web-based appplication to nominate students and vote on the categ
 * Django 1.10
 * PostgreSQL 9.5
 * psycopg2
+* python-ldap
 * Pillow
 [...keep adding requirements]
 ```
@@ -23,7 +24,6 @@ sudo -u postgres createdb -O compusoft -E UTF8 compusoft
 Create admin user for admin site
 ```
 python3 manage.py createsuperuser.
-Username: adminusername
 ```
 
 ## License
