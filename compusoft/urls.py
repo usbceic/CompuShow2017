@@ -13,7 +13,9 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
+	url(r'^', include('nomination.urls')),
 	url(r'^vote/', include('voting.urls')),
 	url(r'^nominate/', include('nomination.urls')),
+	url(r'^accounts/', include('nomination.urls')),
 	url(r'^admin/', admin.site.urls),
 ]

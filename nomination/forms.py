@@ -4,17 +4,23 @@
 #                                                   #
 #####################################################
 #                                                   #
-#  - URL configuration file of nomination module.   #
+#  	  				Forms file.  					#
 #                                                   #
 #####################################################
 
+from django import forms
+from django.core.validators import RegexValidator
 
-from django.conf.urls import url
+class LoginForm(forms.Form):
+	student_id = forms.CharField(
+		label = "ID",
+		strip = True,
+		validators = [RegexValidator(
+			regex = '^([0-9]){2}-([0-9]){5}$',
+			message = "Invalid ID. XX-XXXXX")],
+	)
 
-from . import views
-
-app_name = 'nomination'
-urlpatterns = [
-	url(r'^$', views.index, name='index'),
-	url(r'^login/$', views.login, name='login'),
-]
+	password = forms.CharField(
+		label = "Password",
+		widget = forms.PasswordInput,
+	)

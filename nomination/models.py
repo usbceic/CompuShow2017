@@ -38,7 +38,7 @@ class Person(models.Model):
 	)
 	name = models.CharField(max_length=200)
 	surname = models.CharField(max_length=200)
-	email = models.EmailField(unique=True)
+	email = models.EmailField(unique=True, null=True)
 	status = models.CharField(max_length=20, null=True)
 	entity = models.OneToOneField(
 		Entity,
@@ -82,7 +82,7 @@ class Student(models.Model):
 		max_length=10,
 		unique=True,
 		null=True,
-		validators=[RegexValidator(regex='^([0-9]){2}-([0-9]){5}$')]	
+		validators=[RegexValidator(regex='^([0-9]){2}-([0-9]){5}$')]
 	)
 	career = models.CharField(max_length=200)
 	person = models.OneToOneField(
