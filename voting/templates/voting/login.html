@@ -1,8 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'voting/base.html' %}
 
 {% block content %}
 <p>log in with your student id</p>
-<form action="{% url 'nomination:login' %}" method="post">
+<form action="{% url 'voting:login' %}" method="post">
 	{% csrf_token %}
 	{{ form }}
 	<input type="submit" value="Log in"/>

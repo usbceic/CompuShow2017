@@ -4,7 +4,7 @@
 #                                                   #
 #####################################################
 #                                                   #
-#   - Library of functions for nomination module.  	#
+#  			    - Library of functions.  			#
 #                                                   #
 #####################################################
 
@@ -17,6 +17,7 @@ from django.contrib.auth.models import User
 def user_is_registered(student_id):
 	return Student.objects.filter(student_id = student_id).exists()
 
+# Validate student in LDAP of USB and register in database
 def validate_and_register_user(student_id):
 	
 	server = ldap3.Server('ldap.usb.ve', get_info=ldap3.ALL)
@@ -33,6 +34,7 @@ def validate_and_register_user(student_id):
 	else:
 		return 'id not found'
 
+# Register student in CompuSoft database
 def register_user(entry):
 	entity = Entity.objects.create()
 	person = Person.objects.create(
@@ -58,5 +60,6 @@ def register_user(entry):
 		user = user,
 	)
 
+# Log in
 def login_user(student_id, password):
 	return authenticate(username=student_id, password=password)

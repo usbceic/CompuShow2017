@@ -4,7 +4,7 @@
 #                                                   #
 #####################################################
 #                                                   #
-#  - URL configuration file of voting module.   	#
+#  			   - URL configuration file.   			#
 #                                                   #
 #####################################################
 
@@ -16,4 +16,5 @@ from . import views
 app_name = 'voting'
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
+	url(r'^login/$', views.login, name='login'),
 ]

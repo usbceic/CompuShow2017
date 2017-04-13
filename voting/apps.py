@@ -4,9 +4,10 @@
 #                                                   #
 #####################################################
 #                                                   #
-#    - App declaration file of voting module.  		#
+#    			- App declaration file.  			#
 #                                                   #
 #####################################################
+
 
 from django.apps import AppConfig
 

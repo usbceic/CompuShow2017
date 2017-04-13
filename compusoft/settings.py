@@ -25,7 +25,6 @@ ALLOWED_HOSTS = ['localhost','127.0.0.1']
 # Application definition
 INSTALLED_APPS = [
     'voting.apps.VotingConfig',
-    'nomination.apps.NominationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -111,4 +110,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Login redirection
-LOGIN_URL = '/accounts/login/'
+LOGIN_URL = '/login/'
