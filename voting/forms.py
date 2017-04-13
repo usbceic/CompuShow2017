@@ -17,7 +17,7 @@ class LoginForm(forms.Form):
 		strip = True,
 		validators = [RegexValidator(
 			regex = '^([0-9]){2}-([0-9]){5}$',
-			message = "Invalid ID. XX-XXXXX")],
+			message = "Invalid ID e.g. 00-12345")],
 	)
 
 	password = forms.CharField(

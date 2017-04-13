@@ -34,16 +34,15 @@ def login(request):
 				result = validate_and_register_user(student_id)
 				if result == 'id not found':
 					# student id not found in ldap
-					pass
+					return render(request, 'voting/login.html', {'form':form, 'invalid':True, 'notfound':True})
+					
 				elif result == 'not computer science student':
-					pass
-				elif result == 'successful registration':
-					pass
+					return render(request, 'voting/login.html', {'form':form, 'invalid':True, 'notcs':True})					
 
 			if login_user(student_id, password):
 				return HttpResponseRedirect('/admin/')
 			else:
-				return render(request, 'voting/login.html', {'form':form, 'invalid': 'invalid credentials'})
+				return render(request, 'voting/login.html', {'form':form, 'invalid':True, 'invalidpasswd':True})
 
 		else:
 			return render(request, 'voting/login.html', {'form':form})

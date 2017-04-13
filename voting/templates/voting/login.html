@@ -9,22 +9,32 @@
 
 {% block body %}
 
+
 	<div class="container">
 		<form class="form-login" action="{% url 'voting:login' %}" method="post">
 			<h2 class="form-login-heading text-center">Logo Compushow</h2>
 		
 			{% csrf_token %}
 			<div>
-				{{ form.student_id.errors }}
 				{{ form.student_id }}
 			</div>
 			<div>
-				{{ form.password.errors }}
 				{{ form.password }}
 			</div>			
 
+			{% if invalid or form.student_id.errors %}
+				<div class="alert alert-danger alert-dismissable fade in invalid">
+					{% if form.student_id.errors %}<strong>Error:</strong> Invalid ID. e.g. 12-34567{% endif %}
+					{% if notfound %}<strong>Error:</strong> ID not found.{% endif %}
+					{% if notcs %}<strong>Alert:</strong> You are not registered as a computer science student.{% endif %}
+					{% if invalidpasswd %}<strong>Alert:</strong> Password does not match.{% endif %}
+				</div>
+			{% endif %}
+
 			<button id="loginbtn" class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
 		</form>
+
 	</div>
 
-{% endblock body%}
+
+{% endblock body %}
