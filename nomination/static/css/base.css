@@ -1,0 +1,21 @@
+#main-navbar {
+    margin-bottom: 0;
+    z-index: 9999;
+    border: 0;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
+}
+
+#main-navbar ul li a:hover {
+	background: #DCDCDC;
+}
+
+#main-navbar ul li:hover{
+	border-bottom: 2px solid #DCDCDC;
+}
+
+#main-navbar ul li.actived {
+	border-bottom: 2px solid gray;
+}
