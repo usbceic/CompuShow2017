@@ -1,13 +1,30 @@
 {% extends 'voting/base.html' %}
 
-{% block content %}
-<p>log in with your student id</p>
-<form action="{% url 'voting:login' %}" method="post">
-	{% csrf_token %}
-	{{ form }}
-	<input type="submit" value="Log in"/>
-</form>
-{% if invalid %}
-	<p>malo</p>
-{% endif %}
-{% endblock %}
+{% block css %}
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/login.css' %}"/>
+{% endblock css %}
+
+{% block navbar %}{% endblock navbar %}
+
+{% block body %}
+
+	<div class="container">
+		<form class="form-login" action="{% url 'voting:login' %}" method="post">
+			<h2 class="form-login-heading text-center">Logo Compushow</h2>
+		
+			{% csrf_token %}
+			<div>
+				{{ form.student_id.errors }}
+				{{ form.student_id }}
+			</div>
+			<div>
+				{{ form.password.errors }}
+				{{ form.password }}
+			</div>			
+
+			<button id="loginbtn" class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+		</form>
+	</div>
+
+{% endblock body%}

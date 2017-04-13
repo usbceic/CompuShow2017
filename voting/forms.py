@@ -24,3 +24,19 @@ class LoginForm(forms.Form):
 		label = "Password",
 		widget = forms.PasswordInput,
 	)
+
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['student_id'].widget.attrs.update({
+			'id': 'inputID',
+			'class': 'form-control',
+			'placeholder': 'Student ID',
+			'autofocus': True,
+			'required': True
+		})
+		self.fields['password'].widget.attrs.update({
+			'id': 'inputPassword',
+			'class': 'form-control',
+			'placeholder': 'Password',
+			'required': True
+		})
