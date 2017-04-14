@@ -7,10 +7,3 @@
 //  		    Base Javascript of header.  		  //
 //                                                    //
 ////////////////////////////////////////////////////////
-
-// Wait until page loads
-$(function() {
-
-	// Code
-
-});

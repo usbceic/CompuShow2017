@@ -15,6 +15,9 @@
 	</head>
 	<body>
 
+		<!-- Scripts (before html) -->
+		<script type="text/javascript" src="{% static 'voting/js/base.js' %}"></script>
+
 		<!-- Navigation bar -->
 		{% block navbar %}
 			<nav id="main-navbar" class="navbar navbar-default navbar-static-top">
@@ -26,7 +29,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="#index">Logo</a>
+						<a class="navbar-brand" href="{% url 'voting:index' %}">Logo</a>
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul id="navbar-left" class="nav navbar-nav">
@@ -59,9 +62,9 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown main-navbar-element">
 								<a href="#myprofile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									<!--<span style="display:inline-block; width: 35px;"></span>-->
-									<img src="{% static request.session.profileimage %}" width="30" height="30" class="profile-image">
-									<span class="profile-name">{{ request.user.first_name }}</span>
+									<span id="profilename">{{ request.user.first_name }}</span>
+									<span style="display:inline-block; width:30px;"></span>
+									<img id="profileimage" src="{% static request.session.profileimage %}" width="30" height="30">
 								</a>
 								<ul class="dropdown-menu">
 									<li><a href="#viewrifle">View profile</a></li>
@@ -94,7 +97,5 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<!-- Bootstrap core JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<!-- Scripts -->
-		<script type="text/javascript" src="{% static 'voting/js/base.js' %}"></script>
 	</body>
 </html>
