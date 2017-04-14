@@ -10,7 +10,7 @@
 
 import ldap3
 from .models import Entity, Person, Student
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
 # Checks if student is registered in CompuSoft database
@@ -36,7 +36,9 @@ def validate_and_register_user(student_id):
 
 # Register student in CompuSoft database
 def register_user(entry):
-	entity = Entity.objects.create()
+	entity = Entity.objects.create(
+		profile_photo = 'defaultProfilePhoto.jpg'
+	)
 	person = Person.objects.create(
 		ci = str(entry.personalId),
 		name = str(entry.givenName),
@@ -60,6 +62,9 @@ def register_user(entry):
 		user = user,
 	)
 
-# Log in
-def login_user(student_id, password):
-	return authenticate(username=student_id, password=password)
+# Get filename of user profile image
+def get_user_image(user):
+	student = user.student
+	person = student.person
+	entity = person.entity
+	return str(entity.profile_photo)

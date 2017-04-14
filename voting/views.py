@@ -9,7 +9,10 @@
 #####################################################
 
 
+from django.conf import settings
 from django.shortcuts import render
+from django.contrib.auth import authenticate, logout
+from django.contrib.auth import login as loginUser
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
@@ -18,7 +21,10 @@ from .library import *
 
 @login_required()
 def index(request):
-	return HttpResponse("COMPUSOFT: Under development...")
+	return render(request, 'voting/index.html', {
+		'username': request.user.first_name.split()[0],
+		'profileimage':request.session['profileimage'],
+	})
 
 
 def login(request):
@@ -39,8 +45,13 @@ def login(request):
 				elif result == 'not computer science student':
 					return render(request, 'voting/login.html', {'form':form, 'invalid':True, 'notcs':True})					
 
-			if login_user(student_id, password):
-				return HttpResponseRedirect('/admin/')
+			user = authenticate(username=student_id, password=password)
+			
+			if user is not None:
+				loginUser(request, user)
+				request.session['profileimage'] = '/voting/images/profilePhotos/' + get_user_image(user)
+				return HttpResponseRedirect('/')
+			
 			else:
 				return render(request, 'voting/login.html', {'form':form, 'invalid':True, 'invalidpasswd':True})
 

@@ -14,8 +14,8 @@ from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 
 class Entity(models.Model):
-	# Handle photos later
-	#profile_photo = models.ImageField(upload_to=something,max_length=200, null=True)
+
+	profile_photo = models.ImageField(upload_to='profilePhoto/',max_length=200, null=True)
 	#nominee_photo = models.ImageField(upload_to=something,max_length=200, null=True)
 	#winner_photo = models.ImageField(upload_to=something,max_length=200, null=True)
 
