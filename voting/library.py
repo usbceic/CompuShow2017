@@ -52,7 +52,8 @@ def register_user(entry):
 		email = str(entry.mail),
 		password = str(entry.personalId),
 	)
-	user.first_name = str(entry.givenName)
+	# Keep only first name
+	user.first_name = str(entry.givenName).split()[0]
 	user.last_name = str(entry.sn)
 	user.save()	
 	student = Student.objects.create(

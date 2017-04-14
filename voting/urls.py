@@ -16,5 +16,9 @@ from . import views
 app_name = 'voting'
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
+	url(r'^nominate/$', views.nominate, name='nominate'),
+	url(r'^mynominees/$', views.my_nominees, name='my_nominees'),
+	url(r'^vote/$', views.vote, name='vote'),
+	url(r'^myvotes/$', views.my_votes, name='my_votes'),
 	url(r'^login/$', views.login, name='login'),
 ]

@@ -35,7 +35,7 @@
 								<a href="#nominations" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">NOMINATIONS</a>
 								<ul class="dropdown-menu">
 									<li><a href="#nominations">Nominate</a></li>
-									<li><a href="#mynominations">My nominations</a></li>
+									<li><a href="#mynominations">My nominees</a></li>
 								</ul>
 							</li>
 							<li class="dropdown main-navbar-element">
@@ -59,9 +59,9 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown main-navbar-element">
 								<a href="#myprofile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									<img src="{% static profileimage %}" width="30" height="30" class="profile-image">
 									<span style="display:inline-block; width: 35px;"></span>
-									{{ username }}
+									<img src="{% static request.session.profileimage %}" width="30" height="30" class="profile-image">
+									{{ request.user.first_name }}
 								</a>
 								<ul class="dropdown-menu">
 									<li><a href="#viewrifle">View profile</a></li>

@@ -22,12 +22,14 @@ from .library import *
 @login_required()
 def index(request):
 	return render(request, 'voting/index.html', {
-		'username': request.user.first_name.split()[0],
-		'profileimage':request.session['profileimage'],
 	})
 
-
 def login(request):
+
+	# Redirect if user already logged in
+	if request.user.is_authenticated():
+		return HttpResponseRedirect('/')
+
 	if request.method == 'POST':
 
 		form = LoginForm(request.POST)
@@ -61,3 +63,15 @@ def login(request):
 	else:
 		form = LoginForm()
 		return render(request, 'voting/login.html', {'form':form})
+
+def nominate(request):
+	return HttpResponse("NOMINATE")
+
+def my_nominees(request):
+	return HttpResponse("MY NOMINEES")
+
+def vote(request):
+	return HttpResponse("VOTE")
+
+def my_votes(request):
+	return HttpResponse("MY VOTES")
