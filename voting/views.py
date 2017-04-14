@@ -11,8 +11,7 @@
 
 from django.conf import settings
 from django.shortcuts import render
-from django.contrib.auth import authenticate, logout
-from django.contrib.auth import login as loginUser
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
@@ -25,7 +24,7 @@ def index(request):
 		'home':True,
 	})
 
-def login(request):
+def log_in(request):
 
 	# Redirect if user already logged in
 	if request.user.is_authenticated():
@@ -51,7 +50,7 @@ def login(request):
 			user = authenticate(username=student_id, password=password)
 			
 			if user is not None:
-				loginUser(request, user)
+				login(request, user)
 				request.session['profileimage'] = '/voting/images/profilePhotos/' + get_user_image(user)
 				return HttpResponseRedirect('/')
 			
@@ -65,22 +64,31 @@ def login(request):
 		form = LoginForm()
 		return render(request, 'voting/login.html', {'form':form})
 
+@login_required()
 def nominate(request):
 	return render(request, 'voting/nominate.html', {
 		'nominations':True,
 	})
 
+@login_required()
 def my_nominees(request):
 	return render(request, 'voting/my_nominees.html', {
 		'nominations':True,
 	})
 
+@login_required()
 def vote(request):
 	return render(request, 'voting/vote.html', {
 		'voting':True,
 	})
 
+@login_required()
 def my_votes(request):
 	return render(request, 'voting/my_votes.html', {
 		'voting':True,
 	})
+
+@login_required()
+def log_out(request):
+	logout(request)
+	return HttpResponseRedirect('/login/')
