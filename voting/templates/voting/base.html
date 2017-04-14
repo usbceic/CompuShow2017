@@ -15,9 +15,6 @@
 	</head>
 	<body>
 
-		<!-- Scripts (before html) -->
-		<script type="text/javascript" src="{% static 'voting/js/base.js' %}"></script>
-
 		<!-- Navigation bar -->
 		{% block navbar %}
 			<nav id="main-navbar" class="navbar navbar-default navbar-static-top">
@@ -71,7 +68,7 @@
 									<li><a href="#editprifle">Edit profile</a></li>
 									<li><a href="#editprifle">My nominations</a></li>
 									<li class="divider"></li>
-									<li><a href="{% url 'voting:log_out' %}">Log out</a></li>
+									<li><a data-toggle="modal" data-target="#logOutModal">Log out</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -93,9 +90,32 @@
 			</footer>
 		{% endblock footer %}
 
+		<!-- Logout Modal (pop up window) -->
+		<div id="logOutModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title text-center">Good bye {{ request.user.first_name }}</h4>
+					</div>
+					<div class="modal-body text-center">
+						<p>Are you sure you want to log out?</p>
+					</div>
+					<div class="modal-footer">
+						<form action="{% url 'voting:log_out' %}" >
+							<input type="submit" class="btn btn-danger btn-block" value="Yes, log me out"/>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!-- JQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<!-- Bootstrap core JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		{% block javascript %}{% endblock javascript %}
 	</body>
 </html>
