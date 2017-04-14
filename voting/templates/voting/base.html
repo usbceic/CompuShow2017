@@ -30,19 +30,19 @@
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul id="navbar-left" class="nav navbar-nav">
-							<li class="main-navbar-element actived"><a href="#">HOME</a></li>
-							<li class="dropdown main-navbar-element">
+							<li class="main-navbar-element {% if home %}actived{% endif %}"><a href="{% url 'voting:index' %}">HOME</a></li>
+							<li class="dropdown main-navbar-element {% if nominations %}actived{% endif %}">
 								<a href="#nominations" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">NOMINATIONS</a>
 								<ul class="dropdown-menu">
-									<li><a href="#nominations">Nominate</a></li>
-									<li><a href="#mynominations">My nominees</a></li>
+									<li><a href="{% url 'voting:nominate' %}">Nominate</a></li>
+									<li><a href="{% url 'voting:my_nominees' %}">My nominees</a></li>
 								</ul>
 							</li>
-							<li class="dropdown main-navbar-element">
+							<li class="dropdown main-navbar-element {% if voting %}actived{% endif %}">
 								<a href="#voting" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VOTING</a>
 								<ul class="dropdown-menu">
-									<li><a href="#vote">Vote</a></li>
-									<li><a href="#myvotes">My Votes</a></li>
+									<li><a href="{% url 'voting:vote' %}">Vote</a></li>
+									<li><a href="{% url 'voting:my_votes' %}">My Votes</a></li>
 								</ul>
 							</li>
 							<form class="navbar-form navbar-left main-navbar-element">
@@ -59,9 +59,9 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown main-navbar-element">
 								<a href="#myprofile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									<span style="display:inline-block; width: 35px;"></span>
+									<!--<span style="display:inline-block; width: 35px;"></span>-->
 									<img src="{% static request.session.profileimage %}" width="30" height="30" class="profile-image">
-									{{ request.user.first_name }}
+									<span class="profile-name">{{ request.user.first_name }}</span>
 								</a>
 								<ul class="dropdown-menu">
 									<li><a href="#viewrifle">View profile</a></li>
@@ -94,6 +94,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<!-- Bootstrap core JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+		<!-- Scripts -->
+		<script type="text/javascript" src="{% static 'voting/js/base.js' %}"></script>
 	</body>
 </html>

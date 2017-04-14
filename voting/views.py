@@ -22,6 +22,7 @@ from .library import *
 @login_required()
 def index(request):
 	return render(request, 'voting/index.html', {
+		'home':True,
 	})
 
 def login(request):
@@ -65,13 +66,21 @@ def login(request):
 		return render(request, 'voting/login.html', {'form':form})
 
 def nominate(request):
-	return HttpResponse("NOMINATE")
+	return render(request, 'voting/nominate.html', {
+		'nominations':True,
+	})
 
 def my_nominees(request):
-	return HttpResponse("MY NOMINEES")
+	return render(request, 'voting/my_nominees.html', {
+		'nominations':True,
+	})
 
 def vote(request):
-	return HttpResponse("VOTE")
+	return render(request, 'voting/vote.html', {
+		'voting':True,
+	})
 
 def my_votes(request):
-	return HttpResponse("MY VOTES")
+	return render(request, 'voting/my_votes.html', {
+		'voting':True,
+	})
