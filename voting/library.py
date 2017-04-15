@@ -9,7 +9,7 @@
 #####################################################
 
 import ldap3
-from .models import Entity, Person, Student
+from .models import *
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
@@ -69,3 +69,7 @@ def get_user_image(user):
 	person = student.person
 	entity = person.entity
 	return str(entity.profile_photo)
+
+# Get information about Compushow categories
+def get_categories():
+	return Category.objects.all()

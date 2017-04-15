@@ -66,14 +66,12 @@ def log_in(request):
 
 @login_required()
 def nominate(request):
+	
+	categories = get_categories()
+
 	return render(request, 'voting/nominate.html', {
 		'nominations':True,
-	})
-
-@login_required()
-def my_nominees(request):
-	return render(request, 'voting/my_nominees.html', {
-		'nominations':True,
+		'categories':categories,
 	})
 
 @login_required()

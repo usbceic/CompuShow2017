@@ -15,7 +15,7 @@ from django.core.exceptions import ValidationError
 
 class Entity(models.Model):
 
-	profile_photo = models.ImageField(upload_to='profilePhoto/',max_length=200, null=True)
+	profile_photo = models.ImageField(upload_to='profilePhotos/',max_length=200, null=True)
 	#nominee_photo = models.ImageField(upload_to=something,max_length=200, null=True)
 	#winner_photo = models.ImageField(upload_to=something,max_length=200, null=True)
 
@@ -111,6 +111,7 @@ class Category(models.Model):
 
 	name = models.CharField(max_length=200)
 	description = models.TextField(null=True)
+	image = models.ImageField(upload_to='categoryImages/',max_length=200, null=True)
 
 	class Meta:
 		db_table = 'category'
