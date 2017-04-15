@@ -2,6 +2,41 @@
 	top: 52px;
 }
 
-#categories-navbar {
-	padding: 50px;
+.category-container {
+	width: 100%;
+	margin-top: 40px;
+	padding: 30px;
+}
+
+.category-image {
+	width: 350px;
+	height: 350px;
+	object-fit:cover;
+}
+
+.category-info {
+	text-align: center;
+}
+
+.form-nominate {
+	padding: 40px;
+	background-color: rgba(190,190,190,0.3);
+	border-radius: 5px;
+}
+
+.form-nominate .form-control {
+	//position: relative;
+	//height: auto;
+	//-webkit-box-sizing: border-box;
+	//-moz-box-sizing: border-box;
+	//box-sizing: border-box;
+	//padding: 10px;
+	//font-size: 16px;
+}
+
+@media screen and (max-width: 1000px) {
+    .category-image {
+		width: 200px;
+		height: 200px;
+    }
 }

@@ -33,14 +33,14 @@
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul id="navbar-left" class="nav navbar-nav">
-							<li class="main-navbar-element {% if home %}actived{% endif %}"><a href="{% url 'voting:index' %}">HOME</a></li>
-							<li class="main-navbar-element {% if nominations %}actived{% endif %}"><a href="{% url 'voting:nominate' %}">NOMINATIONS</a></li>
-							<li class="dropdown main-navbar-element {% if voting %}actived{% endif %}">
-								<a href="#voting" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VOTING</a>
-								<ul class="dropdown-menu">
-									<li><a href="{% url 'voting:vote' %}">Vote</a></li>
-									<li><a href="{% url 'voting:my_votes' %}">My Votes</a></li>
-								</ul>
+							<li class="main-navbar-element {% if home %}actived{% endif %}">
+								<a href="{% url 'voting:index' %}">HOME</a>
+							</li>
+							<li class="main-navbar-element {% if nominations %}actived{% endif %}">
+								<a href="{% url 'voting:nominate' %}">NOMINATIONS</a>
+							</li>
+							<li class="main-navbar-element {% if voting %}actived{% endif %} disabled">
+								<a href="">VOTING</a>
 							</li>
 							<form class="navbar-form navbar-left main-navbar-element">
 								<div class="input-group">
@@ -63,7 +63,7 @@
 								<ul class="dropdown-menu">
 									<li><a href="#viewrifle">View profile</a></li>
 									<li><a href="#editprifle">Edit profile</a></li>
-									<li><a href="#editprifle">My nominations</a></li>
+									<li class="disabled"><a href="">My nominations</a></li>
 									<li class="divider"></li>
 									<li><a data-toggle="modal" data-target="#logOutModal">Log out</a></li>
 								</ul>

@@ -81,12 +81,6 @@ def vote(request):
 	})
 
 @login_required()
-def my_votes(request):
-	return render(request, 'voting/my_votes.html', {
-		'voting':True,
-	})
-
-@login_required()
 def log_out(request):
 	logout(request)
 	return HttpResponseRedirect('/login/')

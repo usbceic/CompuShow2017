@@ -7,3 +7,9 @@
 //  		    Base Javascript of header.  		  //
 //                                                    //
 ////////////////////////////////////////////////////////
+
+$(document).ready(function(){
+	
+	$('[data-toggle="popover"]').popover();   
+
+});
