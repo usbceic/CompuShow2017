@@ -25,6 +25,10 @@ Create admin user for admin site
 ```
 python3 manage.py createsuperuser.
 ```
+Load Compushow categories
+```
+psql -f loaddb.sql compusoft
+```
 
 ## License
 ```
