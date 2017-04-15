@@ -13,7 +13,8 @@
 	
 	<div class="row">
 		<nav class="col-sm-3" id="categories-navbar">
-			<ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="50">
+			<h3>Categories</h3>
+			<ul class="nav nav-pills nav-stacked nav-categories" data-spy="affix" data-offset-top="50">
 				{% for category in categories %}
 					<li class="categories-navbar-item" style="font-size:15px;"><a href="#{{ category.name }}">{{ category.name | upper }}</a></li>
 
