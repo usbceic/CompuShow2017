@@ -3,6 +3,7 @@
 {% block css %}
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/nominate.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/slideineffect.css' %}"/>
 {% endblock css %}
 
 {% block bodydiv %}
@@ -27,13 +28,23 @@
 		<div class="col-xs-10 categories">
 			{% for category in categories %}
 				<div id="{{ category.name }}" class="container-fluid category-container text-center">
-					<img class="category-image cat-item" src="/static/voting/images/categoryImages/{{ category.image }}"/>
-					<div class="category-title cat-item">{{ category.name }}</div>
-					<div class="category-description cat-item">{{ category.description }}</div>
-					<div id="{{ category.name }}-form" class="cat-item">
+					<img class="category-image cat-item slideanim" src="/static/voting/images/categoryImages/{{ category.image }}"/>
+					<div class="category-title cat-item slideanim">{{ category.name }}</div>
+					<div class="category-description cat-item slideanim">{{ category.description }}</div>
+					<div id="{{ category.name }}-form" class="cat-item slideanim">
 						<form name="{{ category.name }}-form" class="form-nominate" action="">
 							<div class="form-group">
-    							<input type="text" name="{{ category.name }}-name" id="{{ category.name }}-name" placeholder="Carnet" class="text-input form-control"/>
+    							<input type="text" name="{{ category.name }}-name" id="{{ category.name }}-name" class="text-input form-control" required 
+    							{% if category.name == 'CompuMaster' %}placeholder="Nombre del profesor"
+    							{% elif  category.name == 'CompuLove' %}placeholder="Carnet 1"
+    							{% elif  category.name == 'CompuAdoptado' %}placeholder="Nombre del estudiante"
+    							{% elif  category.name == 'CompuTeam' %}placeholder="Nombre de la agrupación"
+    							{% else %}placeholder="Carnet"
+    							{% endif %}
+    							/>
+    							{% if category.name == 'CompuLove' %}
+	    							<input type="text" name="{{ category.name }}-name-2" id="{{ category.name }}-name-2" class="text-input form-control" required placeholder="Carnet 2"/>
+	    						{% endif %}
     							<textarea name="{{ category.name }}-comment" id="{{ category.name }}-comment" placeholder="Comentario (opcional)" class="text-input form-control"></textarea>
 							</div>
 							<button type="submit" name="submit" id="{{ category.name }}-submitbtn" class="btn btn-success btn-block">Nominar</button>
@@ -50,4 +61,5 @@
 {% block javascript %}
 	{% load static %}
 	<script src="{% static 'voting/js/nominate.js' %}"></script>
+	<script src="{% static 'voting/js/slideineffect.js' %}"></script>
 {% endblock javascript %}

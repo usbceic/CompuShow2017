@@ -6,11 +6,11 @@ body {
 
 .categories {
 	background-color: black;
-	background-image: url("../images/loginbackground.jpg");
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-attachment: fixed;
+	//background-image: url("../images/loginbackground.jpg");
+	//background-position: center;
+	//background-repeat: no-repeat;
+	//background-size: cover;
+	//background-attachment: fixed;
 }
 
 /* Navbar */
@@ -58,8 +58,8 @@ body {
 
 .category-container {
 	padding: 30px;
-	background-color: transparent !important;
-	color: white;
+	//background-color: transparent !important;
+	//color: white;
 	width: 100%;
 }
 
