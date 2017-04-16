@@ -32,8 +32,8 @@
 					<img class="category-image cat-item slideanim" src="/static/voting/images/categoryImages/{{ category.image }}"/>
 					<div class="category-title cat-item slideanim">{{ category.name }}</div>
 					<div class="category-description cat-item slideanim">{{ category.description }}</div>
-					<div id="{{ category.name }}-form" class="cat-item slideanim">
-						<form name="{{ category.name }}-form" class="form-nominate" action="">
+					<div id="{{ category.name }}-form" class="cat-item form-nominate slideanim">
+						<form name="{{ category.name }}-form" action="/">
 							<div class="form-group">
     							<input type="text" name="{{ category.name }}-name" id="{{ category.name }}-name" class="text-input form-control" required 
     							{% if category.name == 'CompuMaster' %}placeholder="Nombre del profesor"
@@ -48,13 +48,37 @@
 	    						{% endif %}
     							<textarea name="{{ category.name }}-comment" id="{{ category.name }}-comment" placeholder="Comentario (opcional)" class="text-input form-control"></textarea>
 							</div>
-							<button type="submit" name="submit" id="{{ category.name }}-submitbtn" class="btn btn-success btn-block">Nominar</button>
 						</form>
+							<button id="{{ category.name }}-submitbtn" class="btn btn-success btn-block btn-nominate" data-toggle="modal" data-target="#nominateModal">Nominar</button>
 					</div>
 				</div>
 			{% endfor %}
 		</div>
 
+	</div>
+
+	<!-- Nominate Modal (pop up window) -->
+	<div id="nominateModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body text-center">
+					<p>¿Estás seguro de que deseas cerrar sesión?</p>
+				</div>
+				<div class="modal-footer">
+					<div class="row">
+						<div class="col-xs-6">
+							<form action="{% url 'voting:log_out' %}" class="nominate-modal-form">
+								<input type="submit" class="btn btn-success nominate-modal-btn1" value="Sí, quiero salir."/>
+							</form>
+						</div>
+						<div class="col-xs-6">
+							<button type="button" class="btn btn-danger nominate-modal-btn2" data-dismiss="modal">Nolsa.</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 {% endblock body %}

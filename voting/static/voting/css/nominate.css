@@ -89,6 +89,11 @@ body {
 	margin: auto;
 }
 
+/* Confirmation modal */
+.nominate-modal-btn1, .nominate-modal-btn2 {
+	width: 100%;
+}
+
 @media screen and (max-width: 1000px) {
     .category-image {
 		width: 200px;

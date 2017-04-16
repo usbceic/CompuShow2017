@@ -34,4 +34,11 @@ $(function() {
 		} // End if
 	});
 
+	// Get information of user to be nominated
+	$(".btn-nominate").click(function() {
+		//alert("epa");
+		//var name = $(this).siblings(".form-group .text-input").val();
+		//alert(val);
+	});
+
 });
