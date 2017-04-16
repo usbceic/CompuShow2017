@@ -30,13 +30,13 @@ class LoginForm(forms.Form):
 		self.fields['student_id'].widget.attrs.update({
 			'id': 'inputID',
 			'class': 'form-control',
-			'placeholder': 'Student ID',
+			'placeholder': 'Carnet',
 			'autofocus': True,
 			'required': True
 		})
 		self.fields['password'].widget.attrs.update({
 			'id': 'inputPassword',
 			'class': 'form-control',
-			'placeholder': 'Password',
+			'placeholder': 'Contraseña',
 			'required': True
 		})

@@ -24,14 +24,14 @@
 
 			{% if invalid or form.student_id.errors %}
 				<div class="alert alert-danger alert-dismissable fade in invalid">
-					{% if form.student_id.errors %}<strong>Error:</strong> Invalid ID. e.g. 12-34567{% endif %}
-					{% if notfound %}<strong>Error:</strong> ID not found.{% endif %}
-					{% if notcs %}<strong>Alert:</strong> You are not registered as a computer science student.{% endif %}
-					{% if invalidpasswd %}<strong>Alert:</strong> Password does not match.{% endif %}
+					{% if form.student_id.errors %}<strong>Error:</strong> Carnet inválido. e.g. 12-34567{% endif %}
+					{% if notfound %}<strong>Error:</strong> Carnet no encontrado.{% endif %}
+					{% if notcs %}<strong>Alerta:</strong> No está registrado como estudiante de computación.{% endif %}
+					{% if invalidpasswd %}<strong>Alerta:</strong> Constraseña incorrecta.{% endif %}
 				</div>
 			{% endif %}
 
-			<button id="loginbtn" class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+			<button id="loginbtn" class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
 		</form>
 
 	</div>

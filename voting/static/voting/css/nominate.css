@@ -1,5 +1,25 @@
+body {
+	height: 100%;
+	margin-bottom: 50px;
+	background-color: #111111;
+}
+
+.categories {
+	background-color: black;
+	background-image: url("../images/loginbackground.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+/* Navbar */
+#categories-navbar {
+	padding: 20px;
+}
+
 .affix {
-	top: 52px;
+	top: 85px;
 }
 
 .nav-categories {
@@ -9,16 +29,33 @@
 	bottom: 70px;
 }
 
+.categories-navbar-item a {
+	color: #AAAAAA;
+}
+
+.nav-pills>li>a:hover{
+	color: white;
+	background-color: transparent;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+	border-bottom: 2px solid #DCDCDC;
+	background-color: transparent;
+}
+
+/* Content */
 .category-container {
 	width: 100%;
-	margin-top: 40px;
 	padding: 30px;
+	height: 600px;
+	background-color: transparent !important
 }
 
 .category-image {
 	width: 350px;
 	height: 350px;
 	object-fit:cover;
+	border-radius: 100%;
 }
 
 .category-info {
@@ -59,4 +96,101 @@
 }
 ::-webkit-scrollbar-thumb:window-inactive {
 	background: rgba(75,0,130,0.4); 
+}
+
+/* Custom category boxes */
+#CompuCono {
+	background-color: #001F3F
+}
+
+#CompuPapi {
+	background-color: #0074D9;
+}
+
+#CompuMami {
+	background-color: #7FDBFF;
+}
+
+#CompuGordito {
+	background-color: #39CCCC;
+}
+
+#CompuAdoptado {
+	background-color: #3D9970;
+}
+
+#CompuMaster {
+	background-color: #2ECC40;
+}
+
+#CompuFalso {
+	background-color: #01FF70;
+}
+
+#CompuTeam {
+	background-color: #FFDC00;
+}
+
+#CompuCuchi {
+	background-color: #FF851B;
+}
+
+#CompuChancero {
+	background-color: #FF4136;
+}
+
+#CompuPro {
+	background-color: #F012BE;
+}
+
+#CompuFitness {
+	background-color: #85144B;
+}
+
+#CompuLove {
+	background-color: #B10DC9;
+}
+
+#CompuChapita {
+	
+}
+
+#CompuTukky {
+	
+}
+
+#CompuLolas {
+	
+}
+
+#CompuComadre {
+	
+}
+
+#CompuCompadre {
+	
+}
+
+#CompuCartoon {
+	
+}
+
+#CompuProductista {
+	
+}
+
+#CompuButt {
+	
+}
+
+#CompuBully {
+	
+}
+
+#CompuCuaima {
+	
+}
+
+#CompuSaurio {
+	
 }
