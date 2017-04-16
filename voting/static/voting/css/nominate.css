@@ -58,8 +58,6 @@ body {
 
 .category-container {
 	padding: 30px;
-	//background-color: transparent !important;
-	//color: white;
 	width: 100%;
 }
 
@@ -123,11 +121,12 @@ body {
 
 /* Custom category boxes */
 #CompuCono {
-	background-color: #001F3F
+	background-color: #001F3F;
+	color: #bdc3c7;
 }
 
 #CompuPapi {
-	background-color: #0074D9;
+	background-color: #2980b9;
 }
 
 #CompuMami {
@@ -139,7 +138,7 @@ body {
 }
 
 #CompuAdoptado {
-	background-color: #3D9970;
+	background-color: #27ae60;
 }
 
 #CompuMaster {
@@ -147,11 +146,11 @@ body {
 }
 
 #CompuFalso {
-	background-color: #01FF70;
+	background-color: #2ecc71;
 }
 
 #CompuTeam {
-	background-color: #FFDC00;
+	background-color: #f1c40f;
 }
 
 #CompuCuchi {
@@ -163,57 +162,60 @@ body {
 }
 
 #CompuPro {
-	background-color: #F012BE;
+	background-color: #001f3f;
+	color: #bdc3c7;
 }
 
 #CompuFitness {
 	background-color: #85144B;
+	color: #bdc3c7;
 }
 
 #CompuLove {
-	background-color: #B10DC9;
+	background-color: #8e44ad;
 }
 
 #CompuChapita {
-	
+	background-color: #16a085;
 }
 
 #CompuTukky {
-	
+	background-color: #95a5a6;
 }
 
 #CompuLolas {
-	
+	background-color: #e74c3c;
 }
 
 #CompuComadre {
-	
+	background-color: #2980b9;
 }
 
 #CompuCompadre {
-	
+	background-color: #7FDBFF;
 }
 
 #CompuCartoon {
-	
+	background-color: #1abc9c;
 }
 
 #CompuProductista {
-	
+	background-color: #FF851B;
 }
 
 #CompuButt {
-	
+	background-color: #FF4136;
 }
 
 #CompuBully {
-	
+	background-color: #8e44ad;
 }
 
 #CompuCuaima {
-	
+	background-color: #AAAAAA;
 }
 
 #CompuSaurio {
-	
+	background-color: #2c3e50;
+	color: #bdc3c7;
 }
