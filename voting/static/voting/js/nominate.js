@@ -36,9 +36,12 @@ $(function() {
 
 	// Get information of user to be nominated
 	$(".btn-nominate").click(function() {
-		//alert("epa");
-		//var name = $(this).siblings(".form-group .text-input").val();
-		//alert(val);
+		var studentID1 = ($(this).siblings(".nominate-form")).find(".text-input-1").val();
+		var studentID2 = ($(this).siblings(".nominate-form")).find(".text-input-2").val();
+		var comment = ($(this).siblings(".nominate-form")).find(".text-input-3").val();
+		alert(studentID1);
+		alert(studentID2);
+		alert(comment);
 	});
 
 });

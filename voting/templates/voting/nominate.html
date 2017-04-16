@@ -33,9 +33,9 @@
 					<div class="category-title cat-item slideanim">{{ category.name }}</div>
 					<div class="category-description cat-item slideanim">{{ category.description }}</div>
 					<div id="{{ category.name }}-form" class="cat-item form-nominate slideanim">
-						<form name="{{ category.name }}-form" action="/">
+						<form name="{{ category.name }}-form" class="nominate-form" action="/">
 							<div class="form-group">
-    							<input type="text" name="{{ category.name }}-name" id="{{ category.name }}-name" class="text-input form-control" required 
+    							<input type="text" name="{{ category.name }}-name" id="{{ category.name }}-name" class="text-input-1 form-control" required 
     							{% if category.name == 'CompuMaster' %}placeholder="Nombre del profesor"
     							{% elif  category.name == 'CompuLove' %}placeholder="Carnet 1"
     							{% elif  category.name == 'CompuAdoptado' %}placeholder="Nombre del estudiante"
@@ -44,12 +44,12 @@
     							{% endif %}
     							/>
     							{% if category.name == 'CompuLove' %}
-	    							<input type="text" name="{{ category.name }}-name-2" id="{{ category.name }}-name-2" class="text-input form-control" required placeholder="Carnet 2"/>
+	    							<input type="text" name="{{ category.name }}-name-2" id="{{ category.name }}-name-2" class="text-input-2 form-control" required placeholder="Carnet 2"/>
 	    						{% endif %}
-    							<textarea name="{{ category.name }}-comment" id="{{ category.name }}-comment" placeholder="Comentario (opcional)" class="text-input form-control"></textarea>
+    							<textarea name="{{ category.name }}-comment" id="{{ category.name }}-comment" placeholder="Comentario (opcional)" class="text-input-3 form-control"></textarea>
 							</div>
 						</form>
-							<button id="{{ category.name }}-submitbtn" class="btn btn-success btn-block btn-nominate" data-toggle="modal" data-target="#nominateModal">Nominar</button>
+						<button id="{{ category.name }}-submitbtn" class="btn btn-success btn-block btn-nominate" data-toggle="modal" data-target="#nominateModal">Nominar</button>
 					</div>
 				</div>
 			{% endfor %}
