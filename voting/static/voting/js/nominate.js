@@ -42,6 +42,20 @@ $(function() {
 		alert(studentID1);
 		alert(studentID2);
 		alert(comment);
+
+		$.ajax({
+			url: '/info/',
+			//data: {
+			//	'username': username
+			//},
+			//dataType: 'json',
+			//success: function (data) {
+        	//	if (data.is_taken) {
+        	//		alert("A user with this username already exists.");
+        	//	}
+			//}
+      });
+
 	});
 
 });

@@ -84,3 +84,8 @@ def vote(request):
 def log_out(request):
 	logout(request)
 	return HttpResponseRedirect('/login/')
+
+@login_required()
+def get_student_info(request):
+	print("we here")
+	return HttpResponseRedirect('/')
