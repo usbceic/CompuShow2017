@@ -1,6 +1,6 @@
 @font-face {
-    font-family: "CompuSoft Font";
-    src: url("../fonts/Corbert_Reg/Corbert-Regular.otf") format("opentype");
+	font-family: "CompuSoft Font";
+	src: url("../fonts/Corbert_Reg/Corbert-Regular.otf") format("opentype");
 }
 
 html {
@@ -75,22 +75,22 @@ html * {
 }
 
 @media screen and (max-width: 995px) {
-  	#search-bar {
-  		width:90px
-  	}
-    .main-navbar-element {
-    	font-size: 9px;
-    }
+	#search-bar {
+		width:90px
+	}
+	.main-navbar-element {
+		font-size: 9px;
+	}
 }
 
 @media screen and (max-width: 767px) {
-    #search-bar {
-    	width:100%
-    }
-    .main-navbar-element {
-    	font-size: 12px;
-    }
+	#search-bar {
+		width:100%
+	}
+	.main-navbar-element {
+		font-size: 12px;
+	}
 	#profileimage {
-    	display:none
-    }
+		display:none
+	}
 }
