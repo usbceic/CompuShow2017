@@ -112,7 +112,6 @@ class Category(models.Model):
 	name = models.CharField(max_length=200)
 	description = models.TextField(null=True)
 	image = models.ImageField(upload_to='categoryImages/',max_length=200, null=True)
-	inv = models.BooleanField(default=True)
 
 	class Meta:
 		db_table = 'category'

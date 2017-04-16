@@ -16,16 +16,21 @@ body {
 /* Navbar */
 #categories-navbar {
 	padding: 20px;
+	overflow: hidden;
+}
+
+.aux {
+	overflow: auto;
 }
 
 .affix {
 	top: 85px;
+	width: 15%;
 }
 
 .nav-categories {
 	overflow-y: scroll !important;
 	max-height: 100% !important;
-	width: 300px;
 	bottom: 70px;
 }
 
@@ -35,6 +40,9 @@ body {
 
 .nav-pills>li>a:hover{
 	color: white;
+}
+
+.nav-pills>li>a, .nav-pills>li>a:focus, .nav-pills>li>a:hover{
 	background-color: transparent;
 }
 
@@ -45,9 +53,8 @@ body {
 
 /* Content */
 .category-container {
-	width: 100%;
 	padding: 30px;
-	height: 600px;
+	//height: 600px;
 	background-color: transparent !important
 }
 
@@ -56,10 +63,6 @@ body {
 	height: 350px;
 	object-fit:cover;
 	border-radius: 100%;
-}
-
-.category-info {
-	text-align: center;
 }
 
 .form-nominate {
@@ -75,11 +78,11 @@ body {
     }
 }
 
+/* Scroll bar */ 
 ::-webkit-scrollbar {
     width: 12px;
 }
 
-/* Scroll bar */ 
 /* Track */
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
@@ -91,11 +94,11 @@ body {
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: rgba(75,0,130,0.8); 
+    background: rgba(180,180,180,0.8); 
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-	background: rgba(75,0,130,0.4); 
+	background: rgba(180,180,180,0.4); 
 }
 
 /* Custom category boxes */

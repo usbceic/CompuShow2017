@@ -12,58 +12,31 @@
 {% block body %}
 	
 	<div class="row">
-		<nav class="col-sm-2" id="categories-navbar">
-			<h2>CATEGORÍAS</h2>
-			<ul class="nav nav-pills nav-stacked nav-categories" data-spy="affix" data-offset-top="50">
-				{% for category in categories %}
-					<li class="categories-navbar-item" style="font-size:15px;"><a href="#{{ category.name }}">{{ category.name | upper }}</a></li>
-
-				{% endfor %}
-      		</ul>
-
+		<nav class="col-xs-2" id="categories-navbar">
+			<div class="aux">
+				<h2 style="letter-spacing:2px;">CATEGORÍAS</h2>
+				<ul class="nav nav-pills nav-stacked nav-categories" data-spy="affix" data-offset-top="50">
+					{% for category in categories %}
+						<li class="categories-navbar-item" style="font-size:15px;"><a href="#{{ category.name }}">{{ category.name }}</a></li>
+					{% endfor %}
+      			</ul>
+      		</div>
     	</nav>
-		<div class="col-sm-10 categories">
+		<div class="col-xs-10 categories">
 			{% for category in categories %}
 				<div id="{{ category.name }}" class="container-fluid category-container">
-				{% if category.inv %}
-					<div class="col-sm-3">
-						<!--<img class="category-image" src="/static/voting/images/categoryImages/{{ category.image }}"/>-->
+					<img class="category-image" src="/static/voting/images/categoryImages/{{ category.image }}"/>
+					<h1>{{ category.name }}</h3>
+					<div class="category-description">{{ category.description }}</div>
+					<div id="{{ category.name }}-form">
+						<form name="{{ category.name }}-form" class="form-nominate" action="">
+							<div class="form-group">
+    							<input type="text" name="{{ category.name }}-name" id="{{ category.name }}-name" size="30" placeholder="Carnet" class="text-input form-control" />
+    							<textarea name="{{ category.name }}-comment" id="{{ category.name }}-comment" placeholder="Comentario (opcional)" class="text-input form-control"></textarea>
+							</div>
+							<button type="submit" name="submit" id="{{ category.name }}-submitbtn" class="btn btn-default">Nominar</button>
+						</form>
 					</div>
-					<div class="col-sm-7 category-info">
-						<h1>{{ category.name }}</h3>
-						<div class="category-description">{{ category.description }}</div>
-
-						<div id="{{ category.name }}-form">
-							<form name="{{ category.name }}-form" class="form-nominate" action="">
-								<div class="form-group">
-    								<input type="text" name="{{ category.name }}-name" id="{{ category.name }}-name" size="30" placeholder="Student ID" class="text-input form-control" />
-    								<textarea name="{{ category.name }}-comment" id="{{ category.name }}-comment" placeholder="Comment" class="text-input form-control"></textarea>
-								</div>
-								<button type="submit" name="submit" id="{{ category.name }}-submitbtn" class="btn btn-default">Nominate</button>
-							</form>
-						</div>
-
-					</div>
-				{% else %}
-					<div class="col-sm-7 category-info">
-						<h1>{{ category.name }}</h3>
-						<div class="category-description">{{ category.description }}</div>
-
-						<div id="{{ category.name }}-form">
-							<form name="{{ category.name }}-form" class="form-nominate" action="">
-								<div class="form-group">
-    								<input type="text" name="{{ category.name }}-name" id="{{ category.name }}-name" size="30" placeholder="Student ID" class="text-input form-control" />
-    								<textarea name="{{ category.name }}-comment" id="{{ category.name }}-comment" placeholder="Comment" class="text-input form-control"></textarea>
-								</div>
-								<button type="submit" name="submit" id="{{ category.name }}-submitbtn" class="btn btn-default">Nominate</button>
-							</form>
-						</div>
-
-					</div>
-					<div class="col-sm-3">
-						<!--<img class="category-image" src="/static/voting/images/categoryImages/{{ category.image }}"/>-->
-					</div>
-				{% endif %}
 				</div>
 			{% endfor %}
 		</div>
