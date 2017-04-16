@@ -6,12 +6,13 @@
 {% endblock css %}
 
 {% block bodydiv %}
-	<body data-spy="scroll" data-target="#categories-navbar" data-offset="55">
+	<body data-spy="scroll" data-target="#categories-navbar" data-offset="200">
 {% endblock bodydiv %}
 
 {% block body %}
 	
 	<div class="row">
+		
 		<nav class="col-xs-2" id="categories-navbar">
 			<div class="aux">
 				<h2 style="letter-spacing:2px;">CATEGORÍAS</h2>
@@ -22,19 +23,20 @@
       			</ul>
       		</div>
     	</nav>
+
 		<div class="col-xs-10 categories">
 			{% for category in categories %}
-				<div id="{{ category.name }}" class="container-fluid category-container">
-					<img class="category-image" src="/static/voting/images/categoryImages/{{ category.image }}"/>
-					<h1>{{ category.name }}</h3>
-					<div class="category-description">{{ category.description }}</div>
-					<div id="{{ category.name }}-form">
+				<div id="{{ category.name }}" class="container-fluid category-container text-center">
+					<img class="category-image cat-item" src="/static/voting/images/categoryImages/{{ category.image }}"/>
+					<div class="category-title cat-item">{{ category.name }}</div>
+					<div class="category-description cat-item">{{ category.description }}</div>
+					<div id="{{ category.name }}-form" class="cat-item">
 						<form name="{{ category.name }}-form" class="form-nominate" action="">
 							<div class="form-group">
-    							<input type="text" name="{{ category.name }}-name" id="{{ category.name }}-name" size="30" placeholder="Carnet" class="text-input form-control" />
+    							<input type="text" name="{{ category.name }}-name" id="{{ category.name }}-name" placeholder="Carnet" class="text-input form-control"/>
     							<textarea name="{{ category.name }}-comment" id="{{ category.name }}-comment" placeholder="Comentario (opcional)" class="text-input form-control"></textarea>
 							</div>
-							<button type="submit" name="submit" id="{{ category.name }}-submitbtn" class="btn btn-default">Nominar</button>
+							<button type="submit" name="submit" id="{{ category.name }}-submitbtn" class="btn btn-success btn-block">Nominar</button>
 						</form>
 					</div>
 				</div>

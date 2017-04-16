@@ -52,10 +52,19 @@ body {
 }
 
 /* Content */
+.categories {
+	padding: 0px;
+}
+
 .category-container {
 	padding: 30px;
-	//height: 600px;
-	background-color: transparent !important
+	background-color: transparent !important;
+	color: white;
+	width: 100%;
+}
+
+.cat-item {
+	padding:10px;
 }
 
 .category-image {
@@ -65,10 +74,21 @@ body {
 	border-radius: 100%;
 }
 
+.category-title {
+	font-size: 50px;
+}
+
+.category-description {
+	font-size: 20px;
+}
+
+/* form */
 .form-nominate {
 	padding: 40px;
 	background-color: rgba(190,190,190,0.3);
 	border-radius: 5px;
+	width: 500px;
+	margin: auto;
 }
 
 @media screen and (max-width: 1000px) {

@@ -27,11 +27,11 @@
 					{% if form.student_id.errors %}<strong>Error:</strong> Carnet inválido. e.g. 12-34567{% endif %}
 					{% if notfound %}<strong>Error:</strong> Carnet no encontrado.{% endif %}
 					{% if notcs %}<strong>Alerta:</strong> No está registrado como estudiante de computación.{% endif %}
-					{% if invalidpasswd %}<strong>Alerta:</strong> Constraseña incorrecta.{% endif %}
+					{% if invalidpasswd %}<strong>Alerta:</strong> Constraseña inválida.{% endif %}
 				</div>
 			{% endif %}
 
-			<button id="loginbtn" class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+			<button id="loginbtn" class="btn btn-lg btn-success btn-block" type="submit">Ingresar</button>
 		</form>
 
 	</div>
