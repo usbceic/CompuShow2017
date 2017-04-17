@@ -9,6 +9,7 @@
 #####################################################
 
 
+import json
 from django.conf import settings
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
@@ -87,5 +88,13 @@ def log_out(request):
 
 @login_required()
 def get_student_info(request):
-	print("we here")
-	return HttpResponseRedirect('/')
+	
+	studentID = request.GET.get('studentID')
+	studentID2 = request.GET.get('studentID2')
+	comment = request.GET.get('comment')
+	
+	data = { 
+		#'nominate':True,
+	}
+
+	return HttpResponse(json.dumps(data))

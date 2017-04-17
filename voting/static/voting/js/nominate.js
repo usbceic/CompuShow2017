@@ -39,23 +39,25 @@ $(function() {
 		var studentID1 = ($(this).siblings(".nominate-form")).find(".text-input-1").val();
 		var studentID2 = ($(this).siblings(".nominate-form")).find(".text-input-2").val();
 		var comment = ($(this).siblings(".nominate-form")).find(".text-input-3").val();
-		alert(studentID1);
-		alert(studentID2);
-		alert(comment);
-
 		$.ajax({
+			type: 'GET',
 			url: '/info/',
-			//data: {
-			//	'username': username
-			//},
-			//dataType: 'json',
-			//success: function (data) {
-        	//	if (data.is_taken) {
-        	//		alert("A user with this username already exists.");
-        	//	}
-			//}
-      });
+			data: {
+				'studentID':studentID1,
+				'studentID2':studentID2,
+				'comment':comment
+			},
+			success: function (data) {
+        		
+				data = JSON.parse(data)
 
+        		if(data.nominate) {
+        			$('#nominateModal').modal('show');
+				//} else if (data.invalid) {
+        		//	//$('#modal de invalido').modal('show');
+				}
+			}
+		});
 	});
 
 });
