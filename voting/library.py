@@ -113,3 +113,8 @@ def make_nomination(user, category, ID1, ID2, comment):
 			category = category,
 			comment = comment
 		)
+
+def get_full_name(user):
+	student = Student.objects.filter(user = user).first()
+	person = student.person
+	return person.name + " " + person.surname

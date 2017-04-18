@@ -1,0 +1,23 @@
+{% extends 'voting/base.html' %}
+
+{% block css %}
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/profile.css' %}"/>
+{% endblock css %}
+
+{% block body %}
+
+		<div class="background-blur"></div>
+		<div class="container-fluid text-center basic-info">
+			<div class="basic-info-content">
+				<img class="profile-image profile-item" src="{% static request.session.profileimage %}"/>
+			</div>
+			<div class="profile-name profile-item">{{ student_name }}</div>
+			<div class="profile-id profile-item">{{ student_id }}</div>
+		</div>
+		<div class="container nominations">
+			<div class="nominations-title">Mis nominaciones</div>
+			<p>Podrás ver las categorias a las que haz sido nominado cuando cierre la etapa de nominaciones.</p>
+		</div>
+
+{% endblock body %}

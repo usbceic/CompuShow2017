@@ -19,6 +19,7 @@ urlpatterns = [
 	url(r'^nominate/$', views.nominate, name='nominate'),
 	url(r'^info/$', views.get_student_info, name='get_student_info'),
 	url(r'^vote/$', views.vote, name='vote'),
+	url(r'^profile/$', views.profile, name='profile'),
 	url(r'^login/$', views.log_in, name='log_in'),
 	url(r'^logout/$', views.log_out, name='log_out'),
 ]

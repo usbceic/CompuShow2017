@@ -109,3 +109,11 @@ def get_student_info(request):
 		data['nominate'] = True
 
 	return HttpResponse(json.dumps(data))
+
+@login_required()
+def profile(request):
+	return render(request, 'voting/profile.html', {
+		'profile':True,
+		'student_name': get_full_name(request.user),
+		'student_id': request.user.username,
+	})
