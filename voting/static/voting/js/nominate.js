@@ -9,6 +9,11 @@
 //                                                    //
 ////////////////////////////////////////////////////////
 
+var warning = 	'<div class="alert alert-danger alert-dismissable fade in"\
+				style="margin:0;margin-bottom:20px;">\
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\
+				<strong>Error:</strong> Carnet requerido.\
+				</div>';
 
 $(function() {
 
@@ -36,6 +41,15 @@ $(function() {
 
 	// Get information of user to be nominated
 	$(".btn-nominate").click(function() {
+
+
+		// Validate non empty input
+		if( !(($(this).siblings(".nominate-form")).find(".text-input-1").val()) ) {
+			$(this).parents(".form-nominate").prepend(warning);
+			($(this).siblings(".nominate-form")).find(".text-input-1").select();
+			return false;
+		}
+
 		var studentID1 = ($(this).siblings(".nominate-form")).find(".text-input-1").val();
 		var studentID2 = ($(this).siblings(".nominate-form")).find(".text-input-2").val();
 		var comment = ($(this).siblings(".nominate-form")).find(".text-input-3").val();
@@ -43,6 +57,7 @@ $(function() {
 			type: 'GET',
 			url: '/info/',
 			data: {
+				'category':$(this).val(),
 				'studentID':studentID1,
 				'studentID2':studentID2,
 				'comment':comment

@@ -89,12 +89,14 @@ def log_out(request):
 @login_required()
 def get_student_info(request):
 	
+	category = request.GET.get('category')
 	studentID = request.GET.get('studentID')
 	studentID2 = request.GET.get('studentID2')
 	comment = request.GET.get('comment')
 	
+
 	data = { 
-		#'nominate':True,
+		'nominate':True,
 	}
 
 	return HttpResponse(json.dumps(data))

@@ -4,15 +4,6 @@ body {
 	background-color: #111111;
 }
 
-.categories {
-	background-color: black;
-	//background-image: url("../images/loginbackground.jpg");
-	//background-position: center;
-	//background-repeat: no-repeat;
-	//background-size: cover;
-	//background-attachment: fixed;
-}
-
 /* Navbar */
 #categories-navbar {
 	padding: 20px;
