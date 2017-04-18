@@ -83,6 +83,31 @@
 		</div>
 	</div>
 
+	<!-- Already nominated warning Modal (pop up window) -->
+	<div id="alreadyNominatedModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body text-center">
+					<p>habla ermio</p>
+				</div>
+				<div class="modal-footer">
+					<div class="row">
+						<div class="col-xs-6">
+							<form action="{% url 'voting:log_out' %}" class="nominate-modal-form">
+								{% csrf_token %}
+								<input type="submit" class="btn btn-success nominate-modal-btn1" value="Sí, quiero salir."/>
+							</form>
+						</div>
+						<div class="col-xs-6">
+							<button type="button" class="btn btn-danger nominate-modal-btn2" data-dismiss="modal">Nolsa.</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 {% endblock body %}
 
 {% block javascript %}

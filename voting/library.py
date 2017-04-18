@@ -73,3 +73,43 @@ def get_user_image(user):
 # Get information about Compushow categories
 def get_categories():
 	return Category.objects.all()
+
+# Checks if user already made this nomination
+def already_nominated(user, category, ID1, ID2):
+	
+	category = Category.objects.filter(name = category).first()
+
+	if category.name == 'CompuMaster':
+		pass
+	elif category.name == 'CompuTeam':
+		pass
+	elif category.name == 'CompuAdoptado':
+		pass
+	elif category.name == 'CompuLove':
+		pass
+	# Regular category
+	else:
+		entity = Student.objects.filter(student_id = ID1).first().person.entity
+		return Nominate.objects.filter(nominator=user, nominee=entity, category=category).exists()
+
+def make_nomination(user, category, ID1, ID2, comment):
+	pass
+	category = Category.objects.filter(name = category).first()
+
+	if category.name == 'CompuMaster':
+		pass
+	elif category.name == 'CompuTeam':
+		pass
+	elif category.name == 'CompuAdoptado':
+		pass
+	elif category.name == 'CompuLove':
+		pass
+	# Regular category
+	else:
+		entity = Student.objects.filter(student_id = ID1).first().person.entity
+		Nominate.objects.create(
+			nominator = user,
+			nominee = entity,
+			category = category,
+			comment = comment
+		)

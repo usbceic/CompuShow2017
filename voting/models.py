@@ -133,6 +133,13 @@ class Nominate(models.Model):
 		Entity,
 		on_delete = models.CASCADE,
 		null=True,
+		related_name = '+',
+	)
+	nomineeOpt = models.ForeignKey(
+		Entity,
+		on_delete = models.CASCADE,
+		null=True,
+		related_name = '+',
 	)
 	category = models.ForeignKey(
 		Category,
@@ -147,7 +154,7 @@ class Nominate(models.Model):
 		db_table = 'nominate'
 		verbose_name = "Nomination"
 		verbose_name_plural = "Nominations"
-		unique_together = ('nominator','nominee','category')
+		unique_together = ('nominator','nominee','nomineeOpt','category')
 
 
 class Nominee(models.Model):

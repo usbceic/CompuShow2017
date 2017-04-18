@@ -89,14 +89,23 @@ def log_out(request):
 @login_required()
 def get_student_info(request):
 	
+	user = request.user
 	category = request.GET.get('category')
 	studentID = request.GET.get('studentID')
 	studentID2 = request.GET.get('studentID2')
 	comment = request.GET.get('comment')
 	
+	data = dict()
 
-	data = { 
-		'nominate':True,
-	}
+	# obtener carnets de inputs
+
+	# checkear input registrado en base
+
+	if(already_nominated(user, category, studentID, studentID2)):
+		data['already_nominated'] = True
+
+	else:
+		make_nomination(user, category, studentID, studentID2, comment)
+		data['nominate'] = True
 
 	return HttpResponse(json.dumps(data))

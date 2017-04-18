@@ -42,17 +42,23 @@ $(function() {
 	// Get information of user to be nominated
 	$(".btn-nominate").click(function() {
 
-
+		var studentID1 = ($(this).siblings(".nominate-form")).find(".text-input-1").val();
+		var studentID2 = ($(this).siblings(".nominate-form")).find(".text-input-2").val();
+		var comment = ($(this).siblings(".nominate-form")).find(".text-input-3").val();
+		
 		// Validate non empty input
-		if( !(($(this).siblings(".nominate-form")).find(".text-input-1").val()) ) {
+		if( studentID1 === "" ) {
 			$(this).parents(".form-nominate").prepend(warning);
 			($(this).siblings(".nominate-form")).find(".text-input-1").select();
 			return false;
 		}
 
-		var studentID1 = ($(this).siblings(".nominate-form")).find(".text-input-1").val();
-		var studentID2 = ($(this).siblings(".nominate-form")).find(".text-input-2").val();
-		var comment = ($(this).siblings(".nominate-form")).find(".text-input-3").val();
+		if( studentID2 === "" ) {
+			$(this).parents(".form-nominate").prepend(warning);
+			($(this).siblings(".nominate-form")).find(".text-input-2").select();
+			return false;
+		}
+
 		$.ajax({
 			type: 'GET',
 			url: '/info/',
@@ -68,8 +74,9 @@ $(function() {
 
         		if(data.nominate) {
         			$('#nominateModal').modal('show');
-				//} else if (data.invalid) {
-        		//	//$('#modal de invalido').modal('show');
+				} 
+				else if (data.already_nominated) {
+        			$('#alreadyNominatedModal').modal('show');
 				}
 			}
 		});
