@@ -112,6 +112,12 @@ def get_student_info(request):
 
 @login_required()
 def profile(request):
+	
+	######
+	#from loadstudents import load
+	#load()
+	####### mmm
+
 	return render(request, 'voting/profile.html', {
 		'profile':True,
 		'student_name': get_full_name(request.user),
