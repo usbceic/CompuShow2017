@@ -80,9 +80,30 @@ body {
 	margin: auto;
 }
 
+.text-input-1, .text-input-2 {
+	margin-bottom: 3px;
+}
+
 /* Confirmation modal */
 .nominate-modal-btn1, .nominate-modal-btn2 {
 	width: 100%;
+}
+
+.make_nomination-modal-btn1, .make_nomination-modal-btn2 {
+	width: 100%;
+}
+
+.modal-header {
+	padding:9px 15px;
+	border-bottom:1px solid #eee;
+	background-color: #2980b9;;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	 border-top-left-radius: 5px;
+	 border-top-right-radius: 5px;
+
 }
 
 @media screen and (max-width: 1000px) {

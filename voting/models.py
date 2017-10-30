@@ -20,7 +20,7 @@ class Entity(models.Model):
 	#winner_photo = models.ImageField(upload_to=something,max_length=200, null=True)
 
 	def __str__(self):
-		return self.id
+		return str(self.id)
 
 	class Meta:
 		db_table = 'entity'
@@ -48,7 +48,7 @@ class Person(models.Model):
 	)
 
 	def __str__(self):
-		return self.ci
+		return str(self.ci)
 
 	class Meta:
 		db_table = 'person'
@@ -68,7 +68,7 @@ class Group(models.Model):
 	)
 
 	def __str__(self):
-		return self.name
+		return str(self.name)
 
 	class Meta:
 		db_table = 'group'
@@ -99,7 +99,7 @@ class Student(models.Model):
 	)
 
 	def __str__(self):
-		return self.student_id
+		return str(self.student_id)
 
 	class Meta:
 		db_table = 'student'
@@ -148,13 +148,12 @@ class Nominate(models.Model):
 	)
 
 	def __str__(self):
-		return self.id
+		return str(self.id)
 
 	class Meta:
 		db_table = 'nominate'
 		verbose_name = "Nomination"
 		verbose_name_plural = "Nominations"
-		unique_together = ('nominator','nominee','nomineeOpt','category')
 
 
 class Nominee(models.Model):
@@ -173,7 +172,7 @@ class Nominee(models.Model):
 	)	
 
 	def __str__(self):
-		return self.id
+		return str(self.id)
 
 	class Meta:
 		db_table = 'nominee'
@@ -197,7 +196,7 @@ class Winner(models.Model):
 	)	
 
 	def __str__(self):
-		return self.id
+		return str(self.id)
 
 	class Meta:
 		db_table = 'winner'

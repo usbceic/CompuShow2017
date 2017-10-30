@@ -69,10 +69,12 @@ def log_in(request):
 def nominate(request):
 	
 	categories = get_categories()
+	students   = get_students()
 
 	return render(request, 'voting/nominate.html', {
 		'nominations':True,
 		'categories':categories,
+		'students':students,
 	})
 
 @login_required()
@@ -96,17 +98,43 @@ def get_student_info(request):
 	comment = request.GET.get('comment')
 	
 	data = dict()
+	data['category'] = category
 
-	# obtener carnets de inputs
+	# Get student ID's
+	studentID = get_student_id(studentID)
 
-	# checkear input registrado en base
+	# Student not found
+	if studentID is None:
+		data['not_found'] = True
+		data['nominate'] = False
+		data['already_nominated'] = False
+		return HttpResponse(json.dumps(data))
 
-	if(already_nominated(user, category, studentID, studentID2)):
+	if studentID2 is not None:
+		studentID2 = get_student_id(studentID2)
+		if studentID2 is None:
+			data['not_found_2'] = True
+			data['nominate'] = False
+			data['already_nominated'] = False
+			return HttpResponse(json.dumps(data))
+
+	# Check if not repeating nomination
+	if already_nominated(user, category, studentID, studentID2):
 		data['already_nominated'] = True
+		data['nominate'] = False
+		data['nom_id'], data['comment'] = get_nomination_info(user, category, studentID, studentID2)
+		data['carnet']   = studentID
+		data['carnet2']  = studentID2
+		data['comment']  = comment
 
+	# Then prepre for nomination
 	else:
-		make_nomination(user, category, studentID, studentID2, comment)
+		# Get nomination info (user, category, studentID, studentID2, comment)
 		data['nominate'] = True
+		data['already_nominated'] = False
+		data['comment']  = comment
+		data['carnet']   = studentID
+		data['carnet2']  = studentID2
 
 	return HttpResponse(json.dumps(data))
 
@@ -123,3 +151,41 @@ def profile(request):
 		'student_name': get_full_name(request.user),
 		'student_id': request.user.username,
 	})
+
+@login_required()
+def delete_nomination(request):
+
+	user = request.user
+	category = request.GET.get('category')
+	studentID = request.GET.get('studentID')
+	studentID2 = request.GET.get('studentID2')
+
+	# Get student ID's
+	studentID = get_student_id(studentID)
+
+	if studentID2 is not None:
+		studentID2 = get_student_id(studentID2)
+
+	delete_nomination_db(user, category, studentID, studentID2)
+
+	data = dict()
+
+	return HttpResponse(json.dumps(data))
+
+@login_required()
+def make_nomination(request):
+
+	if request.method == "POST":
+
+		user = request.user
+		category = request.POST.get('category')
+		studentID = request.POST.get('studentID')
+		studentID2 = request.POST.get('studentID2')
+		comment = request.POST.get('comment')
+		
+		if not already_nominated(user, category, get_student_id(studentID), get_student_id(studentID2)):
+			make_nomination_db(user, category, studentID, studentID2, comment)
+	
+		data = dict()
+	
+		return HttpResponse(json.dumps(data))

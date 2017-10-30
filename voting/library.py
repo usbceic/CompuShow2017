@@ -74,38 +74,91 @@ def get_user_image(user):
 def get_categories():
 	return Category.objects.all()
 
+# Get student names
+def get_students():
+	students = Student.objects.all().values(
+		'student_id',
+		'person__name',
+		'person__surname'
+	)
+	return students
+
+def get_full_name(user):
+	student = Student.objects.filter(user = user).first()
+	person = student.person
+	return person.name + " " + person.surname
+
+def get_student_id(username):
+	students = get_students()
+	for student in  students:
+		if student['person__name'] + " " + student['person__surname'] == username:
+			return student['student_id']
+	return None
+
 # Checks if user already made this nomination
 def already_nominated(user, category, ID1, ID2):
 	
 	category = Category.objects.filter(name = category).first()
+	user   = Student.objects.filter(student_id = user).first().user
 
 	if category.name == 'CompuMaster':
 		pass
+	
 	elif category.name == 'CompuTeam':
 		pass
+	
 	elif category.name == 'CompuAdoptado':
 		pass
+	
 	elif category.name == 'CompuLove':
-		pass
+
+		if ID1 > ID2:
+			ID1, ID2 = ID2, ID1
+
+		entity  = Student.objects.filter(student_id = ID1).first().person.entity
+		entity2 = Student.objects.filter(student_id = ID2).first().person.entity
+		
+		return Nominate.objects.filter(nominator=user, nominee=entity, nomineeOpt=entity2, category=category, active=True).exists()
+	
 	# Regular category
 	else:
 		entity = Student.objects.filter(student_id = ID1).first().person.entity
-		return Nominate.objects.filter(nominator=user, nominee=entity, category=category).exists()
+		return Nominate.objects.filter(nominator=user, nominee=entity, category=category, active=True).exists()
 
-def make_nomination(user, category, ID1, ID2, comment):
-	pass
+def make_nomination_db(user, category, ID1, ID2, comment):
+
 	category = Category.objects.filter(name = category).first()
+	user   = Student.objects.filter(student_id = user).first().user
 
 	if category.name == 'CompuMaster':
 		pass
+	
 	elif category.name == 'CompuTeam':
 		pass
+	
 	elif category.name == 'CompuAdoptado':
 		pass
+	
 	elif category.name == 'CompuLove':
-		pass
+		ID1	= get_student_id(ID1)
+		ID2	= get_student_id(ID2)
+
+		if ID1 > ID2:
+			ID1, ID2 = ID2, ID1
+
+		entity  = Student.objects.filter(student_id = ID1).first().person.entity
+		entity2 = Student.objects.filter(student_id = ID2).first().person.entity
+		Nominate.objects.create(
+			nominator = user,
+			nominee = entity,
+			nomineeOpt = entity2,
+			category = category,
+			comment = comment
+		)
+	
 	# Regular category
 	else:
+		ID1	   = get_student_id(ID1)
 		entity = Student.objects.filter(student_id = ID1).first().person.entity
 		Nominate.objects.create(
 			nominator = user,
@@ -114,7 +167,68 @@ def make_nomination(user, category, ID1, ID2, comment):
 			comment = comment
 		)
 
-def get_full_name(user):
-	student = Student.objects.filter(user = user).first()
-	person = student.person
-	return person.name + " " + person.surname
+# Get nomination comment
+def get_nomination_info(user, category, ID1, ID2):
+	
+	category = Category.objects.filter(name = category).first()
+	user   = Student.objects.filter(student_id = user).first().user
+
+	if category.name == 'CompuMaster':
+		pass
+	
+	elif category.name == 'CompuTeam':
+		pass
+	
+	elif category.name == 'CompuAdoptado':
+		pass
+	
+	elif category.name == 'CompuLove':
+		if ID1 > ID2:
+			ID1, ID2 = ID2, ID1
+
+		entity  = Student.objects.filter(student_id = ID1).first().person.entity
+		entity2 = Student.objects.filter(student_id = ID2).first().person.entity
+		
+		nom_id  = Nominate.objects.filter(nominator=user, nominee=entity, nomineeOpt=entity2, category=category, active=True).first().id
+		comment = Nominate.objects.filter(nominator=user, nominee=entity, nomineeOpt=entity2, category=category, active=True).first().comment
+		return nom_id, comment
+	
+	# Regular category
+	else:
+		entity  = Student.objects.filter(student_id = ID1).first().person.entity
+		nom_id  = Nominate.objects.filter(nominator=user, nominee=entity, category=category, active=True).first().id
+		comment = Nominate.objects.filter(nominator=user, nominee=entity, category=category, active=True).first().comment
+		return nom_id, comment
+
+# Delete nomination
+def delete_nomination_db(user, category, ID1, ID2):
+
+	category = Category.objects.filter(name = category).first()
+	user   = Student.objects.filter(student_id = user).first().user
+
+	if category.name == 'CompuMaster':
+		pass
+	
+	elif category.name == 'CompuTeam':
+		pass
+	
+	elif category.name == 'CompuAdoptado':
+		pass
+	
+	elif category.name == 'CompuLove':
+		if ID1 > ID2:
+			ID1, ID2 = ID2, ID1
+		
+		entity  = Student.objects.filter(student_id = ID1).first().person.entity
+		entity2 = Student.objects.filter(student_id = ID2).first().person.entity
+
+		nomination = Nominate.objects.get(nominator=user, nominee=entity, nomineeOpt=entity2, category=category, active=True)
+		nomination.active = False
+		nomination.save()
+	
+	# Regular category
+	else:
+		entity = Student.objects.filter(student_id = ID1).first().person.entity
+		nomination = Nominate.objects.get(nominator=user, nominee=entity, category=category, active=True)
+		nomination.active = False
+		nomination.save()
