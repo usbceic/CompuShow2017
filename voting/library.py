@@ -12,6 +12,7 @@ import ldap3
 from .models import *
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.db.models import Q, Count
 
 # Checks if student is registered in CompuSoft database
 def user_is_registered(student_id):
@@ -205,6 +206,8 @@ def make_nomination_db(user, category, ID1, ID2, comment):
 			category = category,
 			comment = comment
 		)
+
+		update_nominee(entity, category, entity2, True)
 	
 	# Regular category
 	else:
@@ -216,6 +219,7 @@ def make_nomination_db(user, category, ID1, ID2, comment):
 			category = category,
 			comment = comment
 		)
+		update_nominee(entity, category, None, True)
 
 # Get nomination comment
 def get_nomination_info(user, category, ID1, ID2):
@@ -266,6 +270,7 @@ def delete_nomination_db(user, category, ID1, ID2):
 		pass
 	
 	elif category.name == 'CompuLove':
+		
 		if ID1 > ID2:
 			ID1, ID2 = ID2, ID1
 
@@ -275,6 +280,9 @@ def delete_nomination_db(user, category, ID1, ID2):
 		nomination = Nominate.objects.get(nominator=user, nominee=entity, nomineeOpt=entity2, category=category, active=True)
 		nomination.active = False
 		nomination.save()
+
+		update_nominee(entity, category, entity2, False)
+
 	
 	# Regular category
 	else:
@@ -282,3 +290,128 @@ def delete_nomination_db(user, category, ID1, ID2):
 		nomination = Nominate.objects.get(nominator=user, nominee=entity, category=category, active=True)
 		nomination.active = False
 		nomination.save()
+
+		update_nominee(entity, category, None, False)
+
+def get_nominations_profile(studentID):
+	
+	entity = Student.objects.filter(student_id = studentID).first().person.entity
+	nominees_per_category = get_nominees()
+
+	nominations = []
+	left = True
+	right = False
+
+	for category, nominees in nominees_per_category.items():
+		for nominee in nominees:
+
+			if category.name == 'CompuLove':
+				if nominee.entity == entity or nominee.entityOpt == entity:
+					nomination = dict()
+					comments = get_comments(nominee.entity, nominee.entityOpt, category)
+					nomination['category']  = category
+					if comments:
+						nomination['firstcomment'] = comments[0]
+					nomination['comments']  = comments[1:]
+					nomination['entity']    = get_full_name_from_entity(nominee.entity)
+					nomination['entityOpt'] = get_full_name_from_entity(nominee.entityOpt)
+					nomination['left'] = left
+					nomination['right'] = right
+					left = not left
+					right = not right
+					nominations.append(nomination)
+
+			elif category.name == 'CompuCartoon':
+				pass
+	
+			else:
+				# Regular category
+				if nominee.entity == entity:
+					nomination = dict()
+					comments = get_comments(nominee.entity, None, category)
+					nomination['category']  = category
+					if comments:
+						nomination['firstcomment'] = comments[0]
+					nomination['comments']  = comments[1:]
+					nomination['left'] = left
+					nomination['right'] = right
+					left = not left
+					right = not right
+					nominations.append(nomination)
+
+	return nominations
+
+def get_comments(entity, entity2, category):
+	
+	if category.name == 'CompuLove':
+		nomination_rows = Nominate.objects.filter( \
+			(Q(nominee=entity) & Q(nomineeOpt=entity2) & Q(category=category)) |  \
+			(Q(nomineeOpt=entity) & Q(nominee=entity2) & Q(category=category)))
+
+	elif category.name == 'CompuCartoon':
+		pass
+
+	else:
+		nomination_rows = Nominate.objects.filter(Q(nominee = entity) & Q(category=category))
+
+	comments = []
+
+	for row in nomination_rows:
+
+		if not row.active:
+			continue
+
+		if row.comment:
+			comments.append(row.comment)
+
+	return comments
+
+# Update nomination counter when nomination is submitted
+def update_nominee(entity, category, entity2, add):
+
+	if add:
+		cnt = 1
+	else:
+		cnt = -1
+
+	if category.name == 'CompuLove':
+		if not Nominee.objects.filter(Q(entity = entity) & Q(entityOpt=entity2) & Q(category = category)).exists():
+			Nominee.objects.create(
+				nominations = 1,
+				entity = entity,
+				category = category,
+				entityOpt = entity2,
+			)
+		else:
+			nomination = Nominee.objects.get(entity=entity, category=category, entityOpt=entity2)
+			nomination.nominations += cnt
+			nomination.save()
+
+	elif category.name == 'CompuCartoon':
+		pass
+
+	else:
+		if not Nominee.objects.filter(Q(entity = entity) & Q(category = category)).exists():
+			Nominee.objects.create(
+				nominations = 1,
+				entity = entity,
+				category = category,
+				entityOpt = entity2,
+			)
+		else:
+			nomination = Nominee.objects.get(entity=entity, category=category, entityOpt=entity2)
+			nomination.nominations += cnt
+			nomination.save()
+
+# Get the nominees for each category
+def get_nominees(top = 4):
+
+	categories = get_categories()
+
+	results = dict()
+
+	for category in categories:
+		nominees = Nominee.objects.filter(category=category).order_by('-nominations')[:top]
+		results[category] = nominees
+
+	return results

@@ -24,6 +24,10 @@ html * {
 	background-color: #DDDDDD
 }
 
+.footer {
+	background-color: yellow;
+}
+
 #main-navbar {
 	border-bottom: 1.5px solid #D0D0D0;
 }

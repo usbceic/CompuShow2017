@@ -21,7 +21,7 @@ from .library import *
 ##############################################
 # Flag to enable voting modules (important!) #
 ##############################################
-enable_voting = False                        #
+enable_voting = True                        #
 ##############################################
 
 @login_required()
@@ -162,6 +162,10 @@ def profile(request):
 
 	students = get_students()
 
+	nominations = []
+	if enable_voting:
+		nominations = get_nominations_profile(request.user.username)
+
 	return render(request, 'voting/profile.html', {
 		'profile':True,
 		'student_name': get_full_name(request.user),
@@ -169,6 +173,7 @@ def profile(request):
 		'students':students,
 		'enable_voting':enable_voting,
 		'my_profile':True,
+		'nominations':nominations,
 	})
 
 @login_required()
@@ -235,6 +240,11 @@ def view_profile(request):
 
 	students = get_students()
 
+	nominations = []
+	if enable_voting:
+		nominations = get_nominations_profile(studentID)
+
+
 	return render(request, 'voting/profile.html', {
 		'profile':True,
 		'student_name': name,
@@ -242,4 +252,17 @@ def view_profile(request):
 		'students':students,
 		'enable_voting':enable_voting,
 		'my_profile':False,
+		'nominations':nominations,
+	})
+
+@login_required()
+def vote(request):
+
+	students = get_students()
+	nominees = get_nominees()
+	return render(request, 'voting/vote.html', {
+		'voting':True,
+		'students':students,
+		'enable_voting':enable_voting,
+		'nominees':nominees,
 	})

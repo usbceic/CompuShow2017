@@ -36,11 +36,11 @@
 							<li class="main-navbar-element {% if home %}actived{% endif %}">
 								<a href="{% url 'voting:index' %}">PRINCIPAL</a>
 							</li>
-							<li class="main-navbar-element {% if nominations %}actived{% endif %}">
-								<a href="{% url 'voting:nominate' %}">NOMINACIONES</a>
+							<li class="main-navbar-element {% if nominations %}actived{% endif %} {% if enable_voting %}disabled{% endif %}">
+								<a {% if not enable_voting %}href="{% url 'voting:nominate' %}"{% endif %}>NOMINACIONES</a>
 							</li>
-							<li class="main-navbar-element {% if enable_voting %}actived{% endif %} disabled">
-								<a href="">VOTACIONES</a>
+							<li class="main-navbar-element {% if voting %}actived{% endif %} {% if not enable_voting %}disabled{% endif %}">
+								<a {% if enable_voting %}href="{% url 'voting:vote' %}"{% endif %}>VOTACIONES</a>
 							</li>
 							<form class="navbar-form navbar-left main-navbar-element" action="/view_profile/">
 								<div class="input-group search-bar-group">

@@ -164,12 +164,19 @@ class Nominee(models.Model):
 		Entity,
 		on_delete = models.CASCADE,
 		null=True,
+		related_name ='entity',
 	)
 	category = models.ForeignKey(
 		Category,
 		on_delete = models.CASCADE,
 		null=True,
-	)	
+	)
+	entityOpt = models.ForeignKey(
+		Entity,
+		on_delete = models.CASCADE,
+		null=True,
+		related_name ='entityOpt',
+	)
 
 	def __str__(self):
 		return str(self.id)
@@ -178,7 +185,6 @@ class Nominee(models.Model):
 		db_table = 'nominee'
 		verbose_name = "Nominee"
 		verbose_name_plural = "Nominees"
-		unique_together = ('entity','category')
 
 
 class Winner(models.Model):
