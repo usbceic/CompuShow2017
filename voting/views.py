@@ -8,7 +8,6 @@
 #                                                   #
 #####################################################
 
-
 import json
 from django.conf import settings
 from django.shortcuts import render
@@ -19,10 +18,19 @@ from django.contrib.auth.decorators import login_required
 from .forms import LoginForm
 from .library import *
 
+##############################################
+# Flag to enable voting modules (important!) #
+##############################################
+enable_voting = False                        #
+##############################################
+
 @login_required()
 def index(request):
+	students = get_students()
 	return render(request, 'voting/index.html', {
 		'home':True,
+		'students':students,
+		'enable_voting':enable_voting,
 	})
 
 def log_in(request):
@@ -78,12 +86,15 @@ def nominate(request):
 		'students':students,
 		'nominations':nominations,
 		'categories_exist':categories_exist,
+		'enable_voting':enable_voting,
 	})
 
 @login_required()
 def vote(request):
+	students = get_students()
 	return render(request, 'voting/vote.html', {
-		'voting':True,
+		'enable_voting':enable_voting,
+		'students':students,
 	})
 
 @login_required()
@@ -149,10 +160,15 @@ def profile(request):
 	#load()
 	####### mmm
 
+	students = get_students()
+
 	return render(request, 'voting/profile.html', {
 		'profile':True,
 		'student_name': get_full_name(request.user),
 		'student_id': request.user.username,
+		'students':students,
+		'enable_voting':enable_voting,
+		'my_profile':True,
 	})
 
 @login_required()
@@ -210,3 +226,20 @@ def make_nomination(request):
 			data['carnet2'] = None
 
 		return HttpResponse(json.dumps(data))
+
+@login_required()
+def view_profile(request):
+
+	name = request.GET.get('search-bar')
+	studentID = get_student_id(name)
+
+	students = get_students()
+
+	return render(request, 'voting/profile.html', {
+		'profile':True,
+		'student_name': name,
+		'student_id': studentID,
+		'students':students,
+		'enable_voting':enable_voting,
+		'my_profile':False,
+	})

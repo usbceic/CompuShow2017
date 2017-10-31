@@ -122,9 +122,13 @@ body {
 }
 
 @media screen and (max-width: 1000px) {
+    
     .category-image {
 		width: 200px;
 		height: 200px;
+    }
+    .form-nominate, .box-nominate {
+    	width: 80%;
     }
 }
 

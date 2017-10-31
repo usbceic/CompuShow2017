@@ -8,16 +8,43 @@
 {% block body %}
 
 		<div class="background-blur"></div>
-		<div class="container-fluid text-center basic-info">
-			<div class="basic-info-content">
-				<img class="profile-image profile-item" src="{% static request.session.profileimage %}"/>
+		<div class="profile-wrapper">
+			
+			<div class="container-fluid text-center basic-info">
+				<div class="basic-info-content">
+					<img class="profile-image profile-item" src="{% static request.session.profileimage %}"/>
+					<div class="profile-name profile-item">{{ student_name }}</div>
+					<div class="profile-id profile-item">{{ student_id }}</div>
+				</div>
 			</div>
-			<div class="profile-name profile-item">{{ student_name }}</div>
-			<div class="profile-id profile-item">{{ student_id }}</div>
-		</div>
-		<div class="container nominations">
-			<div class="nominations-title">Mis nominaciones</div>
-			<p>Podrás ver las categorias a las que haz sido nominado cuando cierre la etapa de nominaciones.</p>
+			
+			<div class="container-fluid nominations">
+	
+				<div class="nominations-title text-center">Nominaciones</div>
+	
+				<!-- Nomination period -->
+				{% if not enable_voting %}
+	
+					{% if my_profile %}
+						<div class="box-nominate">
+							<p><strong>Información:</strong> Podrás ver las categorias a las que haz sido nominado cuando cierre la etapa de nominaciones.</p>
+						</div>
+					{% endif %}
+	
+					{% if not my_profile %}
+						<div class="box-nominate">
+							<p><strong>Información:</strong> Podrás ver las categorias a las que ha sido nominada esta persona cuando cierre la etapa de nominaciones.</p>
+						</div>
+					{% endif %}	
+				
+				{% endif %}
+			
+				<!-- Voting period -->
+				{% if enable_voting %}
+					<p>c prendio.</p>
+				{% endif %}
+	
+			</div>
 		</div>
 
 {% endblock body %}
