@@ -68,13 +68,16 @@ def log_in(request):
 @login_required()
 def nominate(request):
 	
-	categories = get_categories()
-	students   = get_students()
+	categories  = get_categories()
+	students    = get_students()
+	nominations, categories_exist = get_nominations(request.user)
 
 	return render(request, 'voting/nominate.html', {
 		'nominations':True,
 		'categories':categories,
 		'students':students,
+		'nominations':nominations,
+		'categories_exist':categories_exist,
 	})
 
 @login_required()
@@ -170,6 +173,13 @@ def delete_nomination(request):
 
 	data = dict()
 
+	data['nominee_entity'] = Student.objects.filter(student_id = studentID ).first().person.entity.pk
+	
+	if studentID2 is not None:
+		data['nomineeOpt_entity'] = Student.objects.filter(student_id = studentID2).first().person.entity.pk
+	else:
+		data['nomineeOpt_entity'] = None
+
 	return HttpResponse(json.dumps(data))
 
 @login_required()
@@ -187,5 +197,16 @@ def make_nomination(request):
 			make_nomination_db(user, category, studentID, studentID2, comment)
 	
 		data = dict()
-	
+
+		data['nominee_entity'] = Student.objects.filter(student_id = get_student_id(studentID) ).first().person.entity.pk
+		data['carnet'] = get_student_id(studentID)
+		data['comment'] = comment
+
+		if studentID2 is not None:
+			data['nomineeOpt_entity'] = Student.objects.filter(student_id = get_student_id(studentID2) ).first().person.entity.pk
+			data['carnet2'] = get_student_id(studentID2)
+		else:
+			data['nomineeOpt_entity'] = None
+			data['carnet2'] = None
+
 		return HttpResponse(json.dumps(data))

@@ -24,43 +24,64 @@ var warning2 = 	'<div class="alert alert-danger alert-dismissable fade in"\
 var studentID1;
 var studentID2;
 var comment;
+var curCategories = {};
 var category,category2;
 
-$(function() {
 
-	// Remove slide in effect from first category
-	$("#CompuCono .cat-item").removeClass("slideanim");	
+// Remove slide in effect from first category
+$("#CompuCono .cat-item").removeClass("slideanim");
 
-	// Add smooth scrolling to all links in category navbar
-	$(".nav-categories li a").on('click', function(event) {
-		// Make sure this.hash has a value before overriding default behavior
-		if (this.hash !== "") {
-		// Prevent default anchor click behavior
-		event.preventDefault();
-		// Store hash
-		var hash = this.hash;
-    	// Using jQuery's animate() method to add smooth page scroll
-    	// The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
-		$('html, body').animate({
-			scrollTop: $(hash).offset().top
-		}, 1500, function(){
-    		// Add hash (#) to URL when done scrolling (default click behavior)
-			window.location.hash = hash;
-			});
-		} // End if
-	});
+// Add smooth scrolling to all links in category navbar
+$(".nav-categories li a").on('click', function(event) {
+	// Make sure this.hash has a value before overriding default behavior
+	if (this.hash !== "") {
+	// Prevent default anchor click behavior
+	event.preventDefault();
+	// Store hash
+	var hash = this.hash;
+   	// Using jQuery's animate() method to add smooth page scroll
+   	// The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+	$('html, body').animate({
+		scrollTop: $(hash).offset().top
+	}, 1500, function(){
+   		// Add hash (#) to URL when done scrolling (default click behavior)
+		window.location.hash = hash;
+		});
+	} // End if
+});
 
+
+$(document).on('click', '.btn-nominate', function() {
+	
 	// Get information of user to be nominated
-	$(".btn-nominate").click(function(e) {
+	$(".btn-nominate").one('click', function(e) {
 
 		e.preventDefault();
 
 		this_btn    =  $(this);
 		category    =  $(this).val();
-		category2   =  $(this).val();
-		studentID1  = ($(this).siblings(".nominate-form")).find(".text-input-1").val();
-		studentID2  = ($(this).siblings(".nominate-form")).find(".text-input-2").val();
-		comment     = ($(this).siblings(".nominate-form")).find(".text-input-3").val();
+
+		if(category !== "") {
+
+			category2   =  $(this).val();
+			studentID1  = ($(this).siblings(".nominate-form")).find(".text-input-1").val();
+			studentID2  = ($(this).siblings(".nominate-form")).find(".text-input-2").val();
+			comment     = ($(this).siblings(".nominate-form")).find(".text-input-3").val();
+
+		} else {
+
+			category    =  $(this).parent().parent().attr('id');
+			category2   =  $(this).parent().parent().attr('id');
+			studentID1  = ($(this).siblings(".p-nominee")).text();
+			
+			if(($(this).siblings(".p-nominee2")).length) {
+				studentID2  = ($(this).siblings(".p-nominee2")).text();
+			} else {
+				studentID2  = undefined;
+			}
+
+			comment     = ($(this).siblings(".p-comment")).text();
+		}
 
 		// Validate non empty input
 		if( studentID1 === "" ) {
@@ -114,7 +135,7 @@ $(function() {
 						$('#modal-body-nominate').append("<p><strong>"+data.carnet+"</strong></p>");
 					}
 
-					if(studentID2 !== null) {
+					if(studentID2 !== undefined) {
 						$('#modal-body-nominate').append("y</p>"
 							+"<p><strong>"+studentID2+"</strong></p>"
 							+"<p><strong>"+data.carnet2+"</strong></p>");
@@ -134,7 +155,7 @@ $(function() {
         			$('#nominateModal').modal('toggle');
 
         			// Make nomination
-					$(".make-nomination-btn").click(function(e) {
+					$(".make-nomination-btn").one('click', function(e) {
 
 						e.preventDefault();
 
@@ -167,6 +188,64 @@ $(function() {
 					        		
 								data = JSON.parse(data);
 						
+								if(data.nomineeOpt_entity === null) {
+									data.nomineeOpt_entity = "None";
+								}
+
+								if($('#'+category+'-nominations-title').length === 0 && !(category in curCategories)) {
+									$('#'+category).append(
+										'<div id='+category+'-nominations-title" class="category-nominations cat-item slideanim">Mis nominaciones</div>'
+									);
+									curCategories[category] = true;
+								}
+
+								$('#'+category).append(
+									'<div id="'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity+'" class="cat-item box-nominate slideanim">'
+								);	
+								
+								$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).append(
+									'<button type="button" class="close btn-close btn-nominate new-btn-nominate">'
+									+'<small><span class="glyphicon glyphicon-edit"></span></small>'
+									+'</button>'
+								).button();
+
+								$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).append(
+									'<p class="p-nominee">'+studentID1+'</p>'
+								);
+
+								if(data.carnet !== null) {
+									$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).append(
+										'<p>'+data.carnet+'</p>'
+									);
+								}
+
+								if(data.nomineeOpt_entity !== "None") {
+									$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).append(
+										'<p>y</p>'
+										+'<p class="p-nominee2">'+studentID2+'</p>'
+									);
+								}
+									
+								if(data.carnet2 !== null) {
+									$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).append(
+										'<p>'+data.carnet2+'</p>'
+									);
+								}
+
+								if(data.comment !== "") {
+									$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).append(
+										'<p class="p-comment"><em>'+data.comment+'</em></p>'
+									);
+								} else {
+									$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).append(
+										'<p class="p-comment">Sin comentarios adicionales.</p>'
+									);
+								}
+
+								$('#'+category).append(
+									'</div>'
+								);
+
 								$('#nominateModal').modal('toggle');
 								$('#successfulNominationModal').modal('toggle');
 
@@ -188,7 +267,7 @@ $(function() {
 						$('#modal-body-alreadynominated').append("<p><strong>"+data.carnet+"</strong></p>");
 					}
 
-					if(studentID2 !== null) {
+					if(studentID2 !== undefined) {
 						$('#modal-body-alreadynominated').append("y</p>"
 							+"<p><strong>"+studentID2+"</strong></p>"
 							+"<p><strong>"+data.carnet2+"</strong></p>");
@@ -224,7 +303,13 @@ $(function() {
 							success: function (data) {
 					        		
 								data = JSON.parse(data);
-						
+
+								if(studentID2 == undefined) {
+									$('#'+category+'-nominations-'+data.nominee_entity+'-None').remove();
+								} else {
+									$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).remove();
+								}
+
 								$('#alreadyNominatedModal').modal('toggle');
 								$('#deletedNominationModal').modal('toggle');
 							}
@@ -240,7 +325,5 @@ $(function() {
 		return false;
 	});
 
-	$(".btn-close").click(function(e) {
-
-	});
+	
 });

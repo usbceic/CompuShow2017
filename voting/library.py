@@ -84,7 +84,20 @@ def get_students():
 	return students
 
 def get_full_name(user):
+
+	if not Student.objects.filter(user = user).exists():
+		return None
+
 	student = Student.objects.filter(user = user).first()
+	person = student.person
+	return person.name + " " + person.surname
+
+def get_full_name_from_entity(entity):
+
+	if not Student.objects.filter(person__entity = entity).exists():
+		return None
+
+	student = Student.objects.filter(person__entity = entity).first()
 	person = student.person
 	return person.name + " " + person.surname
 
@@ -94,6 +107,43 @@ def get_student_id(username):
 		if student['person__name'] + " " + student['person__surname'] == username:
 			return student['student_id']
 	return None
+
+# Get all nominations user has made
+def get_nominations(user):
+
+	nomination_rows = Nominate.objects.filter(nominator = user)
+	nominations = []
+	categories  = dict()
+
+	for row in nomination_rows:
+
+		if not row.active:
+			continue
+
+		nominee_name   = get_full_name_from_entity(row.nominee)
+		nominee_carnet = get_student_id(nominee_name)
+
+		nominee_name2   = get_full_name_from_entity(row.nomineeOpt)
+		nominee_carnet2 = get_student_id(nominee_name2)
+
+		nominations.append({
+			'category':row.category.name,
+			'nominee' :nominee_name,
+			'carnet':nominee_carnet,
+			'nomineeOpt' :nominee_name2,
+			'carnet2':nominee_carnet2,
+			'comment':row.comment,
+			'nominee_entity' :row.nominee.pk,
+		})
+
+		categories[row.category.name] = True
+
+		if row.nomineeOpt is None:
+			nominations[-1]['nomineeOpt_entity'] = None
+		else:
+			nominations[-1]['nomineeOpt_entity'] = row.nomineeOpt.pk
+
+	return nominations, categories
 
 # Checks if user already made this nomination
 def already_nominated(user, category, ID1, ID2):
@@ -218,7 +268,7 @@ def delete_nomination_db(user, category, ID1, ID2):
 	elif category.name == 'CompuLove':
 		if ID1 > ID2:
 			ID1, ID2 = ID2, ID1
-		
+
 		entity  = Student.objects.filter(student_id = ID1).first().person.entity
 		entity2 = Student.objects.filter(student_id = ID2).first().person.entity
 

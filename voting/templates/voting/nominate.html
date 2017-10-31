@@ -50,7 +50,7 @@
     									<option value="{{ student.person__name }} {{ student.person__surname }}">{{ student.student_id }}</option>
     								{% endfor %}
     							</datalist>
-    							
+
     							{% if category.name == 'CompuLove' %}
 	    							<input list="student-id" type="text" name="{{ category.name }}-name-2" id="{{ category.name }}-name-2" class="text-input-2 form-control" required placeholder="Nombre del 2do estudiante"/>
 	    						{% endif %}
@@ -61,6 +61,49 @@
 						</form>
 						<button id="{{ category.name }}-submitbtn" class="btn btn-success btn-block btn-nominate" value={{ category.name }}>Nominar</button>
 					</div>
+
+					</br>
+
+					{% for category_exists in categories_exist %}
+						{% if category_exists == category.name %}
+							<div id="{{ category.name }}-nominations-title" class="category-nominations cat-item slideanim">Mis nominaciones</div>
+						{% endif %}
+					{% endfor %}
+
+					{% for nomination in nominations %}
+						{% if nomination.category == category.name %}
+							<div id="{{ category.name }}-nominations-{{ nomination.nominee_entity }}-{{ nomination.nomineeOpt_entity }}" class="cat-item box-nominate slideanim">
+
+								<button type="button" class="close btn-close btn-nominate">
+									<small><span class="glyphicon glyphicon-edit"></span></small>
+								</button>
+
+								<p class="p-nominee">{{ nomination.nominee }}</p>
+								
+								{% if nomination.carnet is not None %}
+									<p>{{ nomination.carnet }}</p>
+								{% endif %}	
+								
+								{% if nomination.nomineeOpt is not None %}
+									<p>y</p>
+									<p class="p-nominee2">{{ nomination.nomineeOpt }}</p>
+								{% endif %}	
+
+								{% if nomination.carnet2 is not None %}
+									<p>{{ nomination.carnet2 }}</p>
+								{% endif %}	
+
+								{% if nomination.comment != "" %}
+									<p class="p-comment"><em>"{{ nomination.comment }}"</em></p>
+								{% endif %}	
+
+								{% if nomination.comment == "" %}
+									<p class="p-comment">Sin comentarios adicionales.</p>
+								{% endif %}	
+
+							</div>
+						{% endif %}
+					{% endfor %}
 				</div>
 			{% endfor %}
 		</div>
@@ -99,7 +142,7 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
-					<p class="h2 text-center" style="color:white;">Nominación</p>
+					<p class="h2 text-center" style="color:white;">Detalles de nominación</p>
 				</div>
 				<div id="modal-body-alreadynominated" class="modal-body text-center">	
 				</div>
@@ -123,10 +166,11 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-body text-center">
-					<button type="button" class="close btn-close" data-dismiss="modal">&times;</button>
 					<p class="h2">¡Nominación <span class='text-danger'>eliminada</span> con éxito!</p>
 				</div>
-
+				<div class="modal-footer">
+					<button type="button" class="btn btn-info btn-block btn-close" data-dismiss="modal">Continuar</button>
+				</div>
 			</div>
 		</div>
 	</div>
