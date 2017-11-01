@@ -116,6 +116,12 @@ $(document).on('click', '.btn-nominate', function() {
 			return false;
 		}
 
+		if( category === "CompuMaster" || category === "CompuAdoptado" || category === "CompuTeam" ) {
+			studentID1 = studentID1.replace(/ /g,"_");
+		}
+
+
+
 		$.ajax({
 			type: 'GET',
 			url: '/info/',
@@ -147,6 +153,10 @@ $(document).on('click', '.btn-nominate', function() {
 
 
 				else if(data.nominate) {
+
+					if( category === "CompuMaster" || category === "CompuAdoptado" || category === "CompuTeam" ) {
+						studentID1 = studentID1.replace(/_/g, ' ');
+					}
 
         			$('#modal-body-nominate').html(
         				"<p><span class='text-success'>Nominar</span> a:</p>"
@@ -201,6 +211,10 @@ $(document).on('click', '.btn-nominate', function() {
 						    }
 						});
 
+						if( category === "CompuMaster" || category === "CompuAdoptado" || category === "CompuTeam" ) {
+							studentID1 = studentID1.replace(/ /g,"_");
+						}
+
 						$.ajax({
 							type: 'POST',
 							url: '/make_nomination/',
@@ -216,6 +230,10 @@ $(document).on('click', '.btn-nominate', function() {
 					        		
 								data = JSON.parse(data);
 						
+								if( category === "CompuMaster" || category === "CompuAdoptado" || category === "CompuTeam" ) {
+									studentID1 = studentID1.replace(/_/g, ' ');
+								}
+
 								if(data.nomineeOpt_entity === null) {
 									data.nomineeOpt_entity = "None";
 								}
@@ -266,7 +284,7 @@ $(document).on('click', '.btn-nominate', function() {
 
 								if(data.cartoon !== "None") {
 									$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).append(
-										'<p class="p-cartoon">'+cartoon+'</p>'
+										'<p class="p-cartoon-outer">Carticatura: <span class="p-cartoon">'+data.cartoon+'</span></p>'
 									);
 								}
 
@@ -297,6 +315,11 @@ $(document).on('click', '.btn-nominate', function() {
 
 
 				else if (data.already_nominated) {
+
+					if( category === "CompuMaster" || category === "CompuAdoptado" || category === "CompuTeam" ) {
+						studentID1 = studentID1.replace(/_/g, ' ');
+					}
+
         			$('#modal-body-alreadynominated').html(
         				"<p>Ya has <span class='text-success'><u>Nominado</u></span> a:</p>"
         				+"<p><strong>"+studentID1+"</strong></p>");
@@ -333,6 +356,10 @@ $(document).on('click', '.btn-nominate', function() {
 					$(".eliminate-nomination-btn").click(function(e) {
 					
 						e.preventDefault();
+
+						if( category === "CompuMaster" || category === "CompuAdoptado" || category === "CompuTeam" ) {
+							studentID1 = studentID1.replace(/ /g,"_");
+						}
 
 						$.ajax({
 							type: 'GET',

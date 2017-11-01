@@ -127,6 +127,12 @@ def get_nominations(user):
 		nominee_name2   = get_full_name_from_entity(row.nomineeOpt)
 		nominee_carnet2 = get_student_id(nominee_name2)
 
+		if row.nominee is not None:
+			row_nominee = row.nominee.pk
+		else:
+			row_nominee = None
+			row_extra   = row.extra
+
 		nominations.append({
 			'category':row.category.name,
 			'nominee' :nominee_name,
@@ -134,8 +140,7 @@ def get_nominations(user):
 			'nomineeOpt' :nominee_name2,
 			'carnet2':nominee_carnet2,
 			'comment':row.comment,
-			'nominee_entity' :row.nominee.pk,
-			'cartoon':row.extra,
+			'nominee_entity' : (lambda row_nominee: row_nominee if row_nominee else row_extra),
 		})
 
 		categories[row.category.name] = True
@@ -145,6 +150,13 @@ def get_nominations(user):
 		else:
 			nominations[-1]['nomineeOpt_entity'] = row.nomineeOpt.pk
 
+		if row.category.name == 'CompuCartoon':
+			nominations[-1]['cartoon'] = row.extra
+
+		if row.category.name == 'CompuMaster' or row.category.name == 'CompuAdoptado' or row.category.name == 'CompuTeam':
+			nominations[-1]['nominee'] = row.extra.replace("_", " ")
+			nominations[-1]['nominee_entity'] = row.extra
+
 	return nominations, categories
 
 # Checks if user already made this nomination
@@ -153,14 +165,9 @@ def already_nominated(user, category, ID1, ID2):
 	category = Category.objects.filter(name = category).first()
 	user   = Student.objects.filter(student_id = user).first().user
 
-	if category.name == 'CompuMaster':
-		pass
-	
-	elif category.name == 'CompuTeam':
-		pass
-	
-	elif category.name == 'CompuAdoptado':
-		pass
+	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+	if category.name in freeFieldCategories:
+		return Nominate.objects.filter(nominator=user, extra=ID1, category=category, active=True).exists()
 	
 	elif category.name == 'CompuLove':
 
@@ -182,15 +189,16 @@ def make_nomination_db(user, category, ID1, ID2, comment, extra=None):
 	category = Category.objects.filter(name = category).first()
 	user   = Student.objects.filter(student_id = user).first().user
 
-	if category.name == 'CompuMaster':
-		pass
-	
-	elif category.name == 'CompuTeam':
-		pass
-	
-	elif category.name == 'CompuAdoptado':
-		pass
-	
+	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+	if category.name in freeFieldCategories:
+		Nominate.objects.create(
+			nominator = user,
+			category = category,
+			comment = comment,
+			extra = ID1
+		)
+		update_nominee(None, category, None, True, ID1)
+
 	elif category.name == 'CompuLove':
 		ID1	= get_student_id(ID1)
 		ID2	= get_student_id(ID2)
@@ -229,14 +237,11 @@ def get_nomination_info(user, category, ID1, ID2):
 	category = Category.objects.filter(name = category).first()
 	user   = Student.objects.filter(student_id = user).first().user
 
-	if category.name == 'CompuMaster':
-		pass
-	
-	elif category.name == 'CompuTeam':
-		pass
-	
-	elif category.name == 'CompuAdoptado':
-		pass
+	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+	if category.name in freeFieldCategories:
+		nom_id  = Nominate.objects.filter(nominator=user, extra=ID1, category=category, active=True).first().id
+		comment = Nominate.objects.filter(nominator=user, extra=ID1, category=category, active=True).first().comment
+		return nom_id, comment		
 	
 	elif category.name == 'CompuLove':
 		if ID1 > ID2:
@@ -279,14 +284,14 @@ def delete_nomination_db(user, category, ID1, ID2):
 	category = Category.objects.filter(name = category).first()
 	user   = Student.objects.filter(student_id = user).first().user
 
-	if category.name == 'CompuMaster':
-		pass
-	
-	elif category.name == 'CompuTeam':
-		pass
-	
-	elif category.name == 'CompuAdoptado':
-		pass
+	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+	if category.name in freeFieldCategories:
+
+		nomination = Nominate.objects.get(nominator=user, extra=ID1, category=category, active=True)
+		nomination.active = False
+		nomination.save()
+
+		update_nominee(None, category, None, False, ID1)
 	
 	elif category.name == 'CompuLove':
 		
@@ -324,7 +329,31 @@ def get_nominations_profile(studentID):
 	for category, nominees in nominees_per_category.items():
 		for nominee in nominees:
 
-			if category.name == 'CompuLove':
+			freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+			if category.name in freeFieldCategories:
+			
+				row_name = nominee.extra.replace("_", " ")
+				profile_name = get_full_name_from_entity(entity)
+
+				if row_name == profile_name:
+					nomination = dict()
+					comments = get_comments(row_name.replace(" ", "_"), None, category)
+					nomination['category']  = category
+					if comments:
+						nomination['firstcomment'] = comments[0]
+					nomination['comments']  = comments[1:]
+					nomination['left'] = left
+					nomination['right'] = right
+
+					if category.name == 'CompuCartoon':
+						nomination['cartoon'] = get_cartoon_nominee(nominee.entity)
+
+					left = not left
+					right = not right
+					nominations.append(nomination)
+
+
+			elif category.name == 'CompuLove':
 				if nominee.entity == entity or nominee.entityOpt == entity:
 					nomination = dict()
 					comments = get_comments(nominee.entity, nominee.entityOpt, category)
@@ -363,7 +392,11 @@ def get_nominations_profile(studentID):
 
 def get_comments(entity, entity2, category):
 	
-	if category.name == 'CompuLove':
+	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+	if category.name in freeFieldCategories:
+		nomination_rows = Nominate.objects.filter(Q(extra = entity) & Q(category=category))
+
+	elif category.name == 'CompuLove':
 		nomination_rows = Nominate.objects.filter( \
 			(Q(nominee=entity) & Q(nomineeOpt=entity2) & Q(category=category)) |  \
 			(Q(nomineeOpt=entity) & Q(nominee=entity2) & Q(category=category)))
@@ -378,7 +411,7 @@ def get_comments(entity, entity2, category):
 		if not row.active:
 			continue
 
-		if row.comment:
+		if row.comment and row.comment != "" and row.comment != " ":
 			comments.append(row.comment)
 
 	return comments
@@ -391,7 +424,22 @@ def update_nominee(entity, category, entity2, add, extra=None):
 	else:
 		cnt = -1
 
-	if category.name == 'CompuLove':
+	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+	if category.name in freeFieldCategories:
+		if not Nominee.objects.filter(Q(extra = extra) & Q(category = category)).exists():
+			Nominee.objects.create(
+				nominations = 1,
+				entity = None,
+				category = category,
+				entityOpt = None,
+				extra = extra,
+			)
+		else:
+			nomination = Nominee.objects.get(Q(extra = extra) & Q(category = category))
+			nomination.nominations += cnt
+			nomination.save()
+
+	elif category.name == 'CompuLove':
 		if not Nominee.objects.filter(Q(entity = entity) & Q(entityOpt=entity2) & Q(category = category)).exists():
 			Nominee.objects.create(
 				nominations = 1,
@@ -426,7 +474,7 @@ def get_nominees(top = 4):
 	results = dict()
 
 	for category in categories:
-		nominees = Nominee.objects.filter(category=category).order_by('-nominations')[:top]
+		nominees = Nominee.objects.filter(Q(category=category) & Q(nominations__gte=1)).order_by('-nominations')[:top]
 		results[category] = nominees
 
 	return results

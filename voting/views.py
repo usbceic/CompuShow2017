@@ -116,7 +116,9 @@ def get_student_info(request):
 	data['category'] = category
 
 	# Get student ID's
-	studentID = get_student_id(studentID)
+	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+	if category not in freeFieldCategories:
+		studentID = get_student_id(studentID)
 
 	# Student not found
 	if studentID is None:
@@ -138,10 +140,14 @@ def get_student_info(request):
 		data['already_nominated'] = True
 		data['nominate'] = False
 		data['nom_id'], data['comment'] = get_nomination_info(user, category, studentID, studentID2)
-		data['carnet']   = studentID
+		if category not in freeFieldCategories:
+			data['carnet'] = studentID
+		else:
+			data['carnet'] = ""
 		data['carnet2']  = studentID2
 		data['comment']  = comment
-		data['cartoon']  = get_cartoon(user, studentID)
+		if category == 'CompuCartoon':
+			data['cartoon']  = get_cartoon(user, studentID)
 
 	# Then prepre for nomination
 	else:
@@ -149,7 +155,12 @@ def get_student_info(request):
 		data['nominate'] = True
 		data['already_nominated'] = False
 		data['comment']  = comment
-		data['carnet']   = studentID
+		
+		if category not in freeFieldCategories:
+			data['carnet'] = studentID
+		else:
+			data['carnet'] = ""
+
 		data['carnet2']  = studentID2
 		data['cartoon']  = cartoon
 
@@ -188,7 +199,9 @@ def delete_nomination(request):
 	studentID2 = request.GET.get('studentID2')
 
 	# Get student ID's
-	studentID = get_student_id(studentID)
+	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+	if category not in freeFieldCategories:
+		studentID = get_student_id(studentID)
 
 	if studentID2 is not None:
 		studentID2 = get_student_id(studentID2)
@@ -197,12 +210,18 @@ def delete_nomination(request):
 
 	data = dict()
 
-	data['nominee_entity'] = Student.objects.filter(student_id = studentID ).first().person.entity.pk
-	
-	if studentID2 is not None:
-		data['nomineeOpt_entity'] = Student.objects.filter(student_id = studentID2).first().person.entity.pk
+	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+	if category not in freeFieldCategories:
+		data['nominee_entity'] = Student.objects.filter(student_id = studentID ).first().person.entity.pk
+		
+		if studentID2 is not None:
+			data['nomineeOpt_entity'] = Student.objects.filter(student_id = studentID2).first().person.entity.pk
+		else:
+			data['nomineeOpt_entity'] = None
+
 	else:
-		data['nomineeOpt_entity'] = None
+		data['nominee_entity'] = studentID
+		data['nomineeOpt_entity'] = None		
 
 	return HttpResponse(json.dumps(data))
 
@@ -223,17 +242,27 @@ def make_nomination(request):
 	
 		data = dict()
 
-		data['nominee_entity'] = Student.objects.filter(student_id = get_student_id(studentID) ).first().person.entity.pk
-		data['carnet'] = get_student_id(studentID)
-		data['comment'] = comment
-		data['cartoon'] = cartoon
-
-		if studentID2 is not None:
-			data['nomineeOpt_entity'] = Student.objects.filter(student_id = get_student_id(studentID2) ).first().person.entity.pk
-			data['carnet2'] = get_student_id(studentID2)
-		else:
+		freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+		if category in freeFieldCategories:
+			data['nominee_entity'] = studentID
+			data['carnet'] = None
+			data['comment'] = comment
+			data['cartoon'] = None
 			data['nomineeOpt_entity'] = None
 			data['carnet2'] = None
+
+		else:
+			data['nominee_entity'] = Student.objects.filter(student_id = get_student_id(studentID) ).first().person.entity.pk
+			data['carnet'] = get_student_id(studentID)
+			data['comment'] = comment
+			data['cartoon'] = cartoon
+	
+			if studentID2 is not None:
+				data['nomineeOpt_entity'] = Student.objects.filter(student_id = get_student_id(studentID2) ).first().person.entity.pk
+				data['carnet2'] = get_student_id(studentID2)
+			else:
+				data['nomineeOpt_entity'] = None
+				data['carnet2'] = None
 
 		return HttpResponse(json.dumps(data))
 
