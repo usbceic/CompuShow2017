@@ -146,6 +146,7 @@ class Nominate(models.Model):
 		on_delete = models.CASCADE,
 		null=True,
 	)
+	extra = models.TextField(null=True)
 
 	def __str__(self):
 		return str(self.id)
@@ -177,6 +178,7 @@ class Nominee(models.Model):
 		null=True,
 		related_name ='entityOpt',
 	)
+	extra = models.TextField(null=True)
 
 	def __str__(self):
 		return str(self.id)

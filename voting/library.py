@@ -135,6 +135,7 @@ def get_nominations(user):
 			'carnet2':nominee_carnet2,
 			'comment':row.comment,
 			'nominee_entity' :row.nominee.pk,
+			'cartoon':row.extra,
 		})
 
 		categories[row.category.name] = True
@@ -176,7 +177,7 @@ def already_nominated(user, category, ID1, ID2):
 		entity = Student.objects.filter(student_id = ID1).first().person.entity
 		return Nominate.objects.filter(nominator=user, nominee=entity, category=category, active=True).exists()
 
-def make_nomination_db(user, category, ID1, ID2, comment):
+def make_nomination_db(user, category, ID1, ID2, comment, extra=None):
 
 	category = Category.objects.filter(name = category).first()
 	user   = Student.objects.filter(student_id = user).first().user
@@ -217,11 +218,12 @@ def make_nomination_db(user, category, ID1, ID2, comment):
 			nominator = user,
 			nominee = entity,
 			category = category,
-			comment = comment
+			comment = comment,
+			extra = extra
 		)
-		update_nominee(entity, category, None, True)
+		update_nominee(entity, category, None, True, extra)
 
-# Get nomination comment
+# Get nomination details
 def get_nomination_info(user, category, ID1, ID2):
 	
 	category = Category.objects.filter(name = category).first()
@@ -253,6 +255,23 @@ def get_nomination_info(user, category, ID1, ID2):
 		nom_id  = Nominate.objects.filter(nominator=user, nominee=entity, category=category, active=True).first().id
 		comment = Nominate.objects.filter(nominator=user, nominee=entity, category=category, active=True).first().comment
 		return nom_id, comment
+
+# Get nomination cartoon
+def get_cartoon(user, ID1):
+	
+	category = Category.objects.filter(name = 'CompuCartoon').first()
+	user   = Student.objects.filter(student_id = user).first().user
+
+	entity  = Student.objects.filter(student_id = ID1).first().person.entity
+	cartoon = Nominate.objects.filter(nominator=user, nominee=entity, category=category, active=True).first().extra
+	return cartoon
+
+# Get nominee cartoon
+def get_cartoon_nominee(entity):
+	
+	category = Category.objects.filter(name = 'CompuCartoon').first()
+	cartoon = Nominate.objects.filter(nominee=entity, category=category, active=True).first().extra
+	return cartoon
 
 # Delete nomination
 def delete_nomination_db(user, category, ID1, ID2):
@@ -321,9 +340,6 @@ def get_nominations_profile(studentID):
 					right = not right
 					nominations.append(nomination)
 
-			elif category.name == 'CompuCartoon':
-				pass
-	
 			else:
 				# Regular category
 				if nominee.entity == entity:
@@ -335,6 +351,10 @@ def get_nominations_profile(studentID):
 					nomination['comments']  = comments[1:]
 					nomination['left'] = left
 					nomination['right'] = right
+
+					if category.name == 'CompuCartoon':
+						nomination['cartoon'] = get_cartoon_nominee(nominee.entity)
+
 					left = not left
 					right = not right
 					nominations.append(nomination)
@@ -347,9 +367,6 @@ def get_comments(entity, entity2, category):
 		nomination_rows = Nominate.objects.filter( \
 			(Q(nominee=entity) & Q(nomineeOpt=entity2) & Q(category=category)) |  \
 			(Q(nomineeOpt=entity) & Q(nominee=entity2) & Q(category=category)))
-
-	elif category.name == 'CompuCartoon':
-		pass
 
 	else:
 		nomination_rows = Nominate.objects.filter(Q(nominee = entity) & Q(category=category))
@@ -367,7 +384,7 @@ def get_comments(entity, entity2, category):
 	return comments
 
 # Update nomination counter when nomination is submitted
-def update_nominee(entity, category, entity2, add):
+def update_nominee(entity, category, entity2, add, extra=None):
 
 	if add:
 		cnt = 1
@@ -387,9 +404,6 @@ def update_nominee(entity, category, entity2, add):
 			nomination.nominations += cnt
 			nomination.save()
 
-	elif category.name == 'CompuCartoon':
-		pass
-
 	else:
 		if not Nominee.objects.filter(Q(entity = entity) & Q(category = category)).exists():
 			Nominee.objects.create(
@@ -397,6 +411,7 @@ def update_nominee(entity, category, entity2, add):
 				entity = entity,
 				category = category,
 				entityOpt = entity2,
+				extra = extra,
 			)
 		else:
 			nomination = Nominee.objects.get(entity=entity, category=category, entityOpt=entity2)

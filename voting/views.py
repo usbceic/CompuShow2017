@@ -21,7 +21,7 @@ from .library import *
 ##############################################
 # Flag to enable voting modules (important!) #
 ##############################################
-enable_voting = False                        #
+enable_voting = True                        #
 ##############################################
 
 @login_required()
@@ -110,6 +110,7 @@ def get_student_info(request):
 	studentID = request.GET.get('studentID')
 	studentID2 = request.GET.get('studentID2')
 	comment = request.GET.get('comment')
+	cartoon = request.GET.get('cartoon')
 	
 	data = dict()
 	data['category'] = category
@@ -140,6 +141,7 @@ def get_student_info(request):
 		data['carnet']   = studentID
 		data['carnet2']  = studentID2
 		data['comment']  = comment
+		data['cartoon']  = get_cartoon(user, studentID)
 
 	# Then prepre for nomination
 	else:
@@ -149,6 +151,7 @@ def get_student_info(request):
 		data['comment']  = comment
 		data['carnet']   = studentID
 		data['carnet2']  = studentID2
+		data['cartoon']  = cartoon
 
 	return HttpResponse(json.dumps(data))
 
@@ -213,15 +216,17 @@ def make_nomination(request):
 		studentID = request.POST.get('studentID')
 		studentID2 = request.POST.get('studentID2')
 		comment = request.POST.get('comment')
+		cartoon = request.POST.get('cartoon')
 		
 		if not already_nominated(user, category, get_student_id(studentID), get_student_id(studentID2)):
-			make_nomination_db(user, category, studentID, studentID2, comment)
+			make_nomination_db(user, category, studentID, studentID2, comment, cartoon)
 	
 		data = dict()
 
 		data['nominee_entity'] = Student.objects.filter(student_id = get_student_id(studentID) ).first().person.entity.pk
 		data['carnet'] = get_student_id(studentID)
 		data['comment'] = comment
+		data['cartoon'] = cartoon
 
 		if studentID2 is not None:
 			data['nomineeOpt_entity'] = Student.objects.filter(student_id = get_student_id(studentID2) ).first().person.entity.pk

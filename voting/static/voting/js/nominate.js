@@ -21,9 +21,16 @@ var warning2 = 	'<div class="alert alert-danger alert-dismissable fade in"\
 				<strong>Error:</strong> Nombre inválido. Escoja nombre de la lista.\
 				</div>';
 
+var warningCartoon = '<div class="alert alert-danger alert-dismissable fade in"\
+				style="margin:0;margin-bottom:20px;">\
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\
+				<strong>Error:</strong> Ingrese nombre de la caricatura.\
+				</div>';
+
 var studentID1;
 var studentID2;
 var comment;
+var cartoon;
 var curCategories = {};
 var category,category2;
 
@@ -67,6 +74,7 @@ $(document).on('click', '.btn-nominate', function() {
 			studentID1  = ($(this).siblings(".nominate-form")).find(".text-input-1").val();
 			studentID2  = ($(this).siblings(".nominate-form")).find(".text-input-2").val();
 			comment     = ($(this).siblings(".nominate-form")).find(".text-input-3").val();
+			cartoon     = ($(this).siblings(".nominate-form")).find(".text-input-4").val();
 
 		} else {
 
@@ -81,6 +89,12 @@ $(document).on('click', '.btn-nominate', function() {
 			}
 
 			comment     = ($(this).siblings(".p-comment")).text();
+
+			if(($(this).siblings(".p-cartoon-outer")).length) {
+				cartoon  = ($(this).siblings(".p-cartoon-outer").children(".p-cartoon")).text();
+			} else {
+				cartoon  = undefined;
+			}
 		}
 
 		// Validate non empty input
@@ -96,6 +110,12 @@ $(document).on('click', '.btn-nominate', function() {
 			return false;
 		}
 
+		if( cartoon === "" ) {
+			$(this).parents(".form-nominate").prepend(warningCartoon);
+			($(this).siblings(".nominate-form")).find(".text-input-4").select();
+			return false;
+		}
+
 		$.ajax({
 			type: 'GET',
 			url: '/info/',
@@ -104,7 +124,8 @@ $(document).on('click', '.btn-nominate', function() {
 				'category':category,
 				'studentID':studentID1,
 				'studentID2':studentID2,
-				'comment':comment
+				'comment':comment,
+				'cartoon':cartoon,
 			},
 			success: function (data) {
         		
@@ -139,6 +160,12 @@ $(document).on('click', '.btn-nominate', function() {
 						$('#modal-body-nominate').append("y</p>"
 							+"<p><strong>"+studentID2+"</strong></p>"
 							+"<p><strong>"+data.carnet2+"</strong></p>");
+					}
+
+					if(cartoon !== undefined) {
+						$('#modal-body-nominate').append(
+							"<p>como la caricatura:</p>"
+							+"<p><strong>"+cartoon+"</strong></p>");
 					}
 
         			$('#modal-body-nominate').append(
@@ -183,6 +210,7 @@ $(document).on('click', '.btn-nominate', function() {
 								'studentID':studentID1,
 								'studentID2':studentID2,
 								'comment':comment,
+								'cartoon':cartoon,
 							},
 							success: function (data) {
 					        		
@@ -190,6 +218,10 @@ $(document).on('click', '.btn-nominate', function() {
 						
 								if(data.nomineeOpt_entity === null) {
 									data.nomineeOpt_entity = "None";
+								}
+
+								if(data.cartoon === null) {
+									data.cartoon = "None";
 								}
 
 								if($('#'+category+'-nominations-title').length === 0 && !(category in curCategories)) {
@@ -232,6 +264,12 @@ $(document).on('click', '.btn-nominate', function() {
 									);
 								}
 
+								if(data.cartoon !== "None") {
+									$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).append(
+										'<p class="p-cartoon">'+cartoon+'</p>'
+									);
+								}
+
 								if(data.comment !== "") {
 									$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).append(
 										'<p class="p-comment"><em>'+data.comment+'</em></p>'
@@ -268,9 +306,14 @@ $(document).on('click', '.btn-nominate', function() {
 					}
 
 					if(studentID2 !== undefined) {
-						$('#modal-body-alreadynominated').append("y</p>"
+						$('#modal-body-alreadynominated').append("<p>y</p>"
 							+"<p><strong>"+studentID2+"</strong></p>"
 							+"<p><strong>"+data.carnet2+"</strong></p>");
+					}
+
+					if(cartoon !== undefined) {
+						$('#modal-body-alreadynominated').append("<p>como:</p>"
+							+"<p><strong>"+data.cartoon+"</strong></p>");
 					}
 
 					$('#modal-body-alreadynominated').append(

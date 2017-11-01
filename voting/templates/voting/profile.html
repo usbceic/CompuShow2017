@@ -67,6 +67,12 @@
 
 										<div class="category-description cat-item slideanim"><p>{{ nomination.category.description }}</p></div>
 
+										{% if nomination.category.name == 'CompuCartoon' %}
+											<div class="category-description cat-item slideanim">
+												<p>Caricatura: {{ nomination.cartoon }}.</p>
+											</div>
+										{% endif %}
+
 										<!-- Carousel for comments -->
 										<div id="{{ nomination.category.name }}_comments" class="carousel slide text-center" data-ride="carousel">
   											<!-- Wrapper for slides -->
@@ -109,6 +115,12 @@
 
 										<div class="category-description cat-item slideanim">{{ nomination.category.description }}</div>
 										
+										{% if nomination.category.name == 'CompuCartoon' %}
+											<div class="category-description cat-item slideanim" style="margin-top:10px;">
+												<p>Caricatura: <strong>{{ nomination.cartoon }}.</strong></p>
+											</div>
+										{% endif %}
+
 										<!-- Carousel for comments -->
 										<div id="{{ nomination.category.name }}_comments" class="carousel slide text-center" data-ride="carousel">
   											<!-- Wrapper for slides -->

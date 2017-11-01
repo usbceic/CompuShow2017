@@ -55,6 +55,9 @@
 	    							<input list="student-id" type="text" name="{{ category.name }}-name-2" id="{{ category.name }}-name-2" class="text-input-2 form-control" required placeholder="Nombre del 2do estudiante"/>
 	    						{% endif %}
     							
+    							{% if category.name == 'CompuCartoon' %}
+	    							<input type="text" name="{{ category.name }}-cartoon" id="{{ category.name }}-cartoon" class="text-input-4 form-control" required placeholder="Nombre de la caricatura"/>
+	    						{% endif %}
 
     							<textarea name="{{ category.name }}-comment" id="{{ category.name }}-comment" placeholder="Comentario (opcional)" class="text-input-3 form-control"></textarea>
 							</div>
@@ -92,6 +95,11 @@
 								{% if nomination.carnet2 is not None %}
 									<p>{{ nomination.carnet2 }}</p>
 								{% endif %}	
+
+								{% if nomination.cartoon is not None %}
+									<p class="p-cartoon-outer">Carticatura: <span class="p-cartoon">{{ nomination.cartoon }}</span></p>
+								{% endif %}	
+
 
 								{% if nomination.comment != "" %}
 									<p class="p-comment"><em>"{{ nomination.comment }}"</em></p>
