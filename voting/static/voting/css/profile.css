@@ -58,7 +58,6 @@ body {
 /* Nominations block */
 .nominations {
 	background-color: #001F3F;
-	color: #bdc3c7;
 	height: 100%;
 	margin-top: -17px;
 	border-top: 2px solid gray;
@@ -67,6 +66,7 @@ body {
 }
 
 .nominations-title {
+	color: #bdc3c7;
 	font-size: 35px;
 	border-bottom: 2px solid gray;
 	line-height: 1.5 !important;
@@ -107,6 +107,7 @@ body {
 
 .box-nominate {
 	padding: 40px;
+	color: #bdc3c7;
 	background-color: rgba(190,190,190,0.3);
 	border-radius: 5px;
 	width: 500px;

@@ -21,7 +21,7 @@ from .library import *
 ##############################################
 # Flag to enable voting modules (important!) #
 ##############################################
-enable_voting = True                        #
+enable_voting = False                        #
 ##############################################
 
 @login_required()
@@ -237,6 +237,9 @@ def view_profile(request):
 
 	name = request.GET.get('search-bar')
 	studentID = get_student_id(name)
+
+	if studentID is None:
+		return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 	students = get_students()
 
