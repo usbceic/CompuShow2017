@@ -19,7 +19,7 @@ def user_is_registered(student_id):
 	return Student.objects.filter(student_id = student_id).exists()
 
 # Validate student in LDAP of USB and register in database
-def validate_and_register_user(student_id):
+def validate_and_register_user(student_id, skip_validation=False):
 	
 	server = ldap3.Server('ldap.usb.ve', get_info=ldap3.ALL)
 	conn = ldap3.Connection(server, auto_bind=True)
@@ -27,7 +27,7 @@ def validate_and_register_user(student_id):
 	
 	if conn.entries:
 		entry = conn.entries[0]
-		if entry.career == 'Ingenieria de Computacion':
+		if entry.career == 'Ingenieria de Computacion' || skip_validation:
 			register_user(entry)
 			return 'successful registration'
 		else:
