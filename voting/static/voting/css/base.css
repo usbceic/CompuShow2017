@@ -13,6 +13,10 @@ html * {
 	font-family: "CompuSoft Font";
 }
 
+body {
+	margin-bottom: 50px;
+}
+
 #main-navbar, .footer {
 	margin-bottom: 0;
 	z-index: 9990;
