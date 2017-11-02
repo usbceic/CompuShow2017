@@ -21,7 +21,7 @@ from .library import *
 ##############################################
 # Flag to enable voting modules (important!) #
 ##############################################
-enable_voting = True                        #
+enable_voting = False                        #
 ##############################################
 
 @login_required()
