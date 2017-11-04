@@ -168,11 +168,6 @@ def get_student_info(request):
 
 @login_required()
 def profile(request):
-	
-	######
-	#from loadstudents import load
-	#load()
-	####### mmm
 
 	students = get_students()
 

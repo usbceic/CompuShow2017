@@ -27,7 +27,7 @@ def validate_and_register_user(student_id, skip_validation=False):
 	
 	if conn.entries:
 		entry = conn.entries[0]
-		if entry.career == 'Ingenieria de Computacion' || skip_validation:
+		if entry.career == 'Ingenieria de Computacion' or skip_validation:
 			register_user(entry)
 			return 'successful registration'
 		else:

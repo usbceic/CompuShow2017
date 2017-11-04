@@ -16,97 +16,96 @@ INSERT INTO category (name, description, image)
 VALUES
 	('CompuCono',
 	'Pensándolo bien, el cono es hasta más útil que tú.',
-	'defaultCategoryImage.jpg'),
+	'CompuCono.jpg'),
 	
 	('CompuPapi',
 	'El más guapo de Computación, ese que está bueno y con el que todas quieren.',
-	'defaultCategoryImage.jpg'),
+	'CompuPapi.jpg'),
 	
 	('CompuMami',
 	'La más bella de Computación, esa que entra a la sala y todos la desean.',
-	'defaultCategoryImage.jpg'),
+	'CompuMami.jpg'),
 	
 	('CompuGordito',
 	'Mantiene deudas altas en el cuartico y no se pela una dona.',
-	'defaultCategoryImage.jpg'),
+	'CompuGordito.jpg'),
 	
 	('CompuAdoptado',
 	'No es de la carrera pero se la pasa en la sala y sabe más de nuestras materias que nosotros mismos.',
-	'defaultCategoryImage.jpg'),
+	'CompuAdoptado.jpg'),
 	
 	('CompuMaster',
 	'El/La profe más respetad@ de Computación.',
-	'defaultCategoryImage.jpg'),
+	'CompuMaster.jpg'),
 	
 	('CompuFalso',
 	'Iban a ser pareja en el laboratorio y bueeh…',
-	'defaultCategoryImage.jpg'),
-	
+	'CompuFalso.jpg'),
 	
 	('CompuTeam',
 	'El equipo más activo de Computación.',
-	'defaultCategoryImage.jpg'),
+	'CompuTeam.jpg'),
 	
 	('CompuCuchi',
 	'Awwwwwwww…',
-	'defaultCategoryImage.jpg'),
+	'CompuCuchi.jpg'),
 	
 	('CompuChancero',
 	'Ese que no puede ver a una chama porque le empieza a caer con la “mejor” de sus labias.',
-	'defaultCategoryImage.jpg'),
+	'CompuChancero.jpg'),
 	
 	('CompuPro',
 	'Va pensum, no ha retirado nada y saca 5 en todas las materias... Quisieras ser como él.',
-	'defaultCategoryImage.jpg'),
+	'CompuPro.jpg'),
 	
 	('CompuFitness',
 	'Tiene tanta fuerza que puede levantar los servidores del LDC.',
-	'defaultCategoryImage.jpg'),
+	'CompuFitness.jpg'),
 	
 	('CompuLove',
 	'La parejita más linda de computación.',
-	'defaultCategoryImage.jpg'),
+	'CompuLove.jpg'),
 	
 	('CompuChapita',
 	'Se reúnen para tomar unas birras y a la primera ya no puede con su vida.',
-	'defaultCategoryImage.jpg'),
+	'CompuChapita.jpg'),
 	
 	('CompuTukky',
 	'Cuando lo veas, mejor guarda el celular.',
-	'defaultCategoryImage.jpg'),
+	'CompuTukky.jpg'),
 	
 	('CompuLolas',
 	'¿Serán operadas?',
-	'defaultCategoryImage.jpg'),
+	'CompuLolas.jpg'),
 	
 	('CompuComadre',
 	'La más sociable de Computación.',
-	'defaultCategoryImage.jpg'),
+	'CompuComadre.jpg'),
 	
 	('CompuCompadre',
 	'El más sociable de Computación.',
-	'defaultCategoryImage.jpg'),
+	'CompuCompadre.jpg'),
 	
 	('CompuCartoon',
 	'Ese amigo que parece que lo sacaron de la televisión.',
-	'defaultCategoryImage.jpg'),
+	'CompuCartoon.jpg'),
 	
 	('CompuProductista',
 	'¿Qué es Linux? ¿Qué lenguaje es ese?',
-	'defaultCategoryImage.jpg'),
+	'CompuProductista.jpg'),
 	
 	('CompuButt',
 	'¿Será operado?',
-	'defaultCategoryImage.jpg'),
+	'CompuButt.jpg'),
 	
 	('CompuBully',
 	'Esa persona que se la pasa burlándose de todos, basta que le digas "¡Hola!" para que haga un chiste con eso.',
-	'defaultCategoryImage.jpg'),
+	'CompuBully.jpg'),
 	
 	('CompuCuaima',
 	'¿Quien es esa %$!* que te está escribiendo “hola hijo como estas ya comiste”? Seguro es la otra!',
-	'defaultCategoryImage.jpg'),
+	'CompuCuaima.jpg'),
 	
 	('CompuSaurio',
 	'Ese amigo que ya le comienzas a ver las canas..',
-	'defaultCategoryImage.jpg');
+	'CompuSaurio.jpg');

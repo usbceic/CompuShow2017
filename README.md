@@ -12,22 +12,12 @@ CompuSoft is a web-based appplication to nominate students and vote on the categ
 * psycopg2
 * ldap3
 * Pillow
-[...keep adding requirements]
 ```
 
 ## Installation
-Create postgreSQL user and database
+Run compusoftinstall.sh script and enter 'compusoft' as password when prompted.
 ```
-sudo -u postgres createuser -PE -s compusoft
-sudo -u postgres createdb -O compusoft -E UTF8 compusoft
-```
-Create admin user for admin site
-```
-python3 manage.py createsuperuser.
-```
-Load Compushow categories
-```
-psql -f loaddb.sql compusoft
+./compusoftinstall.sh
 ```
 
 ## License
@@ -46,13 +36,5 @@ If you find a bug in CompuSoft, please send an email.
                                                  usbceic@gmail.com
 ```
 
-## Authors
-- Project Leader
-        
-- Frontend Developer
-
-- Backend Developer
-        
-- Pupils
-        
+## Acknowledgements
 Special thanks to all who contributed in the project, particularly to CEIC 2016-2017 (usbceic@gmail.com).
