@@ -36,7 +36,7 @@
 							<li class="main-navbar-element {% if home %}actived{% endif %}">
 								<a href="{% url 'voting:index' %}">PRINCIPAL</a>
 							</li>
-							<li class="main-navbar-element {% if nominations %}actived{% endif %} {% if enable_voting %}disabled{% endif %}">
+							<li class="main-navbar-element {% if nominate %}actived{% endif %} {% if enable_voting %}disabled{% endif %}">
 								<a {% if not enable_voting %}href="{% url 'voting:nominate' %}"{% endif %}>NOMINACIONES</a>
 							</li>
 							<li class="main-navbar-element {% if voting %}actived{% endif %} {% if not enable_voting %}disabled{% endif %}">

@@ -81,7 +81,7 @@ def nominate(request):
 	nominations, categories_exist = get_nominations(request.user)
 
 	return render(request, 'voting/nominate.html', {
-		'nominations':True,
+		'nominate':True,
 		'categories':categories,
 		'students':students,
 		'nominations':nominations,
