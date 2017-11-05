@@ -140,12 +140,26 @@ body {
 	}
 }
 
+@media screen and (max-width: 500px) {
+
+	.category-title, .category-nominations {
+		font-size: 30px;
+	}
+}
+
 @media screen and (max-width: 400px) {
 
     .category-image {
 		width: 200px;
 		height: 200px;
     }
+}
+
+@media screen and (max-width: 300px) {
+
+	.category-title, .category-nominations {
+		font-size: 25px;
+	}
 }
 
 /* Scroll bar */ 
