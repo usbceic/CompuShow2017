@@ -91,7 +91,17 @@ body {
 	padding: 0 !important; 
 }
 
+@media (max-width: 1300px) {
+	.navbar-brand {
+		display: none;
+	}
+}
+
 @media (max-width: 995px) {
+
+	.navbar-brand {
+		display: inline;
+	}
 
 	.search-bar-group {
 		width:100%;
