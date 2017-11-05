@@ -48,7 +48,7 @@
     							{% if category.name != "CompuMaster" and category.name != "CompuTeam" and category.name != "CompuAdoptado"%}
     								<datalist id="student-id-{{ category.name }}">
     									{% for student in students %}
-    										<option value="{{ student.person__name }} {{ student.person__surname }}">{{ student.student_id }}</option>
+    										<option value="{{ student.person__name }} {{ student.person__surname }}"></option>
     									{% endfor %}
     								</datalist>
     							{% endif %}
@@ -167,10 +167,10 @@
 				<div class="modal-footer">
 					<div class="row">
 						<div class="col-xs-6">
-							<button type="button" class="btn btn-success nominate-modal-btn1 btn-close" data-dismiss="modal">Regresar a las nominaciones.</button>
+							<button type="button" class="btn btn-success nominate-modal-btn1 btn-close alreadynom-btn-1" data-dismiss="modal">Regresar a las nominaciones.</button>
 						</div>
 						<div class="col-xs-6">
-							<button type="submit" class="btn btn-danger nominate-modal-btn2 eliminate-nomination-btn" data-dismiss="modal">Eliminar nominación.</button>
+							<button type="submit" class="btn btn-danger nominate-modal-btn2 eliminate-nomination-btn alreadynom-btn-2" data-dismiss="modal">Eliminar nominación.</button>
 						</div>
 					</div>
 				</div>

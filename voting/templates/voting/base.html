@@ -48,7 +48,7 @@
 									<input list="search-bar" name="search-bar" type="text" class="form-control" placeholder="Buscar personas"/>
 									<datalist id="search-bar">
     									{% for student in students %}
-    										<option value="{{ student.person__name }} {{ student.person__surname }}">{{ student.student_id }}</option>
+    										<option value="{{ student.person__name }} {{ student.person__surname }}"></option>
     									{% endfor %}
     								</datalist>
 

@@ -145,6 +145,13 @@ body {
 	.category-title, .category-nominations {
 		font-size: 30px;
 	}
+
+	.alreadynom-btn-1 {
+		font-size: 7px;
+	}
+	.alreadynom-btn-2 {
+		font-size: 7px;
+	}
 }
 
 @media screen and (max-width: 400px) {
