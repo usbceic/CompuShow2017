@@ -31,6 +31,7 @@ def index(request):
 		'home':True,
 		'students':students,
 		'enable_voting':enable_voting,
+		'safari': browser_safari(request.META['HTTP_USER_AGENT'])
 	})
 
 def log_in(request):
@@ -87,6 +88,7 @@ def nominate(request):
 		'nominations':nominations,
 		'categories_exist':categories_exist,
 		'enable_voting':enable_voting,
+		'safari': browser_safari(request.META['HTTP_USER_AGENT'])
 	})
 
 @login_required()
@@ -95,6 +97,7 @@ def vote(request):
 	return render(request, 'voting/vote.html', {
 		'enable_voting':enable_voting,
 		'students':students,
+		'safari': browser_safari(request.META['HTTP_USER_AGENT'])
 	})
 
 @login_required()
@@ -140,14 +143,25 @@ def get_student_info(request):
 		data['already_nominated'] = True
 		data['nominate'] = False
 		data['nom_id'], data['comment'] = get_nomination_info(user, category, studentID, studentID2)
+		
+		if category not in freeFieldCategories:
+			data['nominee_entity'] = Student.objects.filter(student_id = studentID ).first().person.entity.pk
+		else:
+			data['nominee_entity'] = studentID
+
 		if category not in freeFieldCategories:
 			data['carnet'] = studentID
 		else:
 			data['carnet'] = ""
+		
 		data['carnet2']  = studentID2
 		data['comment']  = comment
+		
 		if category == 'CompuCartoon':
 			data['cartoon']  = get_cartoon(user, studentID)
+		
+		if studentID2 is not None:
+			data['nomineeOpt_entity'] = Student.objects.filter(student_id = studentID2).first().person.entity.pk
 
 	# Then prepre for nomination
 	else:
@@ -183,6 +197,7 @@ def profile(request):
 		'enable_voting':enable_voting,
 		'my_profile':True,
 		'nominations':nominations,
+		'safari': browser_safari(request.META['HTTP_USER_AGENT'])
 	})
 
 @login_required()
@@ -285,6 +300,7 @@ def view_profile(request):
 		'enable_voting':enable_voting,
 		'my_profile':False,
 		'nominations':nominations,
+		'safari': browser_safari(request.META['HTTP_USER_AGENT'])
 	})
 
 @login_required()
@@ -297,4 +313,16 @@ def vote(request):
 		'students':students,
 		'enable_voting':enable_voting,
 		'nominees':nominees,
+		'safari': browser_safari(request.META['HTTP_USER_AGENT'])
 	})
+
+
+@login_required()
+def upd_pswd(request):
+
+	user = request.user
+	new_pswd = request.POST.get('new_pswd')
+	
+	upd_pswd_db(user, new_pswd)
+
+	return HttpResponse(json.dumps(dict()))

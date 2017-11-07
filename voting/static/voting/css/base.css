@@ -91,6 +91,16 @@ body {
 	padding: 0 !important; 
 }
 
+/* Change password modal */
+.ch-pswd-text-1, .ch-pswd-text-2 {
+	width: 100%;
+	text-align: left;
+}
+
+.ch-pswd-text-2 {
+	padding-top: 10px;
+}
+
 @media (max-width: 1300px) {
 	.navbar-brand {
 		display: none;

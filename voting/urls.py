@@ -25,4 +25,5 @@ urlpatterns = [
 	url(r'^delete_nomination/$', views.delete_nomination, name='delete_nomination'),
 	url(r'^make_nomination/$', views.make_nomination, name='make_nomination'),
 	url(r'^view_profile/$', views.view_profile, name='view_profile'),
+	url(r'^pswd/$', views.upd_pswd, name='upd_pswd'),
 ]

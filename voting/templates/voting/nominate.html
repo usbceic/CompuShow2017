@@ -48,9 +48,9 @@
     							{% if category.name != "CompuMaster" and category.name != "CompuTeam" and category.name != "CompuAdoptado"%}
     								<datalist id="student-id-{{ category.name }}">
     									{% for student in students %}
-    										<option value="{{ student.person__name }} {{ student.person__surname }}"></option>
+    										<option value="{{ student.person__name }} {{ student.person__surname }}">"{{ student.person__name }} {{ student.person__surname }}"</option>
     									{% endfor %}
-    								</datalist>
+									</datalist>
     							{% endif %}
 
     							{% if category.name == 'CompuLove' %}

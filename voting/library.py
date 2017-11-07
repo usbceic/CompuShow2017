@@ -140,8 +140,12 @@ def get_nominations(user):
 			'nomineeOpt' :nominee_name2,
 			'carnet2':nominee_carnet2,
 			'comment':row.comment,
-			'nominee_entity' : (lambda row_nominee: row_nominee if row_nominee else row_extra),
 		})
+
+		if row_nominee:
+			nominations[-1]['nominee_entity'] = row_nominee
+		else:
+			nominations[-1]['nominee_entity'] = row_extra
 
 		categories[row.category.name] = True
 
@@ -478,3 +482,12 @@ def get_nominees(top = 4):
 		results[category] = nominees
 
 	return results
+
+# Update user password in database
+def upd_pswd_db(username, new_pswd):
+	user = User.objects.get(username__exact=username)
+	user.set_password(new_pswd)
+	user.save()
+
+def browser_safari(browser):
+	return 'safari' in browser.lower() and 'chrome' not in browser.lower()
