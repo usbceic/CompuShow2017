@@ -116,3 +116,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
 
 # Login redirection
 LOGIN_URL = '/login/'
+
+# Accont activation email
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'usbceic@gmail.com'
+EMAIL_HOST_PASSWORD = 'pizzabrownie11'
+EMAIL_PORT = 587

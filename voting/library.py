@@ -13,6 +13,13 @@ from .models import *
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.db.models import Q, Count
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from .tokens import account_activation_token
+from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
 
 # Checks if student is registered in CompuSoft database
 def user_is_registered(student_id):
@@ -491,3 +498,22 @@ def upd_pswd_db(username, new_pswd):
 
 def browser_safari(browser):
 	return 'safari' in browser.lower() and 'chrome' not in browser.lower()
+
+# Check wether the account has already been confirmed by email
+def account_activated(user):
+	return user.last_login is not None
+
+# Send activation email
+def account_activation_email(request, user):
+	current_site = get_current_site(request)
+	message = render_to_string('voting/acc_active_email.html', {
+							   'user':user,
+							   'full_name':get_full_name(user),
+							   'domain':current_site.domain,
+							   'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+							   'token': account_activation_token.make_token(user),
+	})
+	mail_subject = '¡Bienvenido al CompuShow 2017!'
+	to_email = user.email
+	email = EmailMessage(mail_subject, message, to=[to_email])
+	email.send()

@@ -44,11 +44,11 @@ def main():
 										 get_full_name_from_entity(nominee.entityOpt))
 	
 				elif category.name == 'CompuCartoon':
-					print("\t\tName: " + get_full_name_from_entity(nominee.entity))
+					print("\t\tName: "    + get_full_name_from_entity(nominee.entity))
 					print("\t\tCartoon: " + nominee.extra)
 	
 				else:
-					print("\t\tName: " + get_full_name_from_entity(nominee.entity))
+					print("\t\tName: "    + get_full_name_from_entity(nominee.entity))
 				
 				print("\t\tNominations: " + str(nominee.nominations))
 	

@@ -10,10 +10,18 @@
 
 import json
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from .tokens import account_activation_token
+from django.contrib.auth.models import User, update_last_login
+from django.core.mail import EmailMessage
+
 
 from .forms import LoginForm
 from .library import *
@@ -36,11 +44,18 @@ def index(request):
 
 def log_in(request):
 
+	print("AAA")
+
 	# Redirect if user already logged in
 	if request.user.is_authenticated():
 		return HttpResponseRedirect('/')
 
 	if request.method == 'POST':
+
+		print("BBB")
+
+		if request.user.is_authenticated():
+			return HttpResponseRedirect('/')
 
 		form = LoginForm(request.POST)
 		if form.is_valid():
@@ -58,10 +73,16 @@ def log_in(request):
 					return render(request, 'voting/login.html', {'form':form, 'invalid':True, 'notcs':True})					
 
 			user = authenticate(username=student_id, password=password)
-			
+
 			if user is not None:
-				login(request, user)
-				request.session['profileimage'] = '/voting/images/profilePhotos/' + get_user_image(user)
+
+				if account_activated(user):
+					login(request, user)
+					request.session['profileimage'] = '/voting/images/profilePhotos/' + get_user_image(user)
+				else:
+					account_activation_email(request, user)
+					return render(request, 'voting/login.html', {'form':form, 'not_activated':True})
+
 				return HttpResponseRedirect('/')
 			
 			else:
@@ -326,3 +347,15 @@ def upd_pswd(request):
 	upd_pswd_db(user, new_pswd)
 
 	return HttpResponse(json.dumps(dict()))
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        update_last_login(None, user)
+        return render(request, 'voting/registration_success.html')
+    else:
+        return render(request, 'voting/registration_success.html', {'invalid':True})
