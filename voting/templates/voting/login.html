@@ -1,0 +1,40 @@
+{% extends 'voting/base.html' %}
+
+{% block css %}
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/login.css' %}"/>
+{% endblock css %}
+
+{% block navbar %}{% endblock navbar %}
+
+{% block body %}
+
+
+	<div class="container">
+		<form class="form-login" action="{% url 'voting:log_in' %}" method="post">
+			<h2 class="form-login-heading text-center">CompuShow 2017</h2>
+		
+			{% csrf_token %}
+			<div class="form-id-field">
+				{{ form.student_id }}
+			</div>
+			<div>
+				{{ form.password }}
+			</div>			
+
+			{% if invalid or form.student_id.errors %}
+				<div class="alert alert-danger alert-dismissable fade in invalid">
+					{% if form.student_id.errors %}<strong>Error:</strong> Carnet inválido. e.g. 12-34567{% endif %}
+					{% if notfound %}<strong>Error:</strong> Carnet no encontrado.{% endif %}
+					{% if notcs %}<strong>Alerta:</strong> No está registrado como estudiante de computación.{% endif %}
+					{% if invalidpasswd %}<strong>Alerta:</strong> Constraseña inválida.{% endif %}
+				</div>
+			{% endif %}
+
+			<button id="loginbtn" class="btn btn-lg btn-success btn-block" type="submit">Ingresar</button>
+		</form>
+
+	</div>
+
+
+{% endblock body %}

@@ -1,0 +1,294 @@
+body {
+	height: 100%;
+	margin-bottom: 50px;
+	background-color: #111111;
+}
+
+/* Navbar */
+#categories-navbar {
+	padding: 20px;
+	overflow: hidden;
+}
+
+.aux {
+	overflow: auto;
+}
+
+.affix {
+	top: 85px;
+	width: 15%;
+}
+
+.nav-categories {
+	overflow-y: scroll !important;
+	max-height: 100% !important;
+	bottom: 70px;
+}
+
+.categories-navbar-item a {
+	color: #AAAAAA;
+}
+
+.nav-pills>li>a:hover{
+	color: white;
+}
+
+.nav-pills>li>a, .nav-pills>li>a:focus, .nav-pills>li>a:hover{
+	background-color: transparent;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+	border-bottom: 2px solid #DCDCDC;
+	background-color: transparent;
+}
+
+/* Content */
+.categories {
+	padding: 0px;
+}
+
+.category-container {
+	padding: 30px;
+	width: 100%;
+}
+
+.cat-item {
+	padding:10px;
+}
+
+.category-image {
+	width: 350px;
+	height: 350px;
+	object-fit:cover;
+	border-radius: 100%;
+}
+
+.category-title {
+	font-size: 50px;
+}
+
+.category-description {
+	font-size: 20px;
+}
+
+.category-nominations {
+	font-size: 40px;
+}
+
+/* Nomination boxes */
+.box-nominate {
+	padding: 40px;
+	background-color: rgba(190,190,190,0.3);
+	border-radius: 5px;
+	width: 500px;
+	margin: auto;
+	margin-bottom: 7px;
+	font-size: 16px;
+}
+
+/* form */
+.form-nominate {
+	padding: 40px;
+	background-color: rgba(190,190,190,0.3);
+	border-radius: 5px;
+	width: 500px;
+	margin: auto;
+}
+
+.text-input-1, .text-input-2, .text-input-4 {
+	margin-bottom: 3px;
+}
+
+/* Confirmation modal */
+.nominate-modal-btn1, .nominate-modal-btn2 {
+	width: 100%;
+}
+
+.make_nomination-modal-btn1, .make_nomination-modal-btn2 {
+	width: 100%;
+}
+
+.modal-header-nom {
+	padding:9px 15px;
+	border-bottom:1px solid #eee;
+	background-color: #2980b9;;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	 border-top-left-radius: 5px;
+	 border-top-right-radius: 5px;
+
+}
+
+@media screen and (max-width: 1000px) {
+
+   .form-nominate, .box-nominate {
+    	width: 80%;
+    }
+}
+
+
+@media screen and (max-width: 700px) {
+    
+	#categories-navbar {
+		display: none;
+	}
+
+	.categories {
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 500px) {
+
+	.category-title, .category-nominations {
+		font-size: 30px;
+	}
+
+	.alreadynom-btn-1 {
+		font-size: 7px;
+	}
+	.alreadynom-btn-2 {
+		font-size: 7px;
+	}
+}
+
+@media screen and (max-width: 400px) {
+
+    .category-image {
+		width: 200px;
+		height: 200px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+
+	.category-title, .category-nominations {
+		font-size: 25px;
+	}
+}
+
+/* Scroll bar */ 
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(180,180,180,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(180,180,180,0.4); 
+}
+
+/* Custom category boxes */
+#CompuCono {
+	background-color: #001F3F;
+	color: #bdc3c7;
+}
+
+#CompuPapi {
+	background-color: #2980b9;
+}
+
+#CompuMami {
+	background-color: #7FDBFF;
+}
+
+#CompuGordito {
+	background-color: #39CCCC;
+}
+
+#CompuAdoptado {
+	background-color: #27ae60;
+}
+
+#CompuMaster {
+	background-color: #2ECC40;
+}
+
+#CompuFalso {
+	background-color: #2ecc71;
+}
+
+#CompuTeam {
+	background-color: #f1c40f;
+}
+
+#CompuCuchi {
+	background-color: #FF851B;
+}
+
+#CompuChancero {
+	background-color: #FF4136;
+}
+
+#CompuPro {
+	background-color: #001f3f;
+	color: #bdc3c7;
+}
+
+#CompuFitness {
+	background-color: #85144B;
+	color: #bdc3c7;
+}
+
+#CompuLove {
+	background-color: #8e44ad;
+}
+
+#CompuChapita {
+	background-color: #16a085;
+}
+
+#CompuTukky {
+	background-color: #95a5a6;
+}
+
+#CompuLolas {
+	background-color: #e74c3c;
+}
+
+#CompuComadre {
+	background-color: #2980b9;
+}
+
+#CompuCompadre {
+	background-color: #7FDBFF;
+}
+
+#CompuCartoon {
+	background-color: #1abc9c;
+}
+
+#CompuProductista {
+	background-color: #FF851B;
+}
+
+#CompuButt {
+	background-color: #FF4136;
+}
+
+#CompuBully {
+	background-color: #8e44ad;
+}
+
+#CompuCuaima {
+	background-color: #AAAAAA;
+}
+
+#CompuSaurio {
+	background-color: #2c3e50;
+	color: #bdc3c7;
+}

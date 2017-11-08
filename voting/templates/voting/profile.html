@@ -1,0 +1,170 @@
+{% extends 'voting/base.html' %}
+
+{% block css %}
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/profile.css' %}"/>
+{% endblock css %}
+
+{% block body %}
+
+		<div class="profile-wrapper">	
+			<div class="container-fluid text-center basic-info">
+				<div class="basic-info-content">
+					<img class="profile-image profile-item" src="{% static request.session.profileimage %}"/>
+					<div class="profile-name profile-item">{{ student_name }}</div>
+					<div class="profile-id profile-item">{{ student_id }}</div>
+				</div>
+			</div>
+			
+			<div class="container-fluid nominations">
+	
+				<div class="nominations-title text-center">Nominaciones</div>
+	
+				<!-- Nomination period -->
+				{% if not enable_voting %}
+	
+					{% if my_profile %}
+						<div class="box-nominate">
+							<p><strong>Información:</strong> Podrás ver las categorias a las que has sido nominado cuando cierre la etapa de nominaciones.</p>
+						</div>
+					{% endif %}
+	
+					{% if not my_profile %}
+						<div class="box-nominate">
+							<p><strong>Información:</strong> Podrás ver las categorias a las que ha sido nominada esta persona cuando cierre la etapa de nominaciones.</p>
+						</div>
+					{% endif %}	
+				
+				{% endif %}
+			
+				<!-- Voting period -->
+				{% if enable_voting %}
+					
+					{% if not nominations %}
+						<div class="box-nominate">
+							<p><strong>Información:</strong> Esta persona no ha sido nomida a ninguna categoría del CompuShow 2017.</p>
+						</div>
+					{% endif %}
+
+					<!-- Iterate over each category where the person is nominated -->
+					{% for nomination in nominations %}
+						
+						<div id="{{ nomination.category.name }}" class="container-fluid category-container text-center {{ category.name }}">
+							<div class="row">
+								{% if nomination.left %}
+									<div class="col-sm-4 text-center">
+										<img class="category-image cat-item slideanim" src="/static/voting/images/categoryImages/{{ nomination.category.image }}"/>
+										
+									</div>
+									<div class="col-sm-8 text-center">
+										<div class="category-title cat-item slideanim"><p>{{ nomination.category.name }}</p></div>
+										
+										{% if nomination.category.name == 'CompuLove' %}
+											<div class="category-description cat-item slideanim">
+												<p>{{ nomination.entity }} y {{nomination.entityOpt}}</p>
+											</div>
+										{% endif %}
+
+										<div class="category-description cat-item slideanim"><p>{{ nomination.category.description }}</p></div>
+
+										{% if nomination.category.name == 'CompuCartoon' %}
+											<div class="category-description cat-item slideanim">
+												<p>Caricatura: {{ nomination.cartoon }}.</p>
+											</div>
+										{% endif %}
+
+										<!-- Carousel for comments -->
+										<div id="{{ nomination.category.name }}_comments" class="carousel slide text-center" data-ride="carousel">
+  											<!-- Wrapper for slides -->
+  											<div class="carousel-inner" role="listbox">
+    											{% if nomination.firstcomment %}
+    												<div class="item active"><p><em>"{{ nomination.firstcomment }}"</em></p></div>
+    											{% endif %}
+    											{% if not nomination.firstcomment %}
+    												<div class="item active"><p><em>No hay comentarios adicionales.</em></p></div>
+    											{% endif %}
+
+    											{% for comment in nomination.comments %}
+    												<div class="item"><p><em>"{{ comment }}"</em></p></div>
+    											{% endfor %}
+											</div>
+
+											<!-- Left and right controls -->
+											<a class="left carousel-control" href="#{{ nomination.category.name }}_comments" role="button" data-slide="prev">
+												<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+												<span class="sr-only">Previous</span>
+											</a>
+											<a class="right carousel-control" href="#{{ nomination.category.name }}_comments" role="button" data-slide="next">
+												<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+												<span class="sr-only">Next</span>
+											</a>
+										</div>
+
+									</div>
+								{% endif %}
+	
+								{% if nomination.right %}
+									<div class="col-sm-8 text-center">
+										<div class="category-title cat-item slideanim">{{ nomination.category.name }}</div>
+										
+										{% if nomination.category.name == 'CompuLove' %}
+											<div class="category-description cat-item slideanim">
+												<p>{{ nomination.entity }} y {{nomination.entityOpt}}</p>
+											</div>
+										{% endif %}
+
+										<div class="category-description cat-item slideanim">{{ nomination.category.description }}</div>
+										
+										{% if nomination.category.name == 'CompuCartoon' %}
+											<div class="category-description cat-item slideanim" style="margin-top:10px;">
+												<p>Caricatura: <strong>{{ nomination.cartoon }}.</strong></p>
+											</div>
+										{% endif %}
+
+										<!-- Carousel for comments -->
+										<div id="{{ nomination.category.name }}_comments" class="carousel slide text-center" data-ride="carousel">
+  											<!-- Wrapper for slides -->
+  											<div class="carousel-inner" role="listbox">
+    											{% if nomination.firstcomment %}
+    												<div class="item active"><p><em>"{{ nomination.firstcomment }}"</em></p></div>
+    											{% endif %}
+    											{% if not nomination.firstcomment %}
+    												<div class="item active"><p><em>No hay comentarios adicionales.</em></p></div>
+    											{% endif %}
+
+    											{% for comment in nomination.comments %}
+    												<div class="item"><p><em>"{{ comment }}"</em></p></div>
+    											{% endfor %}
+											</div>
+
+											<!-- Left and right controls -->
+											<a class="left carousel-control" href="#{{ nomination.category.name }}_comments" role="button" data-slide="prev">
+												<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+												<span class="sr-only">Previous</span>
+											</a>
+											<a class="right carousel-control" href="#{{ nomination.category.name }}_comments" role="button" data-slide="next">
+												<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+												<span class="sr-only">Next</span>
+											</a>
+										</div>
+
+
+									</div>
+									<div class="col-sm-4 text-center">
+										<img class="category-image cat-item slideanim" src="/static/voting/images/categoryImages/{{ nomination.category.image }}"/>
+										
+									</div>
+								{% endif %}
+							</div>
+
+
+						</div>
+
+					{% endfor %}
+				{% endif %}
+	
+			</div>
+
+		</div>
+
+{% endblock body %}
