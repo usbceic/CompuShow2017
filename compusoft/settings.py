@@ -68,18 +68,31 @@ STATICFILES_DIRS = (
 WSGI_APPLICATION = 'compusoft.wsgi.application'
 
 
-# Database
+################## Local Database ##################
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'compusoft',
+#         'USER': 'compusoft',
+#         'PASSWORD': 'compusoft',
+#         'HOST': '127.0.0.1',
+#         'PORT': '',
+#     }
+# }
+####################################################
+
+################# Heroku Database ##################
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'compusoft',
-        'USER': 'compusoft',
-        'PASSWORD': 'compusoft',
-        'HOST': '127.0.0.1',
-        'PORT': '',
+        'NAME': 'dap5u3ni1bfndq',
+        'USER': 'egltmpehffvmtt',
+        'PASSWORD': '7000b7b0f3abb309ab8e7d63d069f5d9058f03aa0aacb0b342200c858d8c4eff',
+        'HOST': 'ec2-204-236-239-225.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
-
+####################################################
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
