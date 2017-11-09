@@ -32,6 +32,19 @@
 			{% endif %}
 
 			<button id="loginbtn" class="btn btn-lg btn-success btn-block" type="submit">Ingresar</button>
+		
+			{% if not_activated %}
+				<div class="alert alert-info alert-dismissable fade in invalid">
+					<strong>Información:</strong> Se ha enviado un correo de activación de cuenta a su correo institucional.
+				</div>
+			{% endif %}
+
+			{% if activation_success %}
+				<div class="alert alert-success alert-dismissable fade in invalid">
+					Gracias por confirmar el correo electrónico. ¡Ya puedes acceder a tu cuenta!
+				</div>
+			{% endif %}
+
 		</form>
 
 	</div>

@@ -117,10 +117,8 @@ $(document).on('click', '.btn-nominate', function() {
 		}
 
 		if( category === "CompuMaster" || category === "CompuAdoptado" || category === "CompuTeam" ) {
-			studentID1 = studentID1.replace(/ /g,"_");
+			studentID1 = studentID1.replace(/[^A-Za-z0-9-_:.]/g,"_");
 		}
-
-
 
 		$.ajax({
 			type: 'GET',
@@ -149,8 +147,6 @@ $(document).on('click', '.btn-nominate', function() {
 					return false;
 
 				} 
-
-
 
 				else if(data.nominate) {
 
@@ -212,7 +208,7 @@ $(document).on('click', '.btn-nominate', function() {
 						});
 
 						if( category === "CompuMaster" || category === "CompuAdoptado" || category === "CompuTeam" ) {
-							studentID1 = studentID1.replace(/ /g,"_");
+							studentID1 = studentID1.replace(/[^A-Za-z0-9-_:.]/g,"_");
 						}
 
 						$.ajax({
@@ -229,7 +225,7 @@ $(document).on('click', '.btn-nominate', function() {
 							success: function (data) {
 					        		
 								data = JSON.parse(data);
-						
+
 								if( category === "CompuMaster" || category === "CompuAdoptado" || category === "CompuTeam" ) {
 									studentID1 = studentID1.replace(/_/g, ' ');
 								}
@@ -358,7 +354,7 @@ $(document).on('click', '.btn-nominate', function() {
 						e.preventDefault();
 
 						if( category === "CompuMaster" || category === "CompuAdoptado" || category === "CompuTeam" ) {
-							studentID1 = studentID1.replace(/ /g,"_");
+							studentID1 = studentID1.replace(/[^A-Za-z0-9-_:.]/g,"_");
 						}
 
 						$.ajax({
