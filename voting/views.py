@@ -29,7 +29,7 @@ from .library import *
 ##############################################
 # Flag to enable voting modules (important!) #
 ##############################################
-enable_voting = False                        #
+enable_voting = True                        #
 ##############################################
 
 @login_required()
@@ -44,15 +44,11 @@ def index(request):
 
 def log_in(request):
 
-	print("AAA")
-
 	# Redirect if user already logged in
 	if request.user.is_authenticated():
 		return HttpResponseRedirect('/')
 
 	if request.method == 'POST':
-
-		print("BBB")
 
 		if request.user.is_authenticated():
 			return HttpResponseRedirect('/')
@@ -109,15 +105,6 @@ def nominate(request):
 		'nominations':nominations,
 		'categories_exist':categories_exist,
 		'enable_voting':enable_voting,
-		'safari': browser_safari(request.META['HTTP_USER_AGENT'])
-	})
-
-@login_required()
-def vote(request):
-	students = get_students()
-	return render(request, 'voting/vote.html', {
-		'enable_voting':enable_voting,
-		'students':students,
 		'safari': browser_safari(request.META['HTTP_USER_AGENT'])
 	})
 
@@ -328,13 +315,18 @@ def view_profile(request):
 def vote(request):
 
 	students = get_students()
-	nominees = get_nominees()
+	categories = get_categories()
+	category = get_category(request.GET.get('category'))
+	nominees = get_nominees_from_category(category)
+
 	return render(request, 'voting/vote.html', {
 		'voting':True,
 		'students':students,
 		'enable_voting':enable_voting,
+		'category':category,
+		'categories':categories,
 		'nominees':nominees,
-		'safari': browser_safari(request.META['HTTP_USER_AGENT'])
+		'safari': browser_safari(request.META['HTTP_USER_AGENT']),
 	})
 
 

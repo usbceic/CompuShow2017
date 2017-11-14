@@ -82,6 +82,14 @@ def get_user_image(user):
 def get_categories():
 	return Category.objects.all()
 
+# Get information about specific Compushow category
+def get_category(category_name=None):
+	if category_name is None:
+		return Category.objects.first()
+	else:
+		return Category.objects.filter(name=category_name).first()
+
+
 # Get student names
 def get_students():
 	students = Student.objects.all().values(
@@ -489,6 +497,13 @@ def get_nominees(top = 4):
 		results[category] = nominees
 
 	return results
+
+# Get the nominees for specific category
+def get_nominees_from_category(category, top=5):
+
+	nominees = Nominee.objects.filter(Q(category=category) & Q(nominations__gte=1)).order_by('-nominations')[:top]
+
+	return nominees
 
 # Update user password in database
 def upd_pswd_db(username, new_pswd):
