@@ -99,6 +99,15 @@ def get_students():
 	)
 	return students
 
+def get_carnet_from_entity(entity):
+
+	if not Person.objects.filter(entity_id = entity).exists():
+		return None
+
+	person = Person.objects.filter(entity_id = entity).first()
+	student = Student.objects.filter(person_id = person).first()
+	return student.student_id
+
 def get_full_name(user):
 
 	if not Student.objects.filter(user = user).exists():
@@ -486,7 +495,7 @@ def update_nominee(entity, category, entity2, add, extra=None):
 			nomination.save()
 
 # Get the nominees for each category
-def get_nominees(top = 4):
+def get_nominees(top = 5):
 
 	categories = get_categories()
 
@@ -502,8 +511,29 @@ def get_nominees(top = 4):
 def get_nominees_from_category(category, top=5):
 
 	nominees = Nominee.objects.filter(Q(category=category) & Q(nominations__gte=1)).order_by('-nominations')[:top]
+	
+	results = []
+	for cnt, nominee in enumerate(nominees):
+		results.append({
+			'id':cnt,
+			'name':get_full_name_from_entity(nominee.entity_id),
+			'carnet':get_carnet_from_entity(nominee.entity_id),
+		})
 
-	return nominees
+		comments = get_comments(nominee.entity, nominee.entityOpt, nominee.category)
+		if comments:
+			results[-1]['firstcomment'] = comments[0]
+		results[-1]['comments']  = comments[1:]
+					
+		
+		if nominee.entityOpt_id is not None:
+			results[-1]['nameOpt'] = get_full_name_from_entity(nominee.entityOpt_id)
+			results[-1]['carnetopt'] = get_carnet_from_entity(nominee.entityOpt_id)
+
+		if nominee.extra is not None:
+			results[-1]['extra'] = nominee.extra.replace("_", " ")
+
+	return results
 
 # Update user password in database
 def upd_pswd_db(username, new_pswd):

@@ -9,6 +9,7 @@
 #####################################################
 
 import json
+from random import shuffle
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -317,7 +318,12 @@ def vote(request):
 	students = get_students()
 	categories = get_categories()
 	category = get_category(request.GET.get('category'))
+	
+	# Get nominees and shuffle (because they come already sorted)
 	nominees = get_nominees_from_category(category)
+	shuffle(nominees)
+	nominees_upper = nominees[:int((len(nominees)+1)/2)]
+	nominees_lower = nominees[int((len(nominees)+1)/2):]
 
 	return render(request, 'voting/vote.html', {
 		'voting':True,
@@ -325,7 +331,8 @@ def vote(request):
 		'enable_voting':enable_voting,
 		'category':category,
 		'categories':categories,
-		'nominees':nominees,
+		'nominees_upper':nominees_upper,
+		'nominees_lower':nominees_lower,
 		'safari': browser_safari(request.META['HTTP_USER_AGENT']),
 	})
 

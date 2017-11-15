@@ -4,14 +4,10 @@
 //                                                    //
 ////////////////////////////////////////////////////////
 //                                                    //
-//  - Voting page javascript   						  //
+//  - Voting page javascript						  //
 //                                                    //
 ////////////////////////////////////////////////////////
 
 $(document).ready(function () {
-
-	$('.carousel').carousel({
-		interval: false;
-	});
-
+	
 });
