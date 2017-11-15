@@ -131,6 +131,32 @@
 		</div>
 	</div>
 
+	<!-- Vote Modal (pop up window) -->
+	<div id="voteModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header modal-header-nom">
+					<p class="h2 text-center" style="color:white;">Votación</p>
+				</div>
+				<div id="modal-body-vote" class="modal-body text-center">
+					
+				</div>
+				<div class="modal-footer">
+					<div class="row">
+						<div class="col-xs-6">
+							{% csrf_token %}
+							<button type="submit" class="btn btn-success vote-modal-btn1 vote-btn" data-dismiss="modal">Sí, votar.</button>
+						</div>
+						<div class="col-xs-6">
+							<button type="button" class="btn btn-danger vote-modal-btn2 btn-close" data-dismiss="modal">No, regresar.</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 {% endblock body %}
 
 {% block javascript %}
