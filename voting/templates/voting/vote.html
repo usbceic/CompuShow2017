@@ -3,6 +3,7 @@
 {% block css %}
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/vote.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/floateffect.css' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/slideineffect.css' %}"/>
 {% endblock css %}
 
@@ -57,14 +58,14 @@
 				<div class="row">
 					{% for nominee in nominees_upper %}
 						<div class="col-xs-4">
-							<div class="nomination-box">
-								
-								<img class="nominee-image" src="/static/voting/images/categoryImages/{{ category.image }}"/>
-								<div class="nominee-name">{{ nominee.name }}</div>
-								{% if nominee.carnet %}
-									<div class="nominee-carnet">{{ nominee.carnet }}</div>
-								{% endif %}
-
+							<div class="nomination-box hvr-float-shadow">
+								<a href="#" class="fill-div custom-a">
+									<img class="nominee-image" src="/static/voting/images/categoryImages/{{ category.image }}"/>
+									<div class="nominee-name">{{ nominee.name }}</div>
+									{% if nominee.carnet %}
+										<div class="nominee-carnet">{{ nominee.carnet }}</div>
+									{% endif %}
+								</a>
 								<!-- Carousel for comments -->
 								<div id="carousel_{{ nominee.id }}_comments" class="carousel slide" data-ride="carousel" data-interval="false">
 									<!-- Wrapper for slides -->
@@ -91,7 +92,7 @@
 										<span class="sr-only">Next</span>
 									</a>
 								</div>
-
+								
 							</div>
 						</div>
 					{% endfor %}
@@ -101,13 +102,14 @@
 					{% for nominee in nominees_lower %}
 						<div class="col-xs-6">
 							
-							<div class="nomination-box">
-								<img class="nominee-image" src="/static/voting/images/categoryImages/{{ category.image }}"/>
-								<div class="nominee-name">{{ nominee.name }}</div>
-								{% if nominee.carnet %}
-									<div class="nominee-carnet">{{ nominee.carnet }}</div>
-								{% endif %}
-
+							<div class="nomination-box hvr-float-shadow custom-a">
+								<a href="#" class="fill-div custom-a">
+									<img class="nominee-image" src="/static/voting/images/categoryImages/{{ category.image }}"/>
+									<div class="nominee-name">{{ nominee.name }}</div>
+									{% if nominee.carnet %}
+										<div class="nominee-carnet">{{ nominee.carnet }}</div>
+									{% endif %}
+								</a>
 								<!-- Carousel for comments -->
 								<div id="carousel_{{ nominee.id }}_comments" class="carousel slide" data-ride="carousel" data-interval="false">
 									<!-- Wrapper for slides -->

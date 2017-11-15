@@ -114,6 +114,13 @@ body {
 	object-fit:cover;
 	border-radius: 100%;
 }
+.custom-a {
+	text-decoration: none !important;
+}
+
+.custom-a, .custom-a:visited, .custom-a:hover, .custom-a:active {
+  color: inherit;
+}
 
 
 /* Carousel customizations */
