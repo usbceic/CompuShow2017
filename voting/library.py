@@ -528,10 +528,13 @@ def get_nominees_from_category(category, top=5):
 		
 		if nominee.entityOpt_id is not None:
 			results[-1]['nameOpt'] = get_full_name_from_entity(nominee.entityOpt_id)
-			results[-1]['carnetopt'] = get_carnet_from_entity(nominee.entityOpt_id)
+			results[-1]['carnetOpt'] = get_carnet_from_entity(nominee.entityOpt_id)
 
-		if nominee.extra is not None:
+		if nominee.extra is not None and category.name != "CompuCartoon":
 			results[-1]['extra'] = nominee.extra.replace("_", " ")
+
+		if category.name == "CompuCartoon":
+			results[-1]['cartoon'] = nominee.extra.replace("_", " ")
 
 	return results
 
@@ -562,3 +565,18 @@ def account_activation_email(request, user):
 	to_email = user.email
 	email = EmailMessage(mail_subject, message, to=[to_email])
 	email.send()
+
+def get_comments_from_nomination(category, studentID, studentIDOpt, extra):
+
+	category = get_category(category)
+
+	entity  = Student.objects.filter(student_id = studentID).first().person.entity
+	entityOpt = None
+	if studentIDOpt != "":
+		entityOpt = Student.objects.filter(student_id = studentIDOpt).first().person.entity
+
+	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+	if category in freeFieldCategories:
+		return get_comments(extra, entityOpt, category)
+	else:
+		return get_comments(entity, entityOpt, category)

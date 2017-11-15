@@ -98,12 +98,12 @@ body {
 	padding-top: 30px;
 }
 
-.nominee-name {
+.nominee-name, .nominee-nameOpt, .nominee-extra {
 	font-size: 18px;
 	padding-top: 10px;
 }
 
-.nominee-carnet {
+.nominee-carnet, .nominee-carnetOpt {
 	font-size: 15px;
 	padding-bottom: 10px;
 }
@@ -197,10 +197,10 @@ body {
 		font-size: 30px;
 	}
 
-	.nominee-name {
+	.nominee-name, .nominee-nameOpt, .nominee-extra {
 		font-size: 15px;
 	}
-	.nominee-carnet {
+	.nominee-carnet, .nominee-carnetOpt {
 		font-size: 13px;
 	}
     .nominee-image {
@@ -216,10 +216,10 @@ body {
 		height: 200px;
     }
     
-	.nominee-name {
+	.nominee-name, .nominee-nameOpt, .nominee-extra {
 		font-size: 13px;
 	}
-	.nominee-carnet {
+	.nominee-carnet, .nominee-carnetOpt {
 		font-size: 11px;
 	} 
     .nominee-image {

@@ -18,6 +18,7 @@ urlpatterns = [
 	url(r'^$', views.index, name='index'),
 	url(r'^nominate/$', views.nominate, name='nominate'),
 	url(r'^info/$', views.get_student_info, name='get_student_info'),
+	url(r'^voteinfo/$', views.get_vote_info, name='get_vote_info'),
 	url(r'^vote/$', views.vote, name='vote'),
 	url(r'^profile/$', views.profile, name='profile'),
 	url(r'^login/$', views.log_in, name='log_in'),

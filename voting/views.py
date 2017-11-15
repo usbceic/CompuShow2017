@@ -358,3 +358,16 @@ def activate(request, uidb64, token):
         return render(request, 'voting/registration_success.html')
     else:
         return render(request, 'voting/registration_success.html', {'invalid':True})
+
+@login_required()
+def get_vote_info(request):
+
+	category = request.GET.get('category')
+	studentID = request.GET.get('studentID')
+	studentIDOpt = request.GET.get('studentIDOpt')
+	extra = request.GET.get('extra')
+
+	data = dict()
+	data['comments'] = get_comments_from_nomination(category, studentID, studentIDOpt, extra)
+	
+	return HttpResponse(json.dumps(data))
