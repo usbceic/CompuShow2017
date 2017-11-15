@@ -50,39 +50,50 @@ function displayVote(data) {
         		
 	data = JSON.parse(data)
 
-	$('#modal-body-vote').html(
-		"<p><span class='text-success'>Votar</span> por:</p>"
+	$('#modal-header-vote').html(
+		"<p class='h2 text-center' style='color:white;'>"+category+"</p>"
 	);
 
+	// Clean modal
+	$('#modal-body-vote-info').html("");
+
 	if(studentName !== "") {        			
-		$('#modal-body-vote').append("<p><strong>"+studentName+"</strong></p>");
+		$('#modal-body-vote-info').append("<p><strong>"+studentName+"</strong></p>");
 	}
 
 	if(studentID !== "") {        			
-		$('#modal-body-vote').append("<p><strong>"+studentID+"</strong></p>");
+		$('#modal-body-vote-info').append("<p><strong>"+studentID+"</strong></p>");
 	}
 
 	if(studentIDOpt !== "") {
-		$('#modal-body-vote').append("y</p>"
+		$('#modal-body-vote-info').append("y</p>"
 			+"<p><strong>"+studentNameOpt+"</strong></p>"
 			+"<p><strong>"+studentIDOpt+"</strong></p>");
 	}
 
 	if(cartoon !== "") {
-		$('#modal-body-vote').append(
+		$('#modal-body-vote-info').append(
 			"<p>como la caricatura:</p>"
 			+"<p><strong>"+cartoon+"</strong></p>");
 	}
 
-	$('#modal-body-vote').append(
-		"<p>para la categoría de:</p>"
-		+"<p><strong>"+category+"</strong></p>"
-		+"<p>Comentario:</p>");
+	$('#carousel-inner-modal').html("");
 
-	if("comments" in data) {
-		$('#modal-body-vote').append("<p>No tienes comentarios.</p>");
+	var N = data.comments.length;
+	if(N === 0) {
+		$('#carousel-inner-modal').append(
+			"<div class='carousel-comment item active'><p class='comment-text'><em>No hay comentarios adicionales.</em></p></div>"
+		);
 	} else {
-		$('#modal-body-vote').append('<p>No tienes comentarios.</p>');
+		$('#carousel-inner-modal').append(
+			"<div class='carousel-comment item active'><p class='comment-text'><em>"+data.comments[0]+"</em></p></div>"
+		);
+	}
+
+	for(var i = 1; i < N; i++) {
+		$('#carousel-inner-modal').append(
+			"<div class='carousel-comment item'><p class='comment-text'><em>"+data.comments[i]+"</em></p></div>"
+		);
 	}
 
 	$('#voteModal').modal('toggle');
