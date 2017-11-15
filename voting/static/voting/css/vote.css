@@ -177,19 +177,48 @@ body {
 	}
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
+    .nominee-image {
+		width: 150px;
+		height: 150px;
+	}
+}
+
+@media screen and (max-width: 540px) {
 
 	.category-title, .category-nominations {
 		font-size: 30px;
 	}
+
+	.nominee-name {
+		font-size: 15px;
+	}
+	.nominee-carnet {
+		font-size: 13px;
+	}
+    .nominee-image {
+		width: 115px;
+		height: 115px;
+	}
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 440px) {
 
     .category-image {
 		width: 200px;
 		height: 200px;
     }
+    
+	.nominee-name {
+		font-size: 13px;
+	}
+	.nominee-carnet {
+		font-size: 11px;
+	} 
+    .nominee-image {
+		width: 90px;
+		height: 90px;
+	}
 }
 
 @media screen and (max-width: 300px) {
