@@ -61,28 +61,29 @@
 							<div class="nomination-box hvr-float-shadow">
 								<a href="#" class="fill-div custom-a">
 
-									<img class="nominee-image" src="/static/voting/images/categoryImages/{{ category.image }}"/>
+									<img class="nominee-image slide" src="/static/voting/images/categoryImages/{{ category.image }}"/>
 									
 									{% if nominee.name %}
-										<div class="nominee-name">{{ nominee.name }}</div>
+										<div class="nominee-name slide">{{ nominee.name }}</div>
 									{% endif %}
 									
 									{% if nominee.carnet %}
-										<div class="nominee-carnet">{{ nominee.carnet }}</div>
+										<div class="nominee-carnet slide">{{ nominee.carnet }}</div>
 									{% endif %}
 
 									{% if nominee.nameOpt %}
-										<p>y</p>
-										<div class="nominee-nameOpt">{{ nominee.nameOpt }}</div>
-										<div class="nominee-carnetOpt">{{ nominee.carnetOpt }}</div>
+										<div class="nominee-auxtext slide">y</div>
+										<div class="nominee-nameOpt slide">{{ nominee.nameOpt }}</div>
+										<div class="nominee-carnetOpt slide">{{ nominee.carnetOpt }}</div>
 									{% endif %}
 
 									{% if nominee.extra %}
-										<div class="nominee-extra">{{ nominee.extra }}</div>
+										<div class="nominee-extra slide">{{ nominee.extra }}</div>
 									{% endif %}							
 
 									{% if nominee.cartoon %}
-										<div class="nominee-cartoon">{{ nominee.cartoon }}</div>
+										<div class="nominee-auxtext slide">Caricatura:</div>
+										<div class="nominee-cartoon slide">{{ nominee.cartoon }}</div>
 									{% endif %}
 
 								</a>
@@ -153,11 +154,11 @@
 
 						<!-- Left and right controls -->
 						<a class="left carousel-control" href="#carousel_{{ nominee.id }}_comments_modal" role="button" data-slide="prev">
-							<span class="glyphicon glyphicon-chevron-left icon-left" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-left icon-left carousel-modal-arrow" aria-hidden="true"></span>
 							<span class="sr-only">Previous</span>
 						</a>
 						<a class="right carousel-control" href="#carousel_{{ nominee.id }}_comments_modal" role="button" data-slide="next">
-							<span class="glyphicon glyphicon-chevron-right icon-right" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-right icon-right carousel-modal-arrow" aria-hidden="true"></span>
 							<span class="sr-only">Next</span>
 						</a>
 					</div>
@@ -173,6 +174,21 @@
 							<button type="button" class="btn btn-danger vote-modal-btn2 btn-close" data-dismiss="modal">Regresar</button>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Successful Voting Modal (pop up window) -->
+	<div id="successfulVotingModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body text-center">
+					<p class="h1">Votación <span class='text-success'>exitosa</span>!</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success btn-block btn-close" data-dismiss="modal">Continuar</button>
 				</div>
 			</div>
 		</div>

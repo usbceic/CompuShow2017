@@ -371,3 +371,15 @@ def get_vote_info(request):
 	data['comments'] = get_comments_from_nomination(category, studentID, studentIDOpt, extra)
 	
 	return HttpResponse(json.dumps(data))
+
+@login_required()
+def voting(request):
+
+	category = request.POST.get('category')
+	studentID = request.POST.get('studentID')
+	studentIDOpt = request.POST.get('studentIDOpt')
+	extra = request.POST.get('extra')
+
+	data = dict()
+	
+	return HttpResponse(json.dumps(data))

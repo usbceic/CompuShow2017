@@ -103,13 +103,14 @@ body {
 	padding-top: 10px;
 }
 
-.nominee-carnet, .nominee-carnetOpt {
+.nominee-carnet, .nominee-carnetOpt, .nominee-cartoon {
 	font-size: 18px;
-	padding-bottom: 10px;
 }
-.comment-text {
+.comment-text, .nominee-auxtext {
 	font-size: 16px;
 	word-break: break-all;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 .nominee-image {
@@ -128,6 +129,9 @@ body {
 
 
 /* Carousel customizations */
+.carousel {
+	padding-top: 10px;
+}
 .carousel-control .icon-left, .carousel-control .icon-right {
     font-size: 20px;
 }
@@ -156,7 +160,11 @@ body {
 	-moz-border-radius-topright: 5px;
 	 border-top-left-radius: 5px;
 	 border-top-right-radius: 5px;
+}
 
+/* Confirmation modal carousel */
+.carousel-modal-arrow {
+	color: black;
 }
 
 @media screen and (max-width: 1400px) {
@@ -171,11 +179,11 @@ body {
 		padding-top: 10px;
 	}
 	
-	.nominee-carnet, .nominee-carnetOpt {
+	.nominee-carnet, .nominee-carnetOpt, .nominee-cartoon {
 		font-size: 15px;
 		padding-bottom: 10px;
 	}
-	.comment-text {
+	.comment-text, .nominee-auxtext {
 		font-size: 15px;
 	}
 
@@ -230,10 +238,10 @@ body {
 	.nominee-name, .nominee-nameOpt, .nominee-extra {
 		font-size: 15px;
 	}
-	.nominee-carnet, .nominee-carnetOpt {
+	.nominee-carnet, .nominee-carnetOpt, .nominee-cartoon {
 		font-size: 13px;
 	}
-	.comment-text {
+	.comment-text, .nominee-auxtext {
 		font-size: 13px;
 	}
 
@@ -253,10 +261,10 @@ body {
 	.nominee-name, .nominee-nameOpt, .nominee-extra {
 		font-size: 13px;
 	}
-	.nominee-carnet, .nominee-carnetOpt {
+	.nominee-carnet, .nominee-carnetOpt, .nominee-cartoon {
 		font-size: 11px;
 	} 
-	.comment-text {
+	.comment-text, .nominee-auxtext {
 		font-size: 11px;
 	}
 

@@ -26,8 +26,8 @@ $(document).on('click', '.custom-a', function() {
 	studentID      = ($(this).children(".nominee-carnet")).text();
 	studentNameOpt = ($(this).children(".nominee-nameOpt")).text();
 	studentIDOpt   = ($(this).children(".nominee-carnetOpt")).text();
-	extra        = ($(this).children(".nominee-extra")).text().replace(/[^A-Za-z0-9-_:.]/g,"_");
-	cartoon      = ($(this).children(".nominee-cartoon")).text().replace(/[^A-Za-z0-9-_:.]/g,"_");
+	extra        = ($(this).children(".nominee-extra")).text();
+	cartoon      = ($(this).children(".nominee-cartoon")).text();
 
 	$.ajax({
 		type: 'GET',
@@ -48,7 +48,7 @@ $(document).on('click', '.custom-a', function() {
 
 function displayVote(data) {
         		
-	data = JSON.parse(data)
+	data = JSON.parse(data);
 
 	$('#modal-header-vote').html(
 		"<p class='h2 text-center' style='color:white;'>"+category+"</p>"
@@ -77,6 +77,10 @@ function displayVote(data) {
 			+"<p><strong>"+cartoon+"</strong></p>");
 	}
 
+	if(extra !== "") {        			
+		$('#modal-body-vote-info').append("<p><strong>"+extra+"</strong></p>");
+	}
+
 	$('#carousel-inner-modal').html("");
 
 	var N = data.comments.length;
@@ -98,3 +102,32 @@ function displayVote(data) {
 
 	$('#voteModal').modal('toggle');
 }
+
+// Process voting
+$(document).on('click', '.vote-btn', function() {
+
+	// Safe post method
+	var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+	$.ajaxSetup({
+	    beforeSend: function(xhr, settings) {
+	        if (!this.crossDomain) {
+	            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+	        }
+	    }
+	});
+
+	$.ajax({
+		type: 'POST',
+		url: '/voting/',
+		async: false,
+		data: {
+			'category':category,
+			'studentID':studentID,
+			'studentIDOpt':studentIDOpt,
+			'extra':extra,
+		},
+		success: function(data) {
+			$('#successfulVotingModal').modal('toggle');
+		}
+	});	
+});

@@ -570,7 +570,10 @@ def get_comments_from_nomination(category, studentID, studentIDOpt, extra):
 
 	category = get_category(category)
 
-	entity  = Student.objects.filter(student_id = studentID).first().person.entity
+	entity = None
+	if studentID != "":
+		entity  = Student.objects.filter(student_id = studentID).first().person.entity
+
 	entityOpt = None
 	if studentIDOpt != "":
 		entityOpt = Student.objects.filter(student_id = studentIDOpt).first().person.entity
