@@ -502,7 +502,7 @@ def get_nominees(top = 6):
 	results = dict()
 
 	for category in categories:
-		nominees = Nominee.objects.filter(Q(category=category) & Q(nominations__gte=1) & Q(participant=False)).order_by('-nominations')[:top]
+		nominees = Nominee.objects.filter(Q(category=category) & Q(nominations__gte=1) & Q(participant=True)).order_by('-nominations')[:top]
 		results[category] = nominees
 
 	return results
@@ -510,7 +510,7 @@ def get_nominees(top = 6):
 # Get the nominees for specific category
 def get_nominees_from_category(category, user, top=5):
 
-	nominees = Nominee.objects.filter(Q(category=category) & Q(nominations__gte=1) & Q(participant=False)).order_by('-nominations')[:top]
+	nominees = Nominee.objects.filter(Q(category=category) & Q(nominations__gte=1) & Q(participant=True)).order_by('-nominations')[:top]
 	
 	results = []
 	voted = False
