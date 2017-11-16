@@ -2,7 +2,208 @@
 
 {% block css %}
 	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/vote.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/floateffect.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/slideineffect.css' %}"/>
 {% endblock css %}
 
+{% block bodydiv %}
+	<body data-spy="scroll" data-target="#categories-navbar" data-offset="200">
+{% endblock bodydiv %}
+
 {% block body %}
+
+	<div class="row">
+		
+		<nav class="col-xs-2" id="categories-navbar">
+			<div class="aux">	
+				<ul class="nav nav-pills nav-stacked nav-categories" data-spy="affix">
+					<li><h2 class="nav-bar-title">CATEGORÍAS</h2></li>
+					{% for category in categories %}
+						<li class="categories-navbar-item" style="font-size:15px;"><a href="{% url 'voting:vote' %}?category={{ category.name }}">{{ category.name }}</a></li>
+					{% endfor %}
+      			</ul>
+      		</div>
+	    </nav>
+
+		<div class="col-xs-10 categories">
+
+			<nav id="collapsed-navbar2" class="navbar navbar-default navbar-static-top">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2" aria-expanded="false" aria-controls="navbar2">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand navbar-brand2" data-toggle="collapse" data-target="#navbar2">CATEGORÍAS</a>
+					</div>
+					<div id="navbar2" class="navbar-collapse collapse">
+						<ul id="navbar-collapsed2" class="nav nav-pills2">							
+							{% for category in categories %}
+								<li class="collapsed-navbar2-element categories-navbar-item" style="font-size:15px;"><a href="{% url 'voting:vote' %}?category={{ category.name }}">{{ category.name }}</a></li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<div id="{{ category.name }}" class="container-fluid category-container text-center">
+				<img class="category-image cat-item" src="/static/voting/images/categoryImages/{{ category.image }}"/>
+				<div class="category-title cat-item">{{ category.name }}</div>
+				<div class="category-description cat-item">{{ category.description }}</div>
+			
+
+				<div class="row">
+					{% for nominee in nominees_upper %}
+						<div class="col-xs-4">
+							<div class="nomination-box hvr-float-shadow">
+								<a href="#" class="fill-div custom-a">
+
+									<img class="nominee-image slide" src="/static/voting/images/categoryImages/{{ category.image }}"/>
+
+									{% if nominee.name %}
+										<div class="nominee-name slide">{{ nominee.name }}</div>
+									{% endif %}
+									
+									{% if nominee.carnet %}
+										<div class="nominee-carnet slide">{{ nominee.carnet }}</div>
+									{% endif %}
+
+									{% if nominee.nameOpt %}
+										<div class="nominee-auxtext slide">y</div>
+										<div class="nominee-nameOpt slide">{{ nominee.nameOpt }}</div>
+										<div class="nominee-carnetOpt slide">{{ nominee.carnetOpt }}</div>
+									{% endif %}
+
+									{% if nominee.extra %}
+										<div class="nominee-extra slide">{{ nominee.extra }}</div>
+									{% endif %}							
+
+									{% if nominee.cartoon %}
+										<div class="nominee-auxtext slide">Caricatura:</div>
+										<div class="nominee-cartoon slide">{{ nominee.cartoon }}</div>
+									{% endif %}
+
+								</a>
+								<!-- Carousel for comments -->
+								<div id="carousel_{{ nominee.id }}_comments" class="carousel slide" data-ride="carousel" data-interval="false">
+									<!-- Wrapper for slides -->
+									<div class="carousel-inner">
+										{% if nominee.firstcomment %}
+											<div class="carousel-comment item active"><p class="comment-text"><em>"{{ nominee.firstcomment }}"</em></p></div>
+										{% endif %}
+										{% if not nominee.firstcomment %}
+											<div class="carousel-comment item active"><p class="comment-text"><em>No hay comentarios adicionales.</em></p></div>
+										{% endif %}
+
+										{% for comment in nominee.comments %}
+											<div class="carousel-comment item"><p class="comment-text"><em>"{{ comment }}"</em></p></div>
+										{% endfor %}
+									</div>
+
+									<!-- Left and right controls -->
+									<a class="left carousel-control" href="#carousel_{{ nominee.id }}_comments" role="button" data-slide="prev">
+										<span class="glyphicon glyphicon-chevron-left icon-left" aria-hidden="true"></span>
+										<span class="sr-only">Previous</span>
+									</a>
+									<a class="right carousel-control" href="#carousel_{{ nominee.id }}_comments" role="button" data-slide="next">
+										<span class="glyphicon glyphicon-chevron-right icon-right" aria-hidden="true"></span>
+										<span class="sr-only">Next</span>
+									</a>
+								</div>
+								
+								{% if nominee.vote %}
+										<span class="label label-success voted text-center slide">Voto</span>
+								{% endif %}
+
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+
+				<div class="row">
+					{% for nominee in nominees_lower %}
+						<div class="col-xs-6">
+							
+						
+						</div>
+					{% endfor %}
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Vote Modal (pop up window) -->
+	<div id="voteModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div id="modal-header-vote" class="modal-header modal-header-nom">
+					<p class='h2 text-center' style='color:white;'>Nominado</p>
+				</div>
+				<div id="modal-body-vote" class="modal-body text-center">
+					
+					<div id="modal-body-vote-info">
+						<!-- fill in JQuery -->
+					</div>
+
+					<div id="carousel_{{ nominee.id }}_comments_modal" class="carousel slide" data-ride="carousel">
+						<!-- Wrapper for slides -->
+						<div id="carousel-inner-modal" class="carousel-inner">
+							<!-- fill in JQuery -->	
+						</div>
+
+						<!-- Left and right controls -->
+						<a class="left carousel-control" href="#carousel_{{ nominee.id }}_comments_modal" role="button" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left icon-left carousel-modal-arrow" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#carousel_{{ nominee.id }}_comments_modal" role="button" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right icon-right carousel-modal-arrow" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+
+				</div>
+				<div id="modal-vote-footer" class="modal-footer">
+					<div class="row">
+						<div class="col-xs-6">
+							{% csrf_token %}
+							<button type="submit" class="btn btn-success vote-modal-btn1 vote-btn" data-dismiss="modal">Votar</button>
+						</div>
+						<div class="col-xs-6">
+							<button type="button" class="btn btn-danger vote-modal-btn2 btn-close" data-dismiss="modal">Regresar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Successful Voting Modal (pop up window) -->
+	<div id="successfulVotingModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body text-center">
+					<p class="h1">¡Votación <span class='text-success'>exitosa</span>!</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success btn-block btn-close" data-dismiss="modal">Continuar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<input type=hidden id="voted" value={{ voted }}>
+
 {% endblock body %}
+
+{% block javascript %}
+	{% load static %}
+	<script src="{% static 'voting/js/vote.js' %}"></script>
+	<script src="{% static 'voting/js/slideineffect.js' %}"></script>
+{% endblock javascript %}

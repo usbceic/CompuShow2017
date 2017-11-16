@@ -179,6 +179,7 @@ class Nominee(models.Model):
 		related_name ='entityOpt',
 	)
 	extra = models.TextField(null=True)
+	participant = models.BooleanField(default=False)
 
 	def __str__(self):
 		return str(self.id)
@@ -188,6 +189,40 @@ class Nominee(models.Model):
 		verbose_name = "Nominee"
 		verbose_name_plural = "Nominees"
 
+class Vote(models.Model):
+
+	datetime = models.DateTimeField(auto_now=True)
+	nominator = models.ForeignKey(
+		settings.AUTH_USER_MODEL,
+		on_delete = models.CASCADE,
+		null=True,
+	)
+	nominee = models.ForeignKey(
+		Entity,
+		on_delete = models.CASCADE,
+		null=True,
+		related_name = '+',
+	)
+	nomineeOpt = models.ForeignKey(
+		Entity,
+		on_delete = models.CASCADE,
+		null=True,
+		related_name = '+',
+	)
+	category = models.ForeignKey(
+		Category,
+		on_delete = models.CASCADE,
+		null=True,
+	)
+	extra = models.TextField(null=True)
+
+	def __str__(self):
+		return str(self.id)
+
+	class Meta:
+		db_table = 'vote'
+		verbose_name = "Voting"
+		verbose_name_plural = "Voting"
 
 class Winner(models.Model):
 

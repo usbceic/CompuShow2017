@@ -61,15 +61,15 @@
 										
 										{% if nomination.category.name == 'CompuLove' %}
 											<div class="category-description cat-item slideanim">
-												<p>{{ nomination.entity }} y {{nomination.entityOpt}}</p>
+												<p><strong>{{ nomination.entity }}</strong> y <strong>{{nomination.entityOpt}}</strong></p>
 											</div>
 										{% endif %}
 
 										<div class="category-description cat-item slideanim"><p>{{ nomination.category.description }}</p></div>
 
 										{% if nomination.category.name == 'CompuCartoon' %}
-											<div class="category-description cat-item slideanim">
-												<p>Caricatura: {{ nomination.cartoon }}.</p>
+											<div class="category-description cat-item slideanim" style="margin-top:10px;">
+												<p>Caricatura: <strong>{{ nomination.cartoon }}.</strong></p>
 											</div>
 										{% endif %}
 
@@ -109,7 +109,7 @@
 										
 										{% if nomination.category.name == 'CompuLove' %}
 											<div class="category-description cat-item slideanim">
-												<p>{{ nomination.entity }} y {{nomination.entityOpt}}</p>
+												<p><strong>{{ nomination.entity }}</strong> y <strong>{{nomination.entityOpt}}</strong></p>
 											</div>
 										{% endif %}
 

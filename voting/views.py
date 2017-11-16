@@ -9,6 +9,7 @@
 #####################################################
 
 import json
+from random import shuffle
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -29,7 +30,7 @@ from .library import *
 ##############################################
 # Flag to enable voting modules (important!) #
 ##############################################
-enable_voting = False                        #
+enable_voting = True                        #
 ##############################################
 
 @login_required()
@@ -44,15 +45,11 @@ def index(request):
 
 def log_in(request):
 
-	print("AAA")
-
 	# Redirect if user already logged in
 	if request.user.is_authenticated():
 		return HttpResponseRedirect('/')
 
 	if request.method == 'POST':
-
-		print("BBB")
 
 		if request.user.is_authenticated():
 			return HttpResponseRedirect('/')
@@ -109,15 +106,6 @@ def nominate(request):
 		'nominations':nominations,
 		'categories_exist':categories_exist,
 		'enable_voting':enable_voting,
-		'safari': browser_safari(request.META['HTTP_USER_AGENT'])
-	})
-
-@login_required()
-def vote(request):
-	students = get_students()
-	return render(request, 'voting/vote.html', {
-		'enable_voting':enable_voting,
-		'students':students,
 		'safari': browser_safari(request.META['HTTP_USER_AGENT'])
 	})
 
@@ -327,14 +315,27 @@ def view_profile(request):
 @login_required()
 def vote(request):
 
+	user = request.user
 	students = get_students()
-	nominees = get_nominees()
+	categories = get_categories()
+	category = get_category(request.GET.get('category'))
+	
+	# Get nominees and shuffle (because they come already sorted)
+	nominees, voted = get_nominees_from_category(category, user)
+	shuffle(nominees)
+	nominees_upper = nominees[:int((len(nominees)+1)/2)]
+	nominees_lower = nominees[int((len(nominees)+1)/2):]
+
 	return render(request, 'voting/vote.html', {
 		'voting':True,
+		'voted':voted,
 		'students':students,
 		'enable_voting':enable_voting,
-		'nominees':nominees,
-		'safari': browser_safari(request.META['HTTP_USER_AGENT'])
+		'category':category,
+		'categories':categories,
+		'nominees_upper':nominees_upper,
+		'nominees_lower':nominees_lower,
+		'safari': browser_safari(request.META['HTTP_USER_AGENT']),
 	})
 
 
@@ -359,3 +360,30 @@ def activate(request, uidb64, token):
         return render(request, 'voting/registration_success.html')
     else:
         return render(request, 'voting/registration_success.html', {'invalid':True})
+
+@login_required()
+def get_vote_info(request):
+
+	category = request.GET.get('category')
+	studentID = request.GET.get('studentID')
+	studentIDOpt = request.GET.get('studentIDOpt')
+	extra = request.GET.get('extra')
+
+	data = dict()
+	data['comments'] = get_comments_from_nomination(category, studentID, studentIDOpt, extra)
+	
+	return HttpResponse(json.dumps(data))
+
+@login_required()
+def voting(request):
+
+	user = request.user
+	category = request.POST.get('category')
+	studentID = request.POST.get('studentID')
+	studentIDOpt = request.POST.get('studentIDOpt')
+	extra = request.POST.get('extra')
+
+	process_voting(user, studentID, studentIDOpt, category, extra)
+
+	data = dict()	
+	return HttpResponse(json.dumps(data))

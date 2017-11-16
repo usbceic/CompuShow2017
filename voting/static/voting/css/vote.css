@@ -1,0 +1,416 @@
+body {
+	height: 100%;
+	margin-bottom: 50px;
+	background-color: #111111;
+	overflow: hidden;
+}
+
+/* Collapsed nav bar for small screens */
+#collapsed-navbar2 {
+	display: none;
+	background-color: transparent;
+}
+.navbar-brand2 {
+	font-size: 20px;
+}
+.collapsed-navbar2-element {
+	text-align: center;
+}
+
+/* Navbar */
+#categories-navbar {
+	padding: 20px;
+	overflow: hidden;
+}
+
+.aux {
+	overflow: auto;
+}
+
+.affix {
+	top: 85px;
+	width: 15%;
+}
+
+.nav-bar-title {
+	letter-spacing:2px;
+}
+
+.nav-categories {
+	overflow-y: scroll !important;
+	max-height: 100% !important;
+	bottom: 70px;
+}
+
+.categories-navbar-item a {
+	color: #AAAAAA;
+}
+
+.nav-pills >li>a:hover,
+.nav-pills2>li>a:hover {
+	color: white;
+}
+
+.nav-pills >li>a, .nav-pills >li>a:focus, .nav-pills >li>a:hover,
+.nav-pills2>li>a, .nav-pills2>li>a:focus, .nav-pills2>li>a:hover{
+	background-color: transparent;
+}
+
+.nav-pills >li.active>a, .nav-pills >li.active>a:focus, .nav-pills >li.active>a:hover,
+.nav-pills2>li.active>a, .nav-pills2>li.active>a:focus, .nav-pills2>li.active>a:hover{
+	border-bottom: 2px solid #DCDCDC;
+	background-color: transparent;
+}
+
+/* Content */
+.categories {
+	padding: 0px;
+}
+
+.category-container {
+	padding: 30px;
+	width: 100%;
+	height: 100%;
+}
+
+.cat-item {
+	padding:10px;
+}
+
+.category-image {
+	width: 300px;
+	height: 300px;
+	object-fit:cover;
+	border-radius: 100%;
+}
+
+.category-title {
+	font-size: 50px;
+}
+
+.category-description {
+	font-size: 20px;
+}
+
+/* Nomination box */
+.nomination-box {
+	text-align: center;
+	padding-top: 30px;
+}
+
+.nominee-name, .nominee-nameOpt, .nominee-extra {
+	font-size: 21px;
+	padding-top: 10px;
+}
+
+.nominee-carnet, .nominee-carnetOpt, .nominee-cartoon {
+	font-size: 18px;
+}
+.comment-text, .nominee-auxtext {
+	font-size: 16px;
+	word-break: break-all;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.nominee-image {
+	width: 280px;
+	height: 280px;
+	object-fit:cover;
+	border-radius: 100%;
+}
+.custom-a {
+	text-decoration: none !important;
+}
+
+.custom-a, .custom-a:visited, .custom-a:hover, .custom-a:active {
+  color: inherit;
+}
+
+
+/* Voted box */
+.voted {
+	margin-top: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: inline-block;
+	width: 70%;
+	letter-spacing: 4px;
+}
+
+/* Carousel customizations */
+.carousel {
+	padding-top: 10px;
+}
+.carousel-control .icon-left, .carousel-control .icon-right {
+    font-size: 20px;
+}
+.carousel-control.left, .carousel-control.right {
+    background-image: none;
+}
+.carousel-control .icon-right {
+	right:0;
+}
+.carousel-control .icon-left {
+	left:0;
+}
+
+/* Confirmation modal */
+.vote-modal-btn1, .vote-modal-btn2 {
+	width: 100%;
+}
+
+.modal-header-nom {
+	padding:9px 15px;
+	border-bottom:1px solid #eee;
+	background-color: #2980b9;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	 border-top-left-radius: 5px;
+	 border-top-right-radius: 5px;
+}
+
+/* Confirmation modal carousel */
+.carousel-modal-arrow {
+	color: black;
+}
+
+@media screen and (max-width: 1400px) {
+
+	.nominee-image {
+		width: 230px;
+		height: 230px;
+	}
+
+	.nominee-name, .nominee-nameOpt, .nominee-extra {
+		font-size: 18px;
+		padding-top: 10px;
+	}
+	
+	.nominee-carnet, .nominee-carnetOpt, .nominee-cartoon {
+		font-size: 15px;
+		padding-bottom: 10px;
+	}
+	.comment-text, .nominee-auxtext {
+		font-size: 15px;
+	}
+
+
+}
+
+@media screen and (max-width: 1000px) {
+
+	.category-image {
+		width: 250px;
+		height: 250px;
+		object-fit:cover;
+		border-radius: 100%;
+	}
+
+	.nominee-image {
+		width: 200px;
+		height: 200px;
+	}
+}
+
+
+@media screen and (max-width: 800px) {
+    
+
+	#categories-navbar {
+		display: none;
+	}
+
+	#collapsed-navbar2 {
+		display: inline;
+	}
+
+	.categories {
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 700px) {
+    .nominee-image {
+		width: 150px;
+		height: 150px;
+	}
+}
+
+@media screen and (max-width: 540px) {
+
+	.category-title, .category-nominations {
+		font-size: 30px;
+	}
+
+	.nominee-name, .nominee-nameOpt, .nominee-extra {
+		font-size: 15px;
+	}
+	.nominee-carnet, .nominee-carnetOpt, .nominee-cartoon {
+		font-size: 13px;
+	}
+	.comment-text, .nominee-auxtext {
+		font-size: 13px;
+	}
+
+    .nominee-image {
+		width: 115px;
+		height: 115px;
+	}
+}
+
+@media screen and (max-width: 440px) {
+
+    .category-image {
+		width: 200px;
+		height: 200px;
+    }
+    
+	.nominee-name, .nominee-nameOpt, .nominee-extra {
+		font-size: 13px;
+	}
+	.nominee-carnet, .nominee-carnetOpt, .nominee-cartoon {
+		font-size: 11px;
+	} 
+	.comment-text, .nominee-auxtext {
+		font-size: 11px;
+	}
+
+    .nominee-image {
+		width: 90px;
+		height: 90px;
+	}
+}
+
+@media screen and (max-width: 300px) {
+
+	.category-title, .category-nominations {
+		font-size: 25px;
+	}
+}
+
+/* Scroll bar */ 
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(180,180,180,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(180,180,180,0.4); 
+}
+
+/* Custom category boxes */
+#CompuCono {
+	background-color: #001F3F;
+	color: #bdc3c7;
+}
+
+#CompuPapi {
+	background-color: #2980b9;
+}
+
+#CompuMami {
+	background-color: #7FDBFF;
+}
+
+#CompuGordito {
+	background-color: #39CCCC;
+}
+
+#CompuAdoptado {
+	background-color: #27ae60;
+}
+
+#CompuMaster {
+	background-color: #2ECC40;
+}
+
+#CompuFalso {
+	background-color: #2ecc71;
+}
+
+#CompuTeam {
+	background-color: #f1c40f;
+}
+
+#CompuCuchi {
+	background-color: #FF851B;
+}
+
+#CompuChancero {
+	background-color: #FF4136;
+}
+
+#CompuPro {
+	background-color: #001f3f;
+	color: #bdc3c7;
+}
+
+#CompuFitness {
+	background-color: #85144B;
+	color: #bdc3c7;
+}
+
+#CompuLove {
+	background-color: #8e44ad;
+}
+
+#CompuChapita {
+	background-color: #16a085;
+}
+
+#CompuTukky {
+	background-color: #95a5a6;
+}
+
+#CompuLolas {
+	background-color: #e74c3c;
+}
+
+#CompuComadre {
+	background-color: #2980b9;
+}
+
+#CompuCompadre {
+	background-color: #7FDBFF;
+}
+
+#CompuCartoon {
+	background-color: #1abc9c;
+}
+
+#CompuProductista {
+	background-color: #FF851B;
+}
+
+#CompuButt {
+	background-color: #FF4136;
+}
+
+#CompuBully {
+	background-color: #8e44ad;
+}
+
+#CompuCuaima {
+	background-color: #AAAAAA;
+}
+
+#CompuSaurio {
+	background-color: #2c3e50;
+	color: #bdc3c7;
+}

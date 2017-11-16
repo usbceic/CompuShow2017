@@ -82,6 +82,14 @@ def get_user_image(user):
 def get_categories():
 	return Category.objects.all()
 
+# Get information about specific Compushow category
+def get_category(category_name=None):
+	if category_name is None:
+		return Category.objects.first()
+	else:
+		return Category.objects.filter(name=category_name).first()
+
+
 # Get student names
 def get_students():
 	students = Student.objects.all().values(
@@ -90,6 +98,15 @@ def get_students():
 		'person__surname'
 	)
 	return students
+
+def get_carnet_from_entity(entity):
+
+	if not Person.objects.filter(entity_id = entity).exists():
+		return None
+
+	person = Person.objects.filter(entity_id = entity).first()
+	student = Student.objects.filter(person_id = person).first()
+	return student.student_id
 
 def get_full_name(user):
 
@@ -478,17 +495,53 @@ def update_nominee(entity, category, entity2, add, extra=None):
 			nomination.save()
 
 # Get the nominees for each category
-def get_nominees(top = 4):
+def get_nominees(top = 6):
 
 	categories = get_categories()
 
 	results = dict()
 
 	for category in categories:
-		nominees = Nominee.objects.filter(Q(category=category) & Q(nominations__gte=1)).order_by('-nominations')[:top]
+		nominees = Nominee.objects.filter(Q(category=category) & Q(nominations__gte=1) & Q(participant=False)).order_by('-nominations')[:top]
 		results[category] = nominees
 
 	return results
+
+# Get the nominees for specific category
+def get_nominees_from_category(category, user, top=5):
+
+	nominees = Nominee.objects.filter(Q(category=category) & Q(nominations__gte=1) & Q(participant=False)).order_by('-nominations')[:top]
+	
+	results = []
+	voted = False
+	for cnt, nominee in enumerate(nominees):
+		results.append({
+			'id':cnt,
+			'name':get_full_name_from_entity(nominee.entity_id),
+			'carnet':get_carnet_from_entity(nominee.entity_id),
+		})
+
+		comments = get_comments(nominee.entity, nominee.entityOpt, nominee.category)
+		if comments:
+			results[-1]['firstcomment'] = comments[0]
+		results[-1]['comments']  = comments[1:]
+					
+		
+		if nominee.entityOpt_id is not None:
+			results[-1]['nameOpt'] = get_full_name_from_entity(nominee.entityOpt_id)
+			results[-1]['carnetOpt'] = get_carnet_from_entity(nominee.entityOpt_id)
+
+		if nominee.extra is not None and category.name != "CompuCartoon":
+			results[-1]['extra'] = nominee.extra.replace("_", " ")
+
+		if category.name == "CompuCartoon":
+			results[-1]['cartoon'] = nominee.extra.replace("_", " ")
+
+		if user_voted_for_nominee(user, category, nominee):
+			results[-1]['vote'] = True
+			voted = True
+
+	return results, voted
 
 # Update user password in database
 def upd_pswd_db(username, new_pswd):
@@ -517,3 +570,97 @@ def account_activation_email(request, user):
 	to_email = user.email
 	email = EmailMessage(mail_subject, message, to=[to_email])
 	email.send()
+
+def get_comments_from_nomination(category, studentID, studentIDOpt, extra):
+
+	category = get_category(category)
+
+	entity = None
+	if studentID != "":
+		entity  = Student.objects.filter(student_id = studentID).first().person.entity
+
+	entityOpt = None
+	if studentIDOpt != "":
+		entityOpt = Student.objects.filter(student_id = studentIDOpt).first().person.entity
+
+	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+	if category in freeFieldCategories:
+		return get_comments(extra, entityOpt, category)
+	else:
+		return get_comments(entity, entityOpt, category)
+
+# Process the vote of a user
+def process_voting(user, studentID, studentIDOpt, category, extra):
+
+	user     = Student.objects.filter(student_id = user).first().user
+	category = Category.objects.filter(name = category).first()
+	
+	ID1 = studentID
+	ID2 = studentIDOpt
+	extra = extra.replace(' ','_')
+
+	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+	if category.name in freeFieldCategories:
+		Vote.objects.create(
+			nominator = user,
+			category = category,
+			extra = extra,
+		)
+		update_voting(None, category, None, extra)
+
+	elif category.name == 'CompuLove':
+		if ID1 > ID2:
+			ID1, ID2 = ID2, ID1
+
+		entity  = Student.objects.filter(student_id = ID1).first().person.entity
+		entity2 = Student.objects.filter(student_id = ID2).first().person.entity
+		Vote.objects.create(
+			nominator = user,
+			nominee = entity,
+			nomineeOpt = entity2,
+			category = category,
+		)
+
+		update_voting(entity, category, entity2)
+	
+	# Regular category
+	else:
+		entity = Student.objects.filter(student_id = ID1).first().person.entity
+		Vote.objects.create(
+			nominator = user,
+			nominee = entity,
+			category = category,
+		)
+		update_voting(entity, category, None, extra)
+
+
+# Update voting counter when vote is submitted
+def update_voting(entity, category, entity2, extra=None):
+	
+	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+	
+	if category.name in freeFieldCategories:
+		nominee = Nominee.objects.get(Q(extra = extra) & Q(category = category))
+		nominee.votes += 1
+		nominee.save()
+
+	elif category.name == 'CompuLove':
+		nominee = Nominee.objects.get(entity=entity, category=category, entityOpt=entity2)
+		nominee.votes += 1
+		nominee.save()
+
+	else:
+		nominee = Nominee.objects.get(entity=entity, category=category, entityOpt=entity2)
+		nominee.votes += 1
+		nominee.save()
+
+# Check if user voted for the nominee in the category
+def user_voted_for_nominee(user, category, nominee):
+
+	if not Vote.objects.filter(Q(nominator = user) & Q(category = category)).exists():
+		return False
+	else:
+		user_vote = Vote.objects.filter(Q(nominator = user) & Q(category = category)).first()
+		return  user_vote.nominee 	 == nominee.entity 	  and \
+				user_vote.nomineeOpt == nominee.entityOpt and \
+				user_vote.extra 	 == nominee.extra
