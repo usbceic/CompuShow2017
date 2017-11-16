@@ -61,7 +61,11 @@
 							<div class="nomination-box hvr-float-shadow">
 								<a href="#" class="fill-div custom-a">
 
-									<img class="nominee-image slide" src="/static/voting/images/categoryImages/{{ category.image }}"/>
+									<input type=hidden class="nominee-id" value={{ nominee.id }}>
+
+									<img class="nominee-image slide" src="/static/voting/images/NominationImages/{{ category.name }}/{{ nominee.id }}.jpg"/>
+
+									<p>para poner las fotos: {{ nominee.id }} LUEGO QUITARRRRA</p>
 
 									{% if nominee.name %}
 										<div class="nominee-name slide">{{ nominee.name }}</div>
@@ -130,7 +134,11 @@
 							<div class="nomination-box hvr-float-shadow">
 								<a href="#" class="fill-div custom-a">
 
-									<img class="nominee-image slide" src="/static/voting/images/categoryImages/{{ category.image }}"/>
+									<input type=hidden class="nominee-id" value={{ nominee.id }}>
+
+									<img class="nominee-image slide" src="/static/voting/images/NominationImages/{{ category.name }}/{{ nominee.id }}.jpg"/>
+
+									<p>para poner las fotos: {{ nominee.id }}</p>
 
 									{% if nominee.name %}
 										<div class="nominee-name slide">{{ nominee.name }}</div>

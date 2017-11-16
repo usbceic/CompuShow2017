@@ -8,6 +8,7 @@
 //                                                    //
 ////////////////////////////////////////////////////////
 
+var nomineeID;
 var studentID;
 var studentName;
 var studentIDOpt;
@@ -25,6 +26,7 @@ $(document).ready(function(){
 
 $(document).on('click', '.custom-a', function() {
 
+	nomineeID      = ($(this).children(".nominee-id")).val();
 	studentName    = ($(this).children(".nominee-name")).text();
 	studentID      = ($(this).children(".nominee-carnet")).text();
 	studentNameOpt = ($(this).children(".nominee-nameOpt")).text();
@@ -57,12 +59,16 @@ function displayVote(data) {
 	// Clean modal
 	$('#modal-body-vote-info').html("");
 
+	$('#modal-body-vote-info').append(
+		"<img class='big-image' src='/static/voting/images/NominationImages/"+category+"/"+nomineeID+".jpg'/>"
+	);
+
 	if(studentName !== "") {        			
 		$('#modal-body-vote-info').append("<p><strong>"+studentName+"</strong></p>");
 	}
 
 	if(studentID !== "") {        			
-		$('#modal-body-vote-info').append("<p><strong>"+studentID+"</strong></p>");
+		$('#modal-body-vote-info').append("<p>"+studentID+"</p>");
 	}
 
 	if(studentIDOpt !== "") {
