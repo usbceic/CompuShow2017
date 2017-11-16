@@ -335,6 +335,7 @@ def vote(request):
 		'categories':categories,
 		'nominees_upper':nominees_upper,
 		'nominees_lower':nominees_lower,
+		'nominees_count':len(nominees),
 		'safari': browser_safari(request.META['HTTP_USER_AGENT']),
 	})
 
