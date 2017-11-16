@@ -20,12 +20,10 @@ var voted;
 
 $(document).ready(function(){
 	category = $(".category-title").text()
-	voted = $('input#voted').val();
+	voted = ($('input#voted').val() === "True");
 });
 
 $(document).on('click', '.custom-a', function() {
-	
-	alert(voted)
 
 	studentName    = ($(this).children(".nominee-name")).text();
 	studentID      = ($(this).children(".nominee-carnet")).text();
@@ -100,6 +98,12 @@ function displayVote(data) {
 		$('#carousel-inner-modal').append(
 			"<div class='carousel-comment item'><p class='comment-text'><em>"+data.comments[i]+"</em></p></div>"
 		);
+	}
+
+	if(voted) {
+		$("#modal-vote-footer").hide();
+	} else {
+		$("#modal-vote-footer").show();
 	}
 
 	$('#voteModal').modal('toggle');
