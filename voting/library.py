@@ -508,9 +508,9 @@ def get_nominees(top = 6):
 	return results
 
 # Get the nominees for specific category
-def get_nominees_from_category(category, user, top=5):
+def get_nominees_from_category(category, user):
 
-	nominees = Nominee.objects.filter(Q(category=category) & Q(nominations__gte=1) & Q(participant=True)).order_by('-nominations')[:top]
+	nominees = Nominee.objects.filter(Q(category=category) & Q(nominations__gte=1) & Q(participant=True)).order_by('-nominations')
 	
 	results = []
 	voted = False
@@ -521,7 +521,13 @@ def get_nominees_from_category(category, user, top=5):
 			'carnet':get_carnet_from_entity(nominee.entity_id),
 		})
 
-		comments = get_comments(nominee.entity, nominee.entityOpt, nominee.category)
+		freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+		if category.name in freeFieldCategories:
+			comments = get_comments(nominee.extra, nominee.entityOpt, nominee.category)
+		else:
+			comments = get_comments(nominee.entity, nominee.entityOpt, nominee.category)
+		
+
 		if comments:
 			results[-1]['firstcomment'] = comments[0]
 		results[-1]['comments']  = comments[1:]
@@ -584,7 +590,8 @@ def get_comments_from_nomination(category, studentID, studentIDOpt, extra):
 		entityOpt = Student.objects.filter(student_id = studentIDOpt).first().person.entity
 
 	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
-	if category in freeFieldCategories:
+	
+	if category.name in freeFieldCategories:
 		return get_comments(extra, entityOpt, category)
 	else:
 		return get_comments(entity, entityOpt, category)
