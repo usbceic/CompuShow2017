@@ -508,11 +508,12 @@ def get_nominees(top = 6):
 	return results
 
 # Get the nominees for specific category
-def get_nominees_from_category(category, top=5):
+def get_nominees_from_category(category, user, top=5):
 
 	nominees = Nominee.objects.filter(Q(category=category) & Q(nominations__gte=1) & Q(participant=False)).order_by('-nominations')[:top]
 	
 	results = []
+	voted = False
 	for cnt, nominee in enumerate(nominees):
 		results.append({
 			'id':cnt,
@@ -536,7 +537,11 @@ def get_nominees_from_category(category, top=5):
 		if category.name == "CompuCartoon":
 			results[-1]['cartoon'] = nominee.extra.replace("_", " ")
 
-	return results
+		if user_voted_for_nominee(user, category, nominee):
+			results[-1]['vote'] = True
+			voted = True
+
+	return results, voted
 
 # Update user password in database
 def upd_pswd_db(username, new_pswd):
@@ -583,3 +588,79 @@ def get_comments_from_nomination(category, studentID, studentIDOpt, extra):
 		return get_comments(extra, entityOpt, category)
 	else:
 		return get_comments(entity, entityOpt, category)
+
+# Process the vote of a user
+def process_voting(user, studentID, studentIDOpt, category, extra):
+
+	user     = Student.objects.filter(student_id = user).first().user
+	category = Category.objects.filter(name = category).first()
+	
+	ID1 = studentID
+	ID2 = studentIDOpt
+	extra = extra.replace(' ','_')
+
+	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+	if category.name in freeFieldCategories:
+		Vote.objects.create(
+			nominator = user,
+			category = category,
+			extra = extra,
+		)
+		update_voting(None, category, None, extra)
+
+	elif category.name == 'CompuLove':
+		if ID1 > ID2:
+			ID1, ID2 = ID2, ID1
+
+		entity  = Student.objects.filter(student_id = ID1).first().person.entity
+		entity2 = Student.objects.filter(student_id = ID2).first().person.entity
+		Vote.objects.create(
+			nominator = user,
+			nominee = entity,
+			nomineeOpt = entity2,
+			category = category,
+		)
+
+		update_voting(entity, category, entity2)
+	
+	# Regular category
+	else:
+		entity = Student.objects.filter(student_id = ID1).first().person.entity
+		Vote.objects.create(
+			nominator = user,
+			nominee = entity,
+			category = category,
+		)
+		update_voting(entity, category, None, extra)
+
+
+# Update voting counter when vote is submitted
+def update_voting(entity, category, entity2, extra=None):
+	
+	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+	
+	if category.name in freeFieldCategories:
+		nominee = Nominee.objects.get(Q(extra = extra) & Q(category = category))
+		nominee.votes += 1
+		nominee.save()
+
+	elif category.name == 'CompuLove':
+		nominee = Nominee.objects.get(entity=entity, category=category, entityOpt=entity2)
+		nominee.votes += 1
+		nominee.save()
+
+	else:
+		nominee = Nominee.objects.get(entity=entity, category=category, entityOpt=entity2)
+		nominee.votes += 1
+		nominee.save()
+
+# Check if user voted for the nominee in the category
+def user_voted_for_nominee(user, category, nominee):
+
+	if not Vote.objects.filter(Q(nominator = user) & Q(category = category)).exists():
+		return False
+	else:
+		user_vote = Vote.objects.filter(Q(nominator = user) & Q(category = category)).first()
+		return  user_vote.nominee 	 == nominee.entity 	  and \
+				user_vote.nomineeOpt == nominee.entityOpt and \
+				user_vote.extra 	 == nominee.extra

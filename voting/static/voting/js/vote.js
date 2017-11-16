@@ -14,20 +14,26 @@ var studentIDOpt;
 var studentNameOpt;
 var extra;
 var cartoon;
+var parentDIV;
 var category;
+var voted;
 
 $(document).ready(function(){
 	category = $(".category-title").text()
+	voted = $('input#voted').val();
 });
 
 $(document).on('click', '.custom-a', function() {
 	
+	alert(voted)
+
 	studentName    = ($(this).children(".nominee-name")).text();
 	studentID      = ($(this).children(".nominee-carnet")).text();
 	studentNameOpt = ($(this).children(".nominee-nameOpt")).text();
 	studentIDOpt   = ($(this).children(".nominee-carnetOpt")).text();
-	extra        = ($(this).children(".nominee-extra")).text();
-	cartoon      = ($(this).children(".nominee-cartoon")).text();
+	extra          = ($(this).children(".nominee-extra")).text();
+	cartoon        = ($(this).children(".nominee-cartoon")).text();
+	parentDIV      = $(this).parent();
 
 	$.ajax({
 		type: 'GET',
@@ -49,10 +55,6 @@ $(document).on('click', '.custom-a', function() {
 function displayVote(data) {
         		
 	data = JSON.parse(data);
-
-	$('#modal-header-vote').html(
-		"<p class='h2 text-center' style='color:white;'>"+category+"</p>"
-	);
 
 	// Clean modal
 	$('#modal-body-vote-info').html("");
@@ -127,6 +129,8 @@ $(document).on('click', '.vote-btn', function() {
 			'extra':extra,
 		},
 		success: function(data) {
+			voted = true;
+			parentDIV.append("<span class='label label-success voted text-center slide'>Voto</span>");
 			$('#successfulVotingModal').modal('toggle');
 		}
 	});	

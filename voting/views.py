@@ -315,18 +315,20 @@ def view_profile(request):
 @login_required()
 def vote(request):
 
+	user = request.user
 	students = get_students()
 	categories = get_categories()
 	category = get_category(request.GET.get('category'))
 	
 	# Get nominees and shuffle (because they come already sorted)
-	nominees = get_nominees_from_category(category)
+	nominees, voted = get_nominees_from_category(category, user)
 	shuffle(nominees)
 	nominees_upper = nominees[:int((len(nominees)+1)/2)]
 	nominees_lower = nominees[int((len(nominees)+1)/2):]
 
 	return render(request, 'voting/vote.html', {
 		'voting':True,
+		'voted':voted,
 		'students':students,
 		'enable_voting':enable_voting,
 		'category':category,
@@ -375,11 +377,13 @@ def get_vote_info(request):
 @login_required()
 def voting(request):
 
+	user = request.user
 	category = request.POST.get('category')
 	studentID = request.POST.get('studentID')
 	studentIDOpt = request.POST.get('studentIDOpt')
 	extra = request.POST.get('extra')
 
-	data = dict()
-	
+	process_voting(user, studentID, studentIDOpt, category, extra)
+
+	data = dict()	
 	return HttpResponse(json.dumps(data))

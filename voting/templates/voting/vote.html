@@ -62,7 +62,7 @@
 								<a href="#" class="fill-div custom-a">
 
 									<img class="nominee-image slide" src="/static/voting/images/categoryImages/{{ category.image }}"/>
-									
+
 									{% if nominee.name %}
 										<div class="nominee-name slide">{{ nominee.name }}</div>
 									{% endif %}
@@ -114,6 +114,10 @@
 									</a>
 								</div>
 								
+								{% if nominee.vote %}
+										<span class="label label-success voted text-center slide">Voto</span>
+								{% endif %}
+
 							</div>
 						</div>
 					{% endfor %}
@@ -138,7 +142,7 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div id="modal-header-vote" class="modal-header modal-header-nom">
-					<!-- fill in JQuery -->
+					<p class='h2 text-center' style='color:white;'>Nominado</p>
 				</div>
 				<div id="modal-body-vote" class="modal-body text-center">
 					
@@ -185,7 +189,7 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-body text-center">
-					<p class="h1">Votación <span class='text-success'>exitosa</span>!</p>
+					<p class="h1">¡Votación <span class='text-success'>exitosa</span>!</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-success btn-block btn-close" data-dismiss="modal">Continuar</button>
@@ -193,6 +197,8 @@
 			</div>
 		</div>
 	</div>
+
+	<input type=hidden id="voted" value={{ voted }}>
 
 {% endblock body %}
 
