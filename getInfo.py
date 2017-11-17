@@ -19,12 +19,23 @@ from voting.library import *
 
 def main():
 
-	results = get_nominees(1000)
+	if len(sys.argv) <= 1 or sys.argv[1][0] != '-':
+		usage()
+		sys.exit()
+
+	queryType = sys.argv[1]
+	if queryType == "-nomination":
+		results = get_nominees(1000)
+	elif queryType == "-vote":
+		results = get_participants()
+	else:
+		usage()
+		sys.exit()
 	
 	for category, nominees in results.items():
 
 		# Specify categories to be displayed in the console
-		if len(sys.argv) <= 1 or category.name in sys.argv[1:]:
+		if len(sys.argv) <= 2 or category.name in sys.argv[2:]:
 
 			print("-------------------------------")
 			print("Category: " + str(category.name))
@@ -50,12 +61,18 @@ def main():
 				else:
 					print("\t\tName: "    + get_full_name_from_entity(nominee.entity))
 				
-				print("\t\tNominations: " + str(nominee.nominations))
-	
+				if queryType == "-nomination":
+					print("\t\tNominations: " + str(nominee.nominations))
+				else:
+					print("\t\tVotes: " + str(nominee.votes))
+
 				ranking += 1
 	
 			print("")
 
+def usage():
+	print("Usage:")
+	print("getInfo.py [-nomination | -vote] [category_name]")
 
 if __name__ == "__main__":
     main()

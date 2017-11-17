@@ -507,6 +507,19 @@ def get_nominees(top = 6):
 
 	return results
 
+# Get the nominees for each category
+def get_participants():
+
+	categories = get_categories()
+
+	results = dict()
+
+	for category in categories:
+		participants = Nominee.objects.filter(Q(category=category) & Q(participant=True)).order_by('-votes')
+		results[category] = participants
+
+	return results
+
 # Get the nominees for specific category
 def get_nominees_from_category(category, user):
 
