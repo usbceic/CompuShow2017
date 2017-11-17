@@ -35,13 +35,34 @@
 						</form>
 					</div>
 				</div>
-
 			</div>
+
 		{% endif %}
 
 		{% if enable_voting %}
 
-			<p>que dice manaure probando</p>
+			<div class="main-content">
+				<div class="row">
+					<div class="col-xs-8 presentation">
+						<h3 class="title"><strong>
+							<span class="title-head">¡Los magos han sido escogidos!</span>
+						</strong></h3>
+						<div class="title-body info-text">
+							<p>Luego de un largo período de nominaciones, los mejores hechiceros y brujas han sido seleccionados. Esta vez, para competir en el torneo del <strong>CompuShow 2017</strong>. Así que desenpolva tu varita, practica tus hechizos y <strong>¡prepárate!.</strong></p>
+						</div>
+						<div class="period-info info-text">
+							<p>El período de votaciones esta abierto durante semana 10, entre el 20 y 24 de noviembre. Éxito a todos los nominados y <strong>¡que el mejor mago gane!.</strong></p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="text-center">
+						<form action="{% url 'voting:vote' %}">
+							<input type="submit" id="goto-nomination-btn" class="btn btn-success" value="Votar">
+						</form>
+					</div>
+				</div>
+			</div>
 
 		{% endif %}
 
