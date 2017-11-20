@@ -3,6 +3,12 @@
 ## Description
 CompuSoft is a web-based appplication to nominate students and vote on the categories of the Compushow 2017 hosted by the Students Center of Computer Science, University Simón Bolívar.
 
+<div align="center">
+	<img src="screeshots/compushow_1.jpg" width="600" height="600">
+</div>
+<div align="center">
+	<img src="screeshots/compushow_2.jpg" width="600" height="600">
+</div>
 
 ## Requirements
 ```
