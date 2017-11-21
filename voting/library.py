@@ -215,6 +215,16 @@ def already_nominated(user, category, ID1, ID2):
 		entity = Student.objects.filter(student_id = ID1).first().person.entity
 		return Nominate.objects.filter(nominator=user, nominee=entity, category=category, active=True).exists()
 
+
+# Checks if user already voted in the category
+def already_voted(user, category):
+	
+	category = Category.objects.filter(name = category).first()
+	user     = Student.objects.filter(student_id = user).first().user
+
+	return Vote.objects.filter(nominator=user, category=category).exists()
+	
+
 def make_nomination_db(user, category, ID1, ID2, comment, extra=None):
 
 	category = Category.objects.filter(name = category).first()
