@@ -618,6 +618,7 @@ def get_comments_from_nomination(category, studentID, studentIDOpt, extra):
 	freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
 	
 	if category.name in freeFieldCategories:
+		extra = extra.replace(" ", "_")
 		return get_comments(extra, entityOpt, category)
 	else:
 		return get_comments(entity, entityOpt, category)
