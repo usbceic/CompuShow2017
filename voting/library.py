@@ -623,9 +623,9 @@ def get_comments_from_nomination(category, studentID, studentIDOpt, extra):
 		return get_comments(entity, entityOpt, category)
 
 # Process the vote of a user
-def process_voting(user, studentID, studentIDOpt, category, extra):
+def process_voting(userID, studentID, studentIDOpt, category, extra):
 
-	user     = Student.objects.filter(student_id = user).first().user
+	user     = Student.objects.filter(student_id = userID).first().user
 	category = Category.objects.filter(name = category).first()
 	
 	ID1 = studentID
