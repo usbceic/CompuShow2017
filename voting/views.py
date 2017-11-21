@@ -384,7 +384,8 @@ def voting(request):
 	studentIDOpt = request.POST.get('studentIDOpt')
 	extra = request.POST.get('extra')
 
-	process_voting(user, studentID, studentIDOpt, category, extra)
+	if not already_voted(user, category):
+		process_voting(user, studentID, studentIDOpt, category, extra)
 
 	data = dict()	
 	return HttpResponse(json.dumps(data))
