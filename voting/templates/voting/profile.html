@@ -10,13 +10,7 @@
 		<div class="profile-wrapper">	
 			<div class="container-fluid text-center basic-info">
 				<div class="basic-info-content">
-					<img class="profile-image profile-item" src="/static/voting/images/profilePhotos/
-						{% if nominations %}
-							{{ student_id }}
-						{% else %}
-							defaultProfilePhoto.jpg
-						{% endif %}
-					"/>
+					<img class="profile-image profile-item" src="/static/voting/images/profilePhotos/{% if nominations %}{{ student_id }}.jpg{% else %}defaultProfilePhoto.jpg{% endif %}"/>
 					<div class="profile-name profile-item">{{ student_name }}</div>
 					<div class="profile-id profile-item">{{ student_id }}</div>
 				</div>
@@ -61,7 +55,7 @@
 
 									<div class="col-sm-4 text-center">
 										{% if nomination.category.name == "CompuCartoon" %}
-											<img class="category-image cat-item slideanim" src="/static/voting/images/Cartoons/{{ student_id }}"/>
+											<img class="category-image cat-item slideanim" src="/static/voting/images/Cartoon/{{ student_id }}.png"/>
 										{% else %}
 											<img class="category-image cat-item slideanim" src="/static/voting/images/categoryImages/{{ nomination.category.image }}"/>
 										

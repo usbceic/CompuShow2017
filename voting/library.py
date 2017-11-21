@@ -75,8 +75,11 @@ def register_user(entry):
 def get_user_image(user):
 	student = user.student
 	person = student.person
-	entity = person.entity
-	return str(entity.profile_photo)
+	entityUser = person.entity
+	if Nominee.objects.filter((Q(entity=entityUser) | Q(entityOpt=entityUser)), participant=True).exists():
+		return student.student_id
+	else:
+		return 'defaultProfilePhoto'
 
 # Get information about Compushow categories
 def get_categories():

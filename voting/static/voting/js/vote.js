@@ -59,9 +59,23 @@ function displayVote(data) {
 	// Clean modal
 	$('#modal-body-vote-info').html("");
 
-	$('#modal-body-vote-info').append(
-		"<img class='big-image' src='/static/voting/images/NominationImages/"+category+"/"+nomineeID+".jpg'/>"
-	);
+	if(category === 'CompuCartoon') {
+		$('#modal-body-vote-info').append(
+			"<div class='row'>"
+				+"<div class='col-xs-6'>"
+					+"<img class='big-image' src='/static/voting/images/Cartoon/"+studentID+".png'>"
+				+"</div>"
+				+"<div class='col-xs-6'>"
+					+"<img class='big-image' src='/static/voting/images/NominationImages/"+category+"/"+nomineeID+".jpg'/>"
+				+"</div>"
+			
+			+"</div>"
+		);
+	} else {
+		$('#modal-body-vote-info').append(
+			"<img class='big-image' src='/static/voting/images/NominationImages/"+category+"/"+nomineeID+".jpg'/>"
+		);
+	}
 
 	if(studentName !== "") {        			
 		$('#modal-body-vote-info').append("<p><strong>"+studentName+"</strong></p>");
@@ -74,7 +88,7 @@ function displayVote(data) {
 	if(studentIDOpt !== "") {
 		$('#modal-body-vote-info').append("y</p>"
 			+"<p><strong>"+studentNameOpt+"</strong></p>"
-			+"<p><strong>"+studentIDOpt+"</strong></p>");
+			+"<p>"+studentIDOpt+"</p>");
 	}
 
 	if(cartoon !== "") {

@@ -75,7 +75,7 @@ def log_in(request):
 
 				if account_activated(user):
 					login(request, user)
-					request.session['profileimage'] = '/voting/images/profilePhotos/' + get_user_image(user)
+					request.session['profileimage'] = '/voting/images/profilePhotos/' + get_user_image(user) + '.jpg'
 				else:
 					account_activation_email(request, user)
 					return render(request, 'voting/login.html', {'form':form, 'not_activated':True})
