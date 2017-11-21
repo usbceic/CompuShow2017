@@ -156,6 +156,18 @@ body {
 }
 
 /* Confirmation modal */
+#modal-body-vote {
+	padding: 40px;
+	font-size: 20px;
+}
+
+.big-image {
+	width: 100%;
+	height: 100%;
+	border-radius: 3%;
+	margin-bottom: 20px;
+}
+
 .vote-modal-btn1, .vote-modal-btn2 {
 	width: 100%;
 }
@@ -196,8 +208,6 @@ body {
 	.comment-text, .nominee-auxtext {
 		font-size: 15px;
 	}
-
-
 }
 
 @media screen and (max-width: 1000px) {
@@ -214,7 +224,6 @@ body {
 		height: 200px;
 	}
 }
-
 
 @media screen and (max-width: 800px) {
     

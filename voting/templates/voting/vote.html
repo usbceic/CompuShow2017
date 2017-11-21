@@ -57,11 +57,13 @@
 
 				<div class="row">
 					{% for nominee in nominees_upper %}
-						<div class="col-xs-4">
+						<div class="col-xs-{% if nominees_count >= 5 %}4{% else %}6{% endif %}">
 							<div class="nomination-box hvr-float-shadow">
 								<a href="#" class="fill-div custom-a">
 
-									<img class="nominee-image slide" src="/static/voting/images/categoryImages/{{ category.image }}"/>
+									<input type=hidden class="nominee-id" value={{ nominee.id }}>
+
+									<img class="nominee-image slide" src="/static/voting/images/NominationImages/{{ category.name }}/{{ nominee.id }}.jpg"/>
 
 									{% if nominee.name %}
 										<div class="nominee-name slide">{{ nominee.name }}</div>
@@ -126,11 +128,13 @@
 				<div class="row">
 				
 					{% for nominee in nominees_lower %}
-						<div class="col-xs-{% if nominees_count == 5 %}6{% else %}4{% endif%}">
+						<div class="col-xs-{% if nominees_count >= 6 %}4{% else %}6{% endif %}">
 							<div class="nomination-box hvr-float-shadow">
 								<a href="#" class="fill-div custom-a">
 
-									<img class="nominee-image slide" src="/static/voting/images/categoryImages/{{ category.image }}"/>
+									<input type=hidden class="nominee-id" value={{ nominee.id }}>
+
+									<img class="nominee-image slide" src="/static/voting/images/NominationImages/{{ category.name }}/{{ nominee.id }}.jpg"/>
 
 									{% if nominee.name %}
 										<div class="nominee-name slide">{{ nominee.name }}</div>

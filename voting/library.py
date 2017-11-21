@@ -75,8 +75,11 @@ def register_user(entry):
 def get_user_image(user):
 	student = user.student
 	person = student.person
-	entity = person.entity
-	return str(entity.profile_photo)
+	entityUser = person.entity
+	if Nominee.objects.filter((Q(entity=entityUser) | Q(entityOpt=entityUser)), participant=True).exists():
+		return student.student_id
+	else:
+		return 'defaultProfilePhoto'
 
 # Get information about Compushow categories
 def get_categories():
@@ -504,6 +507,19 @@ def get_nominees(top = 6):
 	for category in categories:
 		nominees = Nominee.objects.filter(Q(category=category) & Q(nominations__gte=1) & Q(participant=True)).order_by('-nominations')[:top]
 		results[category] = nominees
+
+	return results
+
+# Get the nominees for each category
+def get_participants():
+
+	categories = get_categories()
+
+	results = dict()
+
+	for category in categories:
+		participants = Nominee.objects.filter(Q(category=category) & Q(participant=True)).order_by('-votes')
+		results[category] = participants
 
 	return results
 

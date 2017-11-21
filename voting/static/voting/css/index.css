@@ -28,6 +28,9 @@ body {
     padding-right: 30px;
 }
 
+.info-text {
+    font-size: 22px;
+}
 
 /* Animations */
 .title-head {

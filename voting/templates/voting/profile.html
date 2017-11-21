@@ -10,7 +10,7 @@
 		<div class="profile-wrapper">	
 			<div class="container-fluid text-center basic-info">
 				<div class="basic-info-content">
-					<img class="profile-image profile-item" src="{% static request.session.profileimage %}"/>
+					<img class="profile-image profile-item" src="/static/voting/images/profilePhotos/{% if nominations %}{{ student_id }}.jpg{% else %}defaultProfilePhoto.jpg{% endif %}"/>
 					<div class="profile-name profile-item">{{ student_name }}</div>
 					<div class="profile-id profile-item">{{ student_id }}</div>
 				</div>
@@ -52,10 +52,16 @@
 						<div id="{{ nomination.category.name }}" class="container-fluid category-container text-center {{ category.name }}">
 							<div class="row">
 								{% if nomination.left %}
+
 									<div class="col-sm-4 text-center">
-										<img class="category-image cat-item slideanim" src="/static/voting/images/categoryImages/{{ nomination.category.image }}"/>
+										{% if nomination.category.name == "CompuCartoon" %}
+											<img class="category-image cat-item slideanim" src="/static/voting/images/Cartoon/{{ student_id }}.png"/>
+										{% else %}
+											<img class="category-image cat-item slideanim" src="/static/voting/images/categoryImages/{{ nomination.category.image }}"/>
 										
+										{% endif %}
 									</div>
+
 									<div class="col-sm-8 text-center">
 										<div class="category-title cat-item slideanim"><p>{{ nomination.category.name }}</p></div>
 										
@@ -150,9 +156,16 @@
 
 
 									</div>
-									<div class="col-sm-4 text-center">
-										<img class="category-image cat-item slideanim" src="/static/voting/images/categoryImages/{{ nomination.category.image }}"/>
 										
+									<div class="col-sm-4 text-center">
+										{% if nomination.category.name == "CompuCartoon" %}
+											<img class="category-image cat-item slideanim" src="/static/voting/images/Cartoons/{{ student_id }}"/>
+										{% else %}
+											<img class="category-image cat-item slideanim" src="/static/voting/images/categoryImages/{{ nomination.category.image }}"/>
+										
+										{% endif %}
+									</div>
+
 									</div>
 								{% endif %}
 							</div>
