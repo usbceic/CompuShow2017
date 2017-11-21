@@ -153,9 +153,15 @@ $(document).on('click', '.vote-btn', function() {
 			'extra':extra,
 		},
 		success: function(data) {
+
 			voted = true;
-			parentDIV.append("<span class='label label-success voted text-center slide'>Voto</span>");
-			$('#successfulVotingModal').modal('toggle');
+
+			data = JSON.parse(data);
+
+			if(data['valid']) {
+				parentDIV.append("<span class='label label-success voted text-center slide'>Voto</span>");
+				$('#successfulVotingModal').modal('toggle');
+			}
 		}
 	});	
 });
