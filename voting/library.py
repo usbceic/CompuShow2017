@@ -537,7 +537,7 @@ def get_participants():
 def get_nominees_from_category(category, user):
 
 	nominees = Nominee.objects.filter(Q(category=category) & Q(nominations__gte=1) & Q(participant=True)).order_by('-nominations')
-	
+
 	results = []
 	voted = False
 	for cnt, nominee in enumerate(nominees):
@@ -694,6 +694,12 @@ def user_voted_for_nominee(user, category, nominee):
 		return False
 	else:
 		user_vote = Vote.objects.filter(Q(nominator = user) & Q(category = category)).first()
-		return  user_vote.nominee 	 == nominee.entity 	  and \
-				user_vote.nomineeOpt == nominee.entityOpt and \
-				user_vote.extra 	 == nominee.extra
+		
+		freeFieldCategories = ['CompuMaster', 'CompuAdoptado', 'CompuTeam']
+		if category.name in freeFieldCategories:
+			return  user_vote.nominee 	 == nominee.entity 	  and \
+					user_vote.nomineeOpt == nominee.entityOpt and \
+					user_vote.extra 	 == nominee.extra
+		else:
+			return  user_vote.nominee 	 == nominee.entity 	  and \
+					user_vote.nomineeOpt == nominee.entityOpt
