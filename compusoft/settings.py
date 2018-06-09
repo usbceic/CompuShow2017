@@ -9,7 +9,6 @@
 #####################################################
 
 import os
-from django.core.urlresolvers import reverse    
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,6 +20,8 @@ SECRET_KEY = '!%^a8a3lf*rpjw!5wd8ni=6k5ubh2$+yv632%%=q_&+_k1uk$q'
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost','127.0.0.1','192.168.0.102']
+
+CUR_DOMAIN = os.environ.get('CUR_DOMAIN', 'localhost')
 
 # Application definition
 INSTALLED_APPS = [
@@ -67,31 +68,30 @@ STATICFILES_DIRS = (
 
 WSGI_APPLICATION = 'compusoft.wsgi.application'
 
-
-################## Local Database ##################
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'compusoft',
-#         'USER': 'compusoft',
-#         'PASSWORD': 'compusoft',
-#         'HOST': '127.0.0.1',
-#         'PORT': '',
-#     }
-# }
-####################################################
-
-################# Heroku Database ##################
-DATABASES = {
-    'default': {
+# DATABASES
+DATABASES_LIST = {
+    'produccion': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dap5u3ni1bfndq',
         'USER': 'egltmpehffvmtt',
         'PASSWORD': '7000b7b0f3abb309ab8e7d63d069f5d9058f03aa0aacb0b342200c858d8c4eff',
         'HOST': 'ec2-204-236-239-225.compute-1.amazonaws.com',
         'PORT': '5432',
+    },
+    'localhost': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'compusoft',
+        'USER': 'compusoft',
+        'PASSWORD': 'compusoft',
+        'HOST': '127.0.0.1',
+        'PORT': '',
     }
 }
+
+DATABASES = {
+    'default': DATABASES_LIST[CUR_DOMAIN]
+}
+
 ####################################################
 
 # Password validation
