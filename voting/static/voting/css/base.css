@@ -1,8 +1,12 @@
 @font-face {
 	font-family: "CompuSoft Font";
-	src: url("../fonts/Corbert_Reg/Corbert-Regular.otf") format("opentype");
+	src: url("../fonts/NunitoSans/NunitoSans-Regular.ttf") format("opentype");
 }
 
+@font-face {
+	font-family: "CompuSoft Title";
+	src: url('../fonts/ChellaType/ChellaType-Regular.ttf') format('opentype');
+}
 html {
 	position: relative;
 	min-height: 100%;
@@ -11,10 +15,6 @@ html {
 
 html * {
 	font-family: "CompuSoft Font";
-}
-
-body {
-	margin-bottom: 50px;
 }
 
 #main-navbar, .footer {
@@ -26,10 +26,6 @@ body {
 	letter-spacing: 4px;
 	border-radius: 0;
 	background-color: #DDDDDD;
-}
-
-.footer {
-	background-color: yellow;
 }
 
 #main-navbar {
@@ -68,7 +64,6 @@ body {
 	width: 100%;
 	height: 50px;
 	padding: 15px;
-	border-top: 1.5px solid #D0D0D0;
 }
 
 #profileimage {

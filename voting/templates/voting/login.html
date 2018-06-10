@@ -10,42 +10,46 @@
 {% block body %}
 
 
-	<div class="container">
-		<form class="form-login" action="{% url 'voting:log_in' %}" method="post">
-			<h2 class="form-login-heading text-center">CompuShow 2017</h2>
-		
-			{% csrf_token %}
-			<div class="form-id-field">
-				{{ form.student_id }}
+	<div class="">
+		<div class="row">
+			<div class="col-md-8 hidden-xs hidden-sm" id="left-side-login"></div>
+			<div class="col-md-4 col-xs-12" id="form-login-container">
+				<h1 class="visible-xs-block text-center form-heading" >Compushow <br><span>2017-2018</span></h2>
+				<form class="form-login" action="{% url 'voting:log_in' %}" method="post">
+					{% csrf_token %}
+					<div class="form-id-field">
+						{{ form.student_id }}
+					</div>
+					<div>
+						{{ form.password }}
+					</div>
+
+					{% if invalid or form.student_id.errors %}
+						<div class="alert alert-danger alert-dismissable fade in invalid">
+							{% if form.student_id.errors %}<strong>Error:</strong> Carnet inválido. e.g. 12-34567{% endif %}
+							{% if notfound %}<strong>Error:</strong> Carnet no encontrado.{% endif %}
+							{% if notcs %}<strong>Alerta:</strong> No está registrado como estudiante de computación.{% endif %}
+							{% if invalidpasswd %}<strong>Alerta:</strong> Constraseña inválida.{% endif %}
+						</div>
+					{% endif %}
+
+					<button id="loginbtn" class="btn btn-lg btn-info btn-block" type="submit">Ingresar</button>
+
+					{% if not_activated %}
+						<div class="alert alert-info alert-dismissable fade in invalid">
+							<strong>Información:</strong> Se ha enviado un correo de activación de cuenta a su correo institucional.
+						</div>
+					{% endif %}
+
+					{% if activation_success %}
+						<div class="alert alert-success alert-dismissable fade in invalid">
+							Gracias por confirmar el correo electrónico. ¡Ya puedes acceder a tu cuenta!
+						</div>
+					{% endif %}
+
+				</form>
 			</div>
-			<div>
-				{{ form.password }}
-			</div>			
-
-			{% if invalid or form.student_id.errors %}
-				<div class="alert alert-danger alert-dismissable fade in invalid">
-					{% if form.student_id.errors %}<strong>Error:</strong> Carnet inválido. e.g. 12-34567{% endif %}
-					{% if notfound %}<strong>Error:</strong> Carnet no encontrado.{% endif %}
-					{% if notcs %}<strong>Alerta:</strong> No está registrado como estudiante de computación.{% endif %}
-					{% if invalidpasswd %}<strong>Alerta:</strong> Constraseña inválida.{% endif %}
-				</div>
-			{% endif %}
-
-			<button id="loginbtn" class="btn btn-lg btn-success btn-block" type="submit">Ingresar</button>
-		
-			{% if not_activated %}
-				<div class="alert alert-info alert-dismissable fade in invalid">
-					<strong>Información:</strong> Se ha enviado un correo de activación de cuenta a su correo institucional.
-				</div>
-			{% endif %}
-
-			{% if activation_success %}
-				<div class="alert alert-success alert-dismissable fade in invalid">
-					Gracias por confirmar el correo electrónico. ¡Ya puedes acceder a tu cuenta!
-				</div>
-			{% endif %}
-
-		</form>
+		</div>
 
 	</div>
 

@@ -30,7 +30,7 @@ from .library import *
 ##############################################
 # Flag to enable voting modules (important!) #
 ##############################################
-enable_voting = True                        #
+enable_voting = False                        #
 ##############################################
 
 @login_required()
@@ -56,11 +56,14 @@ def log_in(request):
 
 		form = LoginForm(request.POST)
 		if form.is_valid():
-			
 			student_id = form.cleaned_data['student_id']
 			password = form.cleaned_data['password']
+			print(student_id)
+			print(password)
 
 			if not user_is_registered(student_id):
+				print(student_id)
+				print(password)
 				result = validate_and_register_user(student_id)
 				if result == 'id not found':
 					# student id not found in ldap
@@ -68,7 +71,7 @@ def log_in(request):
 					
 				elif result == 'not computer science student':
 					return render(request, 'voting/login.html', {'form':form, 'invalid':True, 'notcs':True})					
-
+			print('aqui')
 			user = authenticate(username=student_id, password=password)
 
 			if user is not None:
@@ -123,7 +126,7 @@ def get_student_info(request):
 	studentID2 = request.GET.get('studentID2')
 	comment = request.GET.get('comment')
 	cartoon = request.GET.get('cartoon')
-	
+	print(user)
 	data = dict()
 	data['category'] = category
 
@@ -149,6 +152,8 @@ def get_student_info(request):
 
 	# Check if not repeating nomination
 	if already_nominated(user, category, studentID, studentID2):
+		print(studentID)
+		print(studentID2)
 		data['already_nominated'] = True
 		data['nominate'] = False
 		data['nom_id'], data['comment'] = get_nomination_info(user, category, studentID, studentID2)

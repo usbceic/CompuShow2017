@@ -1,45 +1,48 @@
 html, body{
 	height: 100%;
+	overflow: hidden;
 }
 
-body {
+#left-side-login {
 	background-color: black;
-	background-image: url("../images/loginbackground.jpg");
+	background-image: url("../images/loginbackground.png");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-}
-
-.footer {
-	background: transparent;
-	border: 0px;
+	height: 100vh;
 }
 
 .form-id-field {
 	margin-bottom: 3px;
 }
 
-.form-login-heading {
-	font-size: 30px !important;
-	line-height: 1.5 !important;
-	letter-spacing: 4px;
+
+#form-login-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	background: linear-gradient(to bottom right, #fc2557, #ad1489);
 }
 
 .form-login {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	-webkit-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
 	width: 330px;
 	padding: 40px;
-	padding-top: 0;
-	margin: 0 auto;
 	background-color: rgba(190,190,190,0.3);
 	border-radius: 5px;
+	order: 2;
 }
 
+.form-heading {
+	font-family: "CompuSoft Title";
+	order: 1;
+}
+
+.form-heading span {
+	font-family: "CompuSoft Font";
+	font-size: 2.5rem;
+}
 .form-login .form-control {
 	position: relative;
 	height: auto;
@@ -56,9 +59,10 @@ body {
 
 #loginbtn {
 	margin-top: 10px;
+	background-color: #0496ff;
+	border-color: #0496ff;
 	font-size: 15px !important;
 	line-height: 1.5 !important;
-	letter-spacing: 4px;
 }
 
 .invalid {
