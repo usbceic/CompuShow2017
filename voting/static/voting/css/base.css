@@ -173,3 +173,13 @@ html * {
 		display: none;
 	}
 }
+
+#nav-compu-title {
+	font-family: "CompuSoft Title";
+}
+
+.btn-info {
+	color: white;
+	background-color: #0496ff;
+	border-color: #0496ff;
+}

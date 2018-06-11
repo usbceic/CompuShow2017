@@ -17,21 +17,22 @@
 				<div class="row">
 					<div class="col-xs-8 presentation">
 						<h3 class="title"><strong>
-							<span class="title-head">¿Estás listo</span>
-							<span class="title-body"> para comenzar este mágico viaje?</span>
+							<span class="title-head">¿Se te hace</span>
+							<span class="title-body"> familiar este paisaje?</span>
 						</strong></h3>
 						<div class="title-text">
-							<p>Bienvenido al CompuShow 2017, un lugar donde encontrarás magos, pociones, hechizos y demás. Así que prepárate y escoge a los mejores magos de la carrera.</p>
+							<p>¡Ya estamos cerca de comenzar el espectáculo!
+								Solo falta que tú escojas los performers que quieres que te traigamos.</p>
 						</div>
 						<div class="period-info">
-							<p> El período de nominación esta abierto entre el 8 y 15 de noviembre. Escoge a tus candidatos, te esperamos.</p>
+							<p>Las nominaciones estarán abiertas desde el lunes 11 de junio al domingo 17 de junio.</p>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="text-center">
 						<form action="{% url 'voting:nominate' %}">
-							<input type="submit" id="goto-nomination-btn" class="btn btn-success" value="Nominar">
+							<input type="submit" id="goto-nomination-btn" class="btn btn-info" value="Nominar">
 						</form>
 					</div>
 				</div>
@@ -41,24 +42,27 @@
 
 		{% if enable_voting %}
 
-			<div class="main-content">
+			<div class="main-content" style="padding-top: 5%;">
 				<div class="row">
 					<div class="col-xs-8 presentation">
 						<h3 class="title"><strong>
-							<span class="title-head">¡Los magos han sido escogidos!</span>
+							<span class="title-head">Ya todo está casi listo para arrancar el espectáculo.</span>
 						</strong></h3>
 						<div class="title-body info-text">
-							<p>Luego de un largo período de nominaciones, los mejores hechiceros y brujas han sido seleccionados. Esta vez, para competir en el torneo del <strong>CompuShow 2017</strong>. Así que desenpolva tu varita, practica tus hechizos y <strong>¡prepárate!.</strong></p>
+							<p>Gracias a ti contaremos con la participación de los mejores artistas y las celebridades mas famosas,
+									¿te lo vas a perder?
+									¡No olvides vestirte a la altura de ellos, te esperamos en el CompuShow 2018!</p>
 						</div>
 						<div class="period-info info-text">
-							<p>El período de votaciones esta abierto durante semana 10, entre el 20 y 24 de noviembre. Éxito a todos los nominados y <strong>¡que el mejor mago gane!.</strong></p>
+							<p>El período de votaciones permanecerá
+								abierto desde el domingo 24 al miércoles 27 de junio (Semana 10).</p>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="text-center">
 						<form action="{% url 'voting:vote' %}">
-							<input type="submit" id="goto-nomination-btn" class="btn btn-success" value="Votar">
+							<input type="submit" id="goto-nomination-btn" class="btn btn-info" value="Votar">
 						</form>
 					</div>
 				</div>

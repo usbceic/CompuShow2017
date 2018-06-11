@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Compushow 2017</title>
+		<title>Compushow 2018</title>
 		<!-- Website icon -->
 		<!--<link rel="icon" href="">-->
 		<!-- Bootstrap core CSS -->
@@ -29,7 +29,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="{% url 'voting:index' %}">CompuShow 2017</a>
+						<a class="navbar-brand" href="{% url 'voting:index' %}"><span id="nav-compu-title">CompuShow</span> 2018</a>
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul id="navbar-left" class="nav navbar-nav">
@@ -46,7 +46,7 @@
 								<div class="input-group search-bar-group">
 
 									<input list="search-bar" name="search-bar" type="text" class="form-control" placeholder="Buscar personas"/>
-									
+
 									<datalist id="search-bar">
     									{% for student in students %}
     										<option value="{{ student.person__name }} {{ student.person__surname }}"></option>
@@ -59,7 +59,7 @@
 										</button>
 									</div>
 
-									
+
 
 								</div>
 							</form>
@@ -83,7 +83,7 @@
 				</div>
 			</nav>
 		{% endblock navbar %}
-	
+
 		<div class="container-fluid">
 			{% block body %}
 			{% endblock body %}
@@ -92,7 +92,7 @@
 		{% block footer %}
 			<footer class="footer">
 				<div class="container">
-					<p class="text-muted center-align">CEIC USB 2016 - 2017.</p>
+					<p class="text-muted center-align">CEIC USB 2017 - 2018.</p>
 				</div>
 			</footer>
 		{% endblock footer %}
@@ -109,7 +109,7 @@
 					</div>
 					<div class="modal-body text-center">
 						<form name="ch-pswd-form" class="nominate-form" action="/">
-						
+
 							<label class="ch-pswd-text-1">Nueva contraseña:</label>
 							<div id="pswd-group-1" class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
