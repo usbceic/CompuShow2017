@@ -3,7 +3,6 @@
 {% block css %}
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/nominate.css' %}"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/slideineffect.css' %}"/>
 {% endblock css %}
 
 {% block bodydiv %}
@@ -11,9 +10,9 @@
 {% endblock bodydiv %}
 
 {% block body %}
-	
+
 	<div class="row">
-		
+
 		<nav class="col-xs-2" id="categories-navbar">
 			<div class="aux">
 				<h2 style="letter-spacing:2px;">CATEGORÍAS</h2>
@@ -36,7 +35,7 @@
 						<form name="{{ category.name }}-form" class="nominate-form" action="/">
 							{% csrf_token %}
 							<div class="form-group">
-    							<input list="student-id-{{ category.name }}" type="text" name="student-id" id="{{ category.name }}-name" class="text-input-1 form-control"required 
+    							<input list="student-id-{{ category.name }}" type="text" name="student-id" id="{{ category.name }}-name" class="text-input-1 form-control"required
     							{% if category.name == 'CompuMaster' %}placeholder="Nombre del profesor"
     							{% elif  category.name == 'CompuLove' %}placeholder="Nombre del 1er estudiante"
     							{% elif  category.name == 'CompuAdoptado' %}placeholder="Nombre del estudiante"
@@ -55,14 +54,14 @@
 
     							{% if category.name == 'CompuLove' %}
 	    							<input list="student-id-2-{{ category.name }}" type="text" name="{{ category.name }}-name-2" id="{{ category.name }}-name-2" class="text-input-2 form-control" required placeholder="Nombre del 2do estudiante"/>
-	    						
+
 	    							<datalist id="student-id-2-{{ category.name }}">
     									{% for student in students %}
     										<option value="{{ student.person__name }} {{ student.person__surname }}">{{ student.person__name }} {{ student.person__surname }}</option>
     									{% endfor %}
     								</datalist>
 	    						{% endif %}
-    							
+
     							{% if category.name == 'CompuCartoon' %}
 	    							<input type="text" name="{{ category.name }}-cartoon" id="{{ category.name }}-cartoon" class="text-input-4 form-control" required placeholder="Nombre de la caricatura"/>
 	    						{% endif %}
@@ -95,29 +94,29 @@
 
 								{% if nomination.carnet is not None %}
 									<p>{{ nomination.carnet }}</p>
-								{% endif %}	
-								
+								{% endif %}
+
 								{% if nomination.nomineeOpt is not None %}
 									<p>y</p>
 									<p class="p-nominee2">{{ nomination.nomineeOpt }}</p>
-								{% endif %}	
+								{% endif %}
 
 								{% if nomination.carnet2 is not None %}
 									<p>{{ nomination.carnet2 }}</p>
-								{% endif %}	
+								{% endif %}
 
 								{% if nomination.cartoon is not None %}
 									<p class="p-cartoon-outer">Carticatura: <span class="p-cartoon">{{ nomination.cartoon }}</span></p>
-								{% endif %}	
+								{% endif %}
 
 
 								{% if nomination.comment != "" %}
 									<p class="p-comment"><em>"{{ nomination.comment }}"</em></p>
-								{% endif %}	
+								{% endif %}
 
 								{% if nomination.comment == "" %}
 									<p class="p-comment">Sin comentarios adicionales.</p>
-								{% endif %}	
+								{% endif %}
 
 							</div>
 						{% endif %}
@@ -137,7 +136,7 @@
 					<p class="h2 text-center" style="color:white;">Nominación</p>
 				</div>
 				<div id="modal-body-nominate" class="modal-body text-center">
-					
+
 				</div>
 				<div class="modal-footer">
 					<div class="row">
@@ -162,7 +161,7 @@
 				<div class="modal-header modal-header-nom">
 					<p class="h2 text-center" style="color:white;">Detalles de nominación</p>
 				</div>
-				<div id="modal-body-alreadynominated" class="modal-body text-center">	
+				<div id="modal-body-alreadynominated" class="modal-body text-center">
 				</div>
 				<div class="modal-footer">
 					<div class="row">
@@ -213,5 +212,4 @@
 {% block javascript %}
 	{% load static %}
 	<script src="{% static 'voting/js/nominate.js' %}"></script>
-	<script src="{% static 'voting/js/slideineffect.js' %}"></script>
 {% endblock javascript %}
