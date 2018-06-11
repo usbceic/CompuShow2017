@@ -58,10 +58,10 @@ $(".nav-categories li a").on('click', function(event) {
 });
 
 
-$(document).on('click', '.btn-nominate', function() {
+$(document).ready(function() {
 	
 	// Get information of user to be nominated
-	$(".btn-nominate").one('click', function(e) {
+	$(".btn-nominate").on('click', function(e) {
 
 		e.preventDefault();
 
