@@ -82,7 +82,7 @@ VALUES
 	(
 		'CompuProductista',
 		'CompuProductista.jpg',
-		'ANTONELLA ANTONELLA'
+		'La que se pasó todo el concierto grabando con el iPhone X'
 	),
 	(
 		'CompuTukky',
