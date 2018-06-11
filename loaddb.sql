@@ -17,67 +17,67 @@ VALUES
 	(
 		'CompuAdoptado',
 		'CompuAdoptado.jpg',
-		'ANTONELLA ANTONELLA'
+		'El que pensó que esto era un festival de Rammstein y Linkin Park'
 	),
 	(
 		'CompuBully',
 		'CompuBully.jpg',
-		'ANTONELLA ANTONELLA'
+		'Te fastidia por ir a Coachella por farandulear cuando en realidad vas por los artistas'
 	),
 	(
 		'CompuButt',
 		'CompuButt.jpg',
-		'ANTONELLA ANTONELLA'
+		'Estamos en el desierto, no hay que desperdiciar los shorts'
 	),
 	(
 		'CompuCartoon',
 		'CompuCartoon.jpg',
-		'ANTONELLA ANTONELLA'
+		'Lo confunden con Kenan'
 	),
 	(
 		'CompuCono',
 		'CompuCono.jpg',
-		'ANTONELLA ANTONELLA'
+		'Sip, es el cono del parking lot'
 	),
 	(
 		'CompuLolas',
 		'CompuLolas.jpg',
-		'ANTONELLA ANTONELLA'
+		'Si comienza a saltar los drops son más fuertes que los de Guetta'
 	),
 	(
 		'CompuFitness',
 		'CompuFitness.jpg',
-		'ANTONELLA ANTONELLA'
+		'Aprovecha el calor para mostrar los bíceps'
 	),
 	(
 		'CompuGordito',
 		'CompuGordito.jpg',
-		'ANTONELLA ANTONELLA'
+		'Pensó que Coachella era una de feria foodtrucks de pulled pork'
 	),
 	(
 		'CompuLove',
 		'CompuLove.jpg',
-		'ANTONELLA ANTONELLA'
+		'Son la envidia hasta de Vanessa Hudgens y Austin Butler'
 	),
 	(
 		'CompuMaster',
 		'CompuMaster.jpg',
-		'ANTONELLA ANTONELLA'
+		'Decepcionado porque Coachella nunca será Woodstock del 69'
 	),
 	(
 		'CompuMami',
 		'CompuMami.jpg',
-		'ANTONELLA ANTONELLA'
+		'Se roba la atención de todos, así Dua Lipa se esté presentando'
 	),
 	(
 		'CompuPapi',
 		'CompuPapi.jpg',
-		'ANTONELLA ANTONELLA'
+		'Estamos claros que va al festival a buscar culish'
 	),
 	(
 		'CompuPro',
 		'CompuPro.jpg',
-		'ANTONELLA ANTONELLA'
+		'Se sabe todas las canciones de la banda underground de la que nunca habías escuchado'
 	),
 	(
 		'CompuProductista',
@@ -87,16 +87,16 @@ VALUES
 	(
 		'CompuTukky',
 		'CompuTukky.jpg',
-		'ANTONELLA ANTONELLA'
+		'El que va sólo para ver a BadBunny'
 	),
 	(
 		'CompuTeam',
 		'CompuTeam.jpg',
-		'ANTONELLA ANTONELLA'
+		'#SquadGoals'
 	),
 	(
 		'CompuChévere',
 		'CompuChévere.jpg',
-		'ANTONELLA ANTONELLA'
+		'El que se cuela en la foto y terminan siendo mejores amigos'
 	)
 ;
