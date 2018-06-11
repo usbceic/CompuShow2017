@@ -194,25 +194,6 @@ def get_student_info(request):
 
 	return HttpResponse(json.dumps(data))
 
-@login_required()
-def profile(request):
-
-	students = get_students()
-
-	nominations = []
-	if enable_voting:
-		nominations = get_nominations_profile(request.user.username)
-
-	return render(request, 'voting/profile.html', {
-		'profile':True,
-		'student_name': get_full_name(request.user),
-		'student_id': request.user.username,
-		'students':students,
-		'enable_voting':enable_voting,
-		'my_profile':True,
-		'nominations':nominations,
-		'safari': browser_safari(request.META['HTTP_USER_AGENT'])
-	})
 
 @login_required()
 def delete_nomination(request):
