@@ -16,7 +16,7 @@
 		<nav class="col-xs-2" id="categories-navbar">
 			<div class="aux">
 				<h3 style="font-family: 'Compusoft Title';color: #777">CATEGORIAS</h3>
-				<ul class="nav nav-pills nav-stacked nav-categories" data-spy="affix" data-offset-top="50">
+				<ul class="nav nav-categories" data-spy="affix" data-offset-top="50">
 					{% for category in categories %}
 						<li class="categories-navbar-item" style="font-size:15px;"><a href="#{{ category.name }}">{{ category.name }}</a></li>
 					{% endfor %}

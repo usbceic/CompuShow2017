@@ -54,6 +54,7 @@ body {
 	/* width: 70%; */
 	margin:20px;
 	border-radius: 8px;
+	height: 700px;
 }
 
 .cat-item {
@@ -76,7 +77,7 @@ body {
 }
 
 .category-nominations {
-	font-size: 40px;
+	font-size: 1.5em;
 }
 
 /* Nomination boxes */
