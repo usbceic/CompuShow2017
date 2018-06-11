@@ -22,7 +22,7 @@ body {
 }
 
 .nav-categories {
-	/*overflow-y: scroll !important; */
+	overflow-y: hidden !important;
 	max-height: 100% !important;
 	bottom: 70px;
 }
@@ -49,12 +49,12 @@ body {
 	padding: 0px;
 }
 
-.category-container {
-	padding: 30px;
-	/* width: 70%; */
-	margin:20px;
+.category-container > div {
+	margin: 20px;
 	border-radius: 8px;
-	height: 700px;
+	height: 800px;
+	display: flex;
+	align-items: center;
 }
 
 .cat-item {
@@ -95,7 +95,7 @@ body {
 	padding: 40px;
 	background-color: rgba(190,190,190,0.3);
 	border-radius: 5px;
-	margin: auto;
+	margin: 0 5rem;
 }
 
 .text-input-1, .text-input-2, .text-input-4 {
@@ -268,6 +268,77 @@ body {
 	background-color: #ad1489;
 }
 
+.CompuCono {
+	background-color: #001F3F;
+	color: #bdc3c7;
+}
+
+.CompuPapi {
+	background-color: #f1c40f;
+}
+
+.CompuMami {
+	background-color: #0496ff;
+}
+
+.CompuGordito {
+	background-color: #ffbc42;
+}
+
+.CompuAdoptado {
+	background-color: #fc2557;
+}
+
+.CompuMaster {
+	background-color: #2ECC40;
+}
+
+.CompuTeam {
+	background-color: #f1c40f;
+}
+
+.CompuPro {
+	background-color: #001f3f;
+	color: #bdc3c7;
+}
+
+.CompuFitness {
+	background-color: #85144B;
+	color: #bdc3c7;
+}
+
+.CompuLove {
+	background-color: #FF4136;
+}
+
+
+.CompuTukky {
+	background-color: #ad1489;
+}
+
+.CompuLolas {
+	background-color: #72d54a;
+}
+
+.CompuChévere {
+	background-color: #2980b9;
+}
+
+.CompuCartoon {
+	background-color: #0496ff;
+}
+
+.CompuProductista {
+	background-color: #FF851B;
+}
+
+.CompuButt {
+	background-color: #ffbc42;
+}
+
+.CompuBully {
+	background-color: #ad1489;
+}
 /*verde #72d54a
 Azul #0496ff
 Amarillo #ffbc42
