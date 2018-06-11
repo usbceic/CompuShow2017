@@ -59,7 +59,7 @@ $(".nav-categories li a").on('click', function(event) {
 
 
 $(document).ready(function() {
-	
+
 	// Get information of user to be nominated
 	$(".btn-nominate").on('click', function(e) {
 
@@ -81,7 +81,7 @@ $(document).ready(function() {
 			category    =  $(this).parent().parent().attr('id');
 			category2   =  $(this).parent().parent().attr('id');
 			studentID1  = ($(this).siblings(".p-nominee")).text();
-			
+
 			if(($(this).siblings(".p-nominee2")).length) {
 				studentID2  = ($(this).siblings(".p-nominee2")).text();
 			} else {
@@ -132,7 +132,7 @@ $(document).ready(function() {
 				'cartoon':cartoon,
 			},
 			success: function (data) {
-        		
+
 				data = JSON.parse(data)
 
 				if(data.not_found) {
@@ -140,13 +140,13 @@ $(document).ready(function() {
 					(this_btn.siblings(".nominate-form")).find(".text-input-1").select();
 					return false;
 
-				} 
+				}
 				else if(data.not_found_2) {
 					this_btn.parents(".form-nominate").prepend(warning2);
 					(this_btn.siblings(".nominate-form")).find(".text-input-2").select();
 					return false;
 
-				} 
+				}
 
 				else if(data.nominate) {
 
@@ -158,7 +158,7 @@ $(document).ready(function() {
         				"<p><span class='text-success'>Nominar</span> a:</p>"
         				+"<p><strong>"+studentID1+"</strong></p>");
 
-					if(data.carnet !== "") {        			
+					if(data.carnet !== "") {
 						$('#modal-body-nominate').append("<p><strong>"+data.carnet+"</strong></p>");
 					}
 
@@ -188,13 +188,13 @@ $(document).ready(function() {
         			$('#nominateModal').modal('toggle');
 
         			// Make nomination
-					$(".make-nomination-btn").one('click', function(e) {
+					$(".make-nomination-btn").on('click', function(e) {
 
 						e.preventDefault();
 
 						// Safe post method
 						var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-						
+
 						function csrfSafeMethod(method) {
 						    // these HTTP methods do not require CSRF protection
 						    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
@@ -223,7 +223,7 @@ $(document).ready(function() {
 								'cartoon':cartoon,
 							},
 							success: function (data) {
-					        		
+
 								data = JSON.parse(data);
 
 								if( category === "CompuMaster" || category === "CompuAdoptado" || category === "CompuTeam" ) {
@@ -239,16 +239,18 @@ $(document).ready(function() {
 								}
 
 								if($('#'+category+'-nominations-title').length === 0 && !(category in curCategories)) {
-									$('#'+category).append(
-										'<div id='+category+'-nominations-title" class="category-nominations cat-item slideanim">Mis nominaciones</div>'
+									$('#'+category + '> div').append(
+										`<button id="${ category }-nominations-title" data-open="${category.name}-nom" class="nominations-title btn btn-info category-nominations cat-item slideanim">
+											Mis nominaciones
+										</button>`
 									);
 									curCategories[category] = true;
 								}
 
 								$('#'+category).append(
 									'<div id="'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity+'" class="cat-item box-nominate slideanim">'
-								);	
-								
+								);
+
 								$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).append(
 									'<button type="button" class="close btn-close btn-nominate new-btn-nominate">'
 									+'<small><span class="glyphicon glyphicon-edit"></span></small>'
@@ -271,7 +273,7 @@ $(document).ready(function() {
 										+'<p class="p-nominee2">'+studentID2+'</p>'
 									);
 								}
-									
+
 								if(data.carnet2 !== null) {
 									$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).append(
 										'<p>'+data.carnet2+'</p>'
@@ -320,7 +322,7 @@ $(document).ready(function() {
         				"<p>Ya has <span class='text-success'><u>Nominado</u></span> a:</p>"
         				+"<p><strong>"+studentID1+"</strong></p>");
 
-					if(data.carnet !== "") {        			
+					if(data.carnet !== "") {
 						$('#modal-body-alreadynominated').append("<p><strong>"+data.carnet+"</strong></p>");
 					}
 
@@ -339,18 +341,18 @@ $(document).ready(function() {
         				 "<p>para la categoría de:</p>"
         				+"<p><strong>"+data.category+"</strong></p>"
         				+"<p>Comentario:</p>")
-        			
+
         			if(data.comment === "") {
         				$('#modal-body-alreadynominated').append("<p>No tienes comentarios.</p>");
         			} else {
         				$('#modal-body-alreadynominated').append('<p><em>"'+data.comment+'"</em></p>');
         			}
 
-        			$('#alreadyNominatedModal').modal('toggle');	
+        			$('#alreadyNominatedModal').modal('toggle');
 
         			// Eliminate nomination
 					$(".eliminate-nomination-btn").click(function(e) {
-					
+
 						e.preventDefault();
 
 						if( category === "CompuMaster" || category === "CompuAdoptado" || category === "CompuTeam" ) {
@@ -367,7 +369,7 @@ $(document).ready(function() {
 								'studentID2':studentID2,
 							},
 							success: function (data) {
-					        		
+
 								data = JSON.parse(data);
 
 								if(studentID2 == undefined) {
@@ -383,13 +385,13 @@ $(document).ready(function() {
 
 						e.stopImmediatePropagation();
 						return false;
-					});		
+					});
 				}
 			}
-		});	
+		});
 		e.stopImmediatePropagation();
 		return false;
 	});
 
-	
+
 });

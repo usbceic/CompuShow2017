@@ -60,21 +60,23 @@
 											<textarea name="{{ category.name }}-comment" id="{{ category.name }}-comment" placeholder="Comentario (opcional)" class="text-input-3 form-control"></textarea>
 										</div>
 									</form>
-									<button id="{{ category.name }}-submitbtn" class="btn btn-success btn-block btn-nominate" value={{ category.name }}>Nominar</button>
+									<button id="{{ category.name }}-submitbtn" class="btn btn-info btn-block btn-nominate" value={{ category.name }}>Nominar</button>
 								</div>
 
 								</br>
 
 								{% for category_exists in categories_exist %}
 									{% if category_exists == category.name %}
-										<div id="{{ category.name }}-nominations-title" class="category-nominations cat-item slideanim">Mis nominaciones</div>
+										<button id="{{ category.name }}-nominations-title" data-open="{{category.name}}-nom" class="nominations-title btn btn-info category-nominations cat-item slideanim">
+											Mis nominaciones
+										</button>
 									{% endif %}
 								{% endfor %}
 							</div>
 						</div>
 					</div>
-					<div class="col-xs-6 text-center hidden category-container">
-						<div class="{{category.name}}">
+					<div id="{{category.name}}-nom-container" class="col-xs-6 text-center hidden category-container nominations-container">
+						<div class="{{category.name}}-nom">
 							{% for nomination in nominations %}
 							{% if nomination.category == category.name %}
 								<div id="{{ category.name }}-nominations-{{ nomination.nominee_entity }}-{{ nomination.nomineeOpt_entity }}" class="cat-item box-nominate slideanim">
