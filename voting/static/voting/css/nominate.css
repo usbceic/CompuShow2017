@@ -50,7 +50,7 @@ body {
 }
 
 .category-container > div {
-	margin: 20px;
+	margin: 50px 20px;
 	border-radius: 8px;
 	height: 800px;
 	display: flex;
@@ -61,7 +61,7 @@ body {
 }
 
 .main-container {
-	max-width: 80%;
+	max-width: 90%;
 }
 
 @media screen and (max-width: 700px) {
@@ -78,7 +78,7 @@ body {
 	}
 	
 	.main-container {
-		min-width: 100% !important;
+		max-width: 90% !important;
 	}
 	
 }
@@ -212,8 +212,11 @@ body {
 
 @media screen and (max-width: 500px) {
 
-	.category-title, .category-nominations {
+	.category-title, .category-nominations, {
 		font-size: 1.5em;
+	}
+	.category-description{
+		font-size:1em;
 	}
 
 	.alreadynom-btn-1 {

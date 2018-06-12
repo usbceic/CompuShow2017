@@ -158,8 +158,8 @@
 											<!-- ======= section text ======= -->
 
 				        						<br>
-				        						Por favor accede al siguiente link para confirmar tu registro.
-				        						http://compushow2017.herokuapp.com{% url 'voting:activate' uidb64=uid token=token %}
+				        						Por favor accede al siguiente link para confirmar tu registro.<br>
+				        						{{domain}}{% url 'voting:activate' uidb64=uid token=token %}
 										</div>
 			        				</td>
 								</tr>

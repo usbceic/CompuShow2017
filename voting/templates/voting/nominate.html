@@ -15,7 +15,7 @@
 			<div class="container-fluid main-container">
 				<div class="row">
 				{% for category in categories %}
-					<div class="col-sm-6 col-xs-12 text-center category-container">
+					<div class="col-sm-4 col-xs-12 text-center category-container">
 						<div id="{{ category.name }}">
 							<div class="main-info">
 								<img src="{% static 'voting/images/tape-vector.png' %}" alt="tape" class="tape-img">
@@ -76,7 +76,7 @@
 							{% endfor %}
 						</div>
 					</div>
-					<div id="{{category.name}}-nom-container" class="col-xs-12 col-sm-6 text-center hidden category-container nominations-container">
+					<div id="{{category.name}}-nom-container" class="hidden">
 						<div id="{{category.name}}-nom">
 							{% for nomination in nominations %}
 							{% if nomination.category == category.name %}
