@@ -54,7 +54,25 @@ body {
 	border-radius: 8px;
 	height: 800px;
 	display: flex;
+	position: relative;
 	align-items: center;
+}
+
+.tape-img, .chichon-img {
+	height: auto;
+	position: absolute;
+}
+
+.tape-img {
+	max-width: 15rem;
+	right: -4rem;
+	top: -4rem;
+}
+
+.chichon-img {
+	max-width: 10rem;
+	left: -2rem;
+	top: -2rem;
 }
 
 .cat-item {
@@ -250,7 +268,7 @@ body {
 }
 
 #CompuCartoon {
-	background-color: #0496ff;
+	background-color: #f1c40f;
 }
 
 #CompuProductista {
@@ -322,7 +340,7 @@ body {
 }
 
 .CompuCartoon {
-	background-color: #0496ff;
+	background-color: #f1c40f;
 }
 
 .CompuProductista {

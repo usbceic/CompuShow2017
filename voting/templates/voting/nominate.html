@@ -1,5 +1,5 @@
 {% extends 'voting/base.html' %}
-
+{% load random01 %}
 {% block css %}
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/nominate.css' %}"/>
@@ -19,6 +19,8 @@
 					<div class="col-xs-6 text-center category-container">
 						<div id="{{ category.name }}">
 							<div>
+								<img src="{% static 'voting/images/tape-vector.png' %}" alt="tape" class="tape-img">
+								<img src="{% static 'voting/images/chichon-vector.png' %}" alt="tape" class="chichon-img">
 								<img class="category-image cat-item slideanim" src="/static/voting/images/categoryImages/{{ category.image }}"/>
 								<div class="category-title cat-item slideanim">{{ category.name }}</div>
 								<div class="category-description cat-item slideanim">{{ category.description }}</div>
