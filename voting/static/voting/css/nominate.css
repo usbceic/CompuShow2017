@@ -84,6 +84,12 @@ body {
 	
 }
 
+@media screen and (max-width: 600px){
+	.category-title{
+		font-size: 2rem !important;
+	}
+}
+
 @media screen and (min-width: 1400px) {
 	
 	.category-container > div {
