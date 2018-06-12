@@ -17,6 +17,9 @@ html * {
 	font-family: "CompuSoft Font";
 }
 
+body {
+	overflow-x: hidden;
+}
 #main-navbar, .footer {
 	margin-bottom: 0;
 	z-index: 9990;
@@ -74,19 +77,6 @@ html * {
 	right: 15px;
 }
 
-.modal {
-	z-index: 9991;
-}
-
-.modal-content {
-	margin-top: 200px;
-}
-
-.modal-open {
-	padding: 0 !important; 
-}
-
-/* Change password modal */
 .ch-pswd-text-1, .ch-pswd-text-2 {
 	width: 100%;
 	text-align: left;
