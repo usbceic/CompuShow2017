@@ -50,7 +50,7 @@ body {
 }
 
 .category-container > div {
-	margin: 50px 20px;
+	margin: 50px 8px;
 	border-radius: 8px;
 	padding-top: 2rem;
 	padding-bottom: 2rem;
@@ -102,6 +102,7 @@ body {
 	}
 
 	.main-container {
+		margin-top: 3rem;
 		width: 70% !important;
 	}
 
