@@ -243,7 +243,7 @@ $(document).ready(function() {
 								}
 
 								if($('#'+category+'-nominations-title').length === 0 && !(category in curCategories)) {
-									$('#'+category + '> div').append(
+									$('#'+category).append(
 										`<button id="${ category }-nominations-title" data-open="#${category}-nom" class="my-nominations-btn btn btn-info category-nominations cat-item slideanim">
 											Mis nominaciones
 										</button>`

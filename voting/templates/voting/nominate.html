@@ -96,7 +96,7 @@
 				{% for category in categories %}
 					<div class="col-sm-6 col-xs-12 text-center category-container">
 						<div id="{{ category.name }}">
-							<div>
+							<div class="main-info">
 								<img src="{% static 'voting/images/tape-vector.png' %}" alt="tape" class="tape-img">
 								<img src="{% static 'voting/images/chichon-vector.png' %}" alt="tape" class="chichon-img">
 								<img class="category-image cat-item slideanim" src="/static/voting/images/categoryImages/{{ category.image }}"/>
@@ -145,14 +145,14 @@
 
 								</br>
 
-								{% for category_exists in categories_exist %}
-									{% if category_exists == category.name %}
-										<button id="{{ category.name }}-nominations-title" data-open="#{{category.name}}-nom" class="my-nominations-btn btn btn-info category-nominations cat-item slideanim">
-											Mis nominaciones
-										</button>
-									{% endif %}
-								{% endfor %}
 							</div>
+							{% for category_exists in categories_exist %}
+								{% if category_exists == category.name %}
+									<button id="{{ category.name }}-nominations-title" data-open="#{{category.name}}-nom" class="my-nominations-btn btn btn-info category-nominations cat-item slideanim" style="display: block;">
+										Mis nominaciones
+									</button>
+								{% endif %}
+							{% endfor %}
 						</div>
 					</div>
 					<div id="{{category.name}}-nom-container" class="col-xs-12 col-sm-6 text-center hidden category-container nominations-container">

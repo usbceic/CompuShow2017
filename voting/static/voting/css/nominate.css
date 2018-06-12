@@ -54,13 +54,16 @@ body {
 	border-radius: 8px;
 	height: 800px;
 	display: flex;
+	flex-direction: column;
 	position: relative;
+	justify-content: center;
 	align-items: center;
 }
 
 .main-container {
 	max-width: 80%;
 }
+
 @media screen and (max-width: 700px) {
 
 	.category-container > div {
@@ -73,12 +76,36 @@ body {
 		position: relative;
 		align-items: center;
 	}
-
+	
 	.main-container {
 		min-width: 100% !important;
 	}
+	
+}
+
+@media screen and (min-width: 1400px) {
+	
+	.category-container > div {
+		margin: 0px;
+		margin-bottom: 10px;
+		margin-top: 10px;
+		border-radius: 8px;
+		display: flex;
+		position: relative;
+		align-items: center;
+	}
+
+	.my-nominations-btn {
+		margin-top: 1rem !important;
+		margin-bottom: 1rem !important;
+	}
+
+	.main-container {
+		width: 70% !important;
+	}
 
 }
+
 .tape-img, .chichon-img {
 	height: auto;
 	position: absolute;
@@ -102,6 +129,7 @@ body {
 
 .category-image {
 	width: 70%;
+	max-width: 300px;
 	height: auto;
 	object-fit:cover;
 	border-radius: 100%;
