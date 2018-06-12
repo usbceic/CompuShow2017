@@ -383,6 +383,10 @@ $(document).ready(function() {
 									$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).remove();
 								}
 
+								if ($(`#${category}-nom`).children().length === 0) {
+									$(`#${category}-nominations-title`).remove()
+								}
+
 								$('#alreadyNominatedModal').modal('toggle');
 								$('#deletedNominationModal').modal('toggle');
 							}
