@@ -67,7 +67,7 @@
 
 								{% for category_exists in categories_exist %}
 									{% if category_exists == category.name %}
-										<button id="{{ category.name }}-nominations-title" data-open="{{category.name}}-nom" class="nominations-title btn btn-info category-nominations cat-item slideanim">
+										<button id="{{ category.name }}-nominations-title" data-open="#{{category.name}}-nom" class="my-nominations-btn btn btn-info category-nominations cat-item slideanim">
 											Mis nominaciones
 										</button>
 									{% endif %}
@@ -76,12 +76,12 @@
 						</div>
 					</div>
 					<div id="{{category.name}}-nom-container" class="col-xs-6 text-center hidden category-container nominations-container">
-						<div class="{{category.name}}-nom">
+						<div id="{{category.name}}-nom">
 							{% for nomination in nominations %}
 							{% if nomination.category == category.name %}
 								<div id="{{ category.name }}-nominations-{{ nomination.nominee_entity }}-{{ nomination.nomineeOpt_entity }}" class="cat-item box-nominate slideanim">
 
-									<button type="button" class="close btn-close btn-nominate">
+									<button type="button" data-cat="{{category.name}}" class="close btn-close btn-nominate">
 										<small><span class="glyphicon glyphicon-edit"></span></small>
 									</button>
 
@@ -200,7 +200,25 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-body text-center">
-					<p class="h1">¡Nominación <span class='text-success'>exitosa</span>!</p>
+					<p class="h1">¡Nominación exitosa!</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success btn-block btn-close" data-dismiss="modal">Continuar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- List Nominations Modal (pop up window) -->
+	<div id="listNominationModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body text-center">
+					<p class="h1">Mis Nominaciones</p>
+					<div id="nomination-container">
+
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-success btn-block btn-close" data-dismiss="modal">Continuar</button>

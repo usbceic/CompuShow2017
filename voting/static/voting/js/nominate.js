@@ -32,7 +32,7 @@ var studentID2;
 var comment;
 var cartoon;
 var curCategories = {};
-var category,category2;
+var category;
 
 
 // Remove slide in effect from first category
@@ -60,9 +60,15 @@ $(".nav-categories li a").on('click', function(event) {
 
 $(document).ready(function() {
 
+	$(document).on('click', '.my-nominations-btn', function(e) {
+		const btn = $(this)
+		const nominations = $(btn.attr('data-open')).html()
+		$('#nomination-container').html(nominations)
+		$('#listNominationModal').modal('show')
+	})
 	// Get information of user to be nominated
-	$(".btn-nominate").on('click', function(e) {
-
+	$(document).on('click', '.btn-nominate', function(e) {
+		console.log("hola mano qlq")
 		e.preventDefault();
 
 		this_btn    =  $(this);
@@ -70,7 +76,6 @@ $(document).ready(function() {
 
 		if(category !== "") {
 
-			category2   =  $(this).val();
 			studentID1  = ($(this).siblings(".nominate-form")).find(".text-input-1").val();
 			studentID2  = ($(this).siblings(".nominate-form")).find(".text-input-2").val();
 			comment     = ($(this).siblings(".nominate-form")).find(".text-input-3").val();
@@ -78,8 +83,7 @@ $(document).ready(function() {
 
 		} else {
 
-			category    =  $(this).parent().parent().attr('id');
-			category2   =  $(this).parent().parent().attr('id');
+			category    =  $(this).attr('data-cat');
 			studentID1  = ($(this).siblings(".p-nominee")).text();
 
 			if(($(this).siblings(".p-nominee2")).length) {
@@ -185,7 +189,7 @@ $(document).ready(function() {
         				$('#modal-body-nominate').append('<p><em>"'+data.comment+'"</em></p>');
         			}
 
-        			$('#nominateModal').modal('toggle');
+					$('#nominateModal').modal('toggle');
 
         			// Make nomination
 					$(".make-nomination-btn").on('click', function(e) {
@@ -240,19 +244,19 @@ $(document).ready(function() {
 
 								if($('#'+category+'-nominations-title').length === 0 && !(category in curCategories)) {
 									$('#'+category + '> div').append(
-										`<button id="${ category }-nominations-title" data-open="${category.name}-nom" class="nominations-title btn btn-info category-nominations cat-item slideanim">
+										`<button id="${ category }-nominations-title" data-open="#${category}-nom" class="my-nominations-btn btn btn-info category-nominations cat-item slideanim">
 											Mis nominaciones
 										</button>`
 									);
 									curCategories[category] = true;
 								}
 
-								$('#'+category).append(
+								$('#' + category + "-nom").append(
 									'<div id="'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity+'" class="cat-item box-nominate slideanim">'
 								);
 
 								$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).append(
-									'<button type="button" class="close btn-close btn-nominate new-btn-nominate">'
+									'<button type="button" data-cat="' + category + '" class="close btn-close btn-nominate new-btn-nominate">'
 									+'<small><span class="glyphicon glyphicon-edit"></span></small>'
 									+'</button>'
 								).button();
@@ -348,7 +352,8 @@ $(document).ready(function() {
         				$('#modal-body-alreadynominated').append('<p><em>"'+data.comment+'"</em></p>');
         			}
 
-        			$('#alreadyNominatedModal').modal('toggle');
+					$('#alreadyNominatedModal').modal('toggle');
+					$('#listNominationModal').modal('hide')
 
         			// Eliminate nomination
 					$(".eliminate-nomination-btn").click(function(e) {
