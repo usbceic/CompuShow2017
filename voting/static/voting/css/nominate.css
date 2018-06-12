@@ -164,7 +164,11 @@ body {
 
    .form-nominate, .box-nominate {
     	width: 80%;
-    }
+	}
+
+	.form-nominate {
+		margin: 0 auto;
+	}
 }
 
 
