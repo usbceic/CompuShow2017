@@ -11,85 +11,6 @@
 {% block body %}
 
 	<div class="row">
-<<<<<<< HEAD
-		
-		<nav class="col-xs-2" id="categories-navbar">
-			<div class="aux">
-				<h3 style="font-family: 'Compusoft Title';color: #777">CATEGORIAS</h3>
-				<ul class="nav nav-categories" data-spy="affix" data-offset-top="50">
-					{% for category in categories %}
-						<li class="categories-navbar-item" style="font-size:15px;"><a href="#{{ category.name }}">{{ category.name }}</a></li>
-					{% endfor %}
-      			</ul>
-      		</div>
-    	</nav>
-
-		<div class="col-xs-10 categories">
-			<div class="container-fluid" style="padding-left: 10%;padding-right: 10%;">
-				<div class="row">
-            	{% for category in categories %}
-					<div id="{{ category.name }}" class="col-sm-5 category-container text-center">
-						<img class="category-image cat-item slideanim" src="/static/voting/images/categoryImages/{{ category.image }}"/>
-						<div class="category-title cat-item slideanim">{{ category.name }}</div>
-						<div class="category-description cat-item slideanim">{{ category.description }}</div>
-						<div id="{{ category.name }}-form" class="cat-item form-nominate slideanim">
-							<form name="{{ category.name }}-form" class="nominate-form" action="/">
-								{% csrf_token %}
-								<div class="form-group">
-	    							<input list="student-id-{{ category.name }}" type="text" name="student-id" id="{{ category.name }}-name" class="text-input-1 form-control"required 
-	    							{% if category.name == 'CompuMaster' %}placeholder="Nombre del profesor"
-	    							{% elif  category.name == 'CompuLove' %}placeholder="Nombre del 1er estudiante"
-	    							{% elif  category.name == 'CompuAdoptado' %}placeholder="Nombre del estudiante"
-	    							{% elif  category.name == 'CompuTeam' %}placeholder="Nombre del equipo"
-	    							{% else %}placeholder="Nombre del estudiante"
-	    							{% endif %}
-	    							/>
-
-	    							{% if category.name != "CompuMaster" and category.name != "CompuTeam" and category.name != "CompuAdoptado"%}
-	    								<datalist id="student-id-{{ category.name }}">
-	    									{% for student in students %}
-	    										<option value="{{ student.person__name }} {{ student.person__surname }}">{{ student.person__name }} {{ student.person__surname }}</option>
-	    									{% endfor %}
-										</datalist>
-	    							{% endif %}
-
-	    							{% if category.name == 'CompuLove' %}
-		    							<input list="student-id-2-{{ category.name }}" type="text" name="{{ category.name }}-name-2" id="{{ category.name }}-name-2" class="text-input-2 form-control" required placeholder="Nombre del 2do estudiante"/>
-		    						
-		    							<datalist id="student-id-2-{{ category.name }}">
-	    									{% for student in students %}
-	    										<option value="{{ student.person__name }} {{ student.person__surname }}">{{ student.person__name }} {{ student.person__surname }}</option>
-	    									{% endfor %}
-	    								</datalist>
-		    						{% endif %}
-	    							
-	    							{% if category.name == 'CompuCartoon' %}
-		    							<input type="text" name="{{ category.name }}-cartoon" id="{{ category.name }}-cartoon" class="text-input-4 form-control" required placeholder="Nombre de la caricatura"/>
-		    						{% endif %}
-
-	    							<textarea name="{{ category.name }}-comment" id="{{ category.name }}-comment" placeholder="Comentario (opcional)" class="text-input-3 form-control"></textarea>
-								</div>
-							</form>
-							<button id="{{ category.name }}-submitbtn" class="btn btn-success btn-block btn-nominate" value={{ category.name }}>Nominar</button>
-						</div>
-
-						</br>
-
-						{% for category_exists in categories_exist %}
-							{% if category_exists == category.name %}
-								<div id="{{ category.name }}-nominations-title" class="category-nominations cat-item slideanim">Mis nominaciones</div>
-							{% endif %}
-						{% endfor %}
-
-						{% for nomination in nominations %}
-							{% if nomination.category == category.name %}
-								<div id="{{ category.name }}-nominations-{{ nomination.nominee_entity }}-{{ nomination.nomineeOpt_entity }}" class="cat-item box-nominate slideanim">
-
-									<button type="button" class="close btn-close btn-nominate">
-										<small><span class="glyphicon glyphicon-edit"></span></small>
-									</button>
-
-=======
 		<div class="col-xs-12 categories">
 			<div class="container-fluid main-container">
 				<div class="row">
@@ -165,42 +86,10 @@
 										<small><span class="glyphicon glyphicon-edit"></span></small>
 									</button>
 
->>>>>>> e02bc2bdec546e53922c12b6ad86d6fadfd3f9ca
 									{% if nomination.nominee is not None %}
 										<p class="p-nominee">{{ nomination.nominee }}</p>
 									{% endif %}
 
-<<<<<<< HEAD
-									{% if nomination.carnet is not None %}
-										<p>{{ nomination.carnet }}</p>
-									{% endif %}	
-									
-									{% if nomination.nomineeOpt is not None %}
-										<p>y</p>
-										<p class="p-nominee2">{{ nomination.nomineeOpt }}</p>
-									{% endif %}	
-
-									{% if nomination.carnet2 is not None %}
-										<p>{{ nomination.carnet2 }}</p>
-									{% endif %}	
-
-									{% if nomination.cartoon is not None %}
-										<p class="p-cartoon-outer">Carticatura: <span class="p-cartoon">{{ nomination.cartoon }}</span></p>
-									{% endif %}	
-
-
-									{% if nomination.comment != "" %}
-										<p class="p-comment"><em>"{{ nomination.comment }}"</em></p>
-									{% endif %}	
-
-									{% if nomination.comment == "" %}
-										<p class="p-comment">Sin comentarios adicionales.</p>
-									{% endif %}	
-
-								</div>
-							{% endif %}
-						{% endfor %}
-=======
 								{% if nomination.carnet is not None %}
 									<p>{{ nomination.carnet }}</p>
 								{% endif %}
@@ -231,7 +120,6 @@
 							{% endif %}
 							{% endfor %}
 						</div>
->>>>>>> e02bc2bdec546e53922c12b6ad86d6fadfd3f9ca
 					</div>
 				{% endfor %}
 				</div>
