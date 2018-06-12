@@ -21,7 +21,6 @@ urlpatterns = [
 	url(r'^voteinfo/$', views.get_vote_info, name='get_vote_info'),
 	url(r'^vote/$', views.vote, name='vote'),
 	url(r'^voting/$', views.voting, name='voting'),
-	url(r'^profile/$', views.profile, name='profile'),
 	url(r'^login/$', views.log_in, name='log_in'),
 	url(r'^logout/$', views.log_out, name='log_out'),
 	url(r'^delete_nomination/$', views.delete_nomination, name='delete_nomination'),

@@ -48,4 +48,4 @@ If you find a bug in CompuSoft, please send an email.
 ```
 
 ## Acknowledgements
-Special thanks to all who contributed in the project, particularly to CEIC 2016-2017 (usbceic@gmail.com).
+Special thanks to all who contributed in the project, particularly to CEIC 2016-2017 and CEIC 2017-2018 (usbceic@gmail.com).

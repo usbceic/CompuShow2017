@@ -32,7 +32,7 @@ var studentID2;
 var comment;
 var cartoon;
 var curCategories = {};
-var category,category2;
+var category;
 
 
 // Remove slide in effect from first category
@@ -58,11 +58,17 @@ $(".nav-categories li a").on('click', function(event) {
 });
 
 
-$(document).on('click', '.btn-nominate', function() {
-	
-	// Get information of user to be nominated
-	$(".btn-nominate").one('click', function(e) {
+$(document).ready(function() {
 
+	$(document).on('click', '.my-nominations-btn', function(e) {
+		const btn = $(this)
+		const nominations = $(btn.attr('data-open')).html()
+		$('#nomination-container').html(nominations)
+		$('#listNominationModal').modal('show')
+	})
+	// Get information of user to be nominated
+	$(document).on('click', '.btn-nominate', function(e) {
+		console.log("hola mano qlq")
 		e.preventDefault();
 
 		this_btn    =  $(this);
@@ -70,7 +76,6 @@ $(document).on('click', '.btn-nominate', function() {
 
 		if(category !== "") {
 
-			category2   =  $(this).val();
 			studentID1  = ($(this).siblings(".nominate-form")).find(".text-input-1").val();
 			studentID2  = ($(this).siblings(".nominate-form")).find(".text-input-2").val();
 			comment     = ($(this).siblings(".nominate-form")).find(".text-input-3").val();
@@ -78,10 +83,9 @@ $(document).on('click', '.btn-nominate', function() {
 
 		} else {
 
-			category    =  $(this).parent().parent().attr('id');
-			category2   =  $(this).parent().parent().attr('id');
+			category    =  $(this).attr('data-cat');
 			studentID1  = ($(this).siblings(".p-nominee")).text();
-			
+
 			if(($(this).siblings(".p-nominee2")).length) {
 				studentID2  = ($(this).siblings(".p-nominee2")).text();
 			} else {
@@ -132,7 +136,7 @@ $(document).on('click', '.btn-nominate', function() {
 				'cartoon':cartoon,
 			},
 			success: function (data) {
-        		
+
 				data = JSON.parse(data)
 
 				if(data.not_found) {
@@ -140,13 +144,13 @@ $(document).on('click', '.btn-nominate', function() {
 					(this_btn.siblings(".nominate-form")).find(".text-input-1").select();
 					return false;
 
-				} 
+				}
 				else if(data.not_found_2) {
 					this_btn.parents(".form-nominate").prepend(warning2);
 					(this_btn.siblings(".nominate-form")).find(".text-input-2").select();
 					return false;
 
-				} 
+				}
 
 				else if(data.nominate) {
 
@@ -158,7 +162,7 @@ $(document).on('click', '.btn-nominate', function() {
         				"<p><span class='text-success'>Nominar</span> a:</p>"
         				+"<p><strong>"+studentID1+"</strong></p>");
 
-					if(data.carnet !== "") {        			
+					if(data.carnet !== "") {
 						$('#modal-body-nominate').append("<p><strong>"+data.carnet+"</strong></p>");
 					}
 
@@ -185,16 +189,16 @@ $(document).on('click', '.btn-nominate', function() {
         				$('#modal-body-nominate').append('<p><em>"'+data.comment+'"</em></p>');
         			}
 
-        			$('#nominateModal').modal('toggle');
+					$('#nominateModal').modal('toggle');
 
         			// Make nomination
-					$(".make-nomination-btn").one('click', function(e) {
+					$(".make-nomination-btn").on('click', function(e) {
 
 						e.preventDefault();
 
 						// Safe post method
 						var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-						
+
 						function csrfSafeMethod(method) {
 						    // these HTTP methods do not require CSRF protection
 						    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
@@ -223,7 +227,7 @@ $(document).on('click', '.btn-nominate', function() {
 								'cartoon':cartoon,
 							},
 							success: function (data) {
-					        		
+
 								data = JSON.parse(data);
 
 								if( category === "CompuMaster" || category === "CompuAdoptado" || category === "CompuTeam" ) {
@@ -239,18 +243,20 @@ $(document).on('click', '.btn-nominate', function() {
 								}
 
 								if($('#'+category+'-nominations-title').length === 0 && !(category in curCategories)) {
-									$('#'+category).append(
-										'<div id='+category+'-nominations-title" class="category-nominations cat-item slideanim">Mis nominaciones</div>'
+									$('#'+category + '> div').append(
+										`<button id="${ category }-nominations-title" data-open="#${category}-nom" class="my-nominations-btn btn btn-info category-nominations cat-item slideanim">
+											Mis nominaciones
+										</button>`
 									);
 									curCategories[category] = true;
 								}
 
-								$('#'+category).append(
+								$('#' + category + "-nom").append(
 									'<div id="'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity+'" class="cat-item box-nominate slideanim">'
-								);	
-								
+								);
+
 								$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).append(
-									'<button type="button" class="close btn-close btn-nominate new-btn-nominate">'
+									'<button type="button" data-cat="' + category + '" class="close btn-close btn-nominate new-btn-nominate">'
 									+'<small><span class="glyphicon glyphicon-edit"></span></small>'
 									+'</button>'
 								).button();
@@ -271,7 +277,7 @@ $(document).on('click', '.btn-nominate', function() {
 										+'<p class="p-nominee2">'+studentID2+'</p>'
 									);
 								}
-									
+
 								if(data.carnet2 !== null) {
 									$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).append(
 										'<p>'+data.carnet2+'</p>'
@@ -320,7 +326,7 @@ $(document).on('click', '.btn-nominate', function() {
         				"<p>Ya has <span class='text-success'><u>Nominado</u></span> a:</p>"
         				+"<p><strong>"+studentID1+"</strong></p>");
 
-					if(data.carnet !== "") {        			
+					if(data.carnet !== "") {
 						$('#modal-body-alreadynominated').append("<p><strong>"+data.carnet+"</strong></p>");
 					}
 
@@ -339,18 +345,19 @@ $(document).on('click', '.btn-nominate', function() {
         				 "<p>para la categoría de:</p>"
         				+"<p><strong>"+data.category+"</strong></p>"
         				+"<p>Comentario:</p>")
-        			
+
         			if(data.comment === "") {
         				$('#modal-body-alreadynominated').append("<p>No tienes comentarios.</p>");
         			} else {
         				$('#modal-body-alreadynominated').append('<p><em>"'+data.comment+'"</em></p>');
         			}
 
-        			$('#alreadyNominatedModal').modal('toggle');	
+					$('#alreadyNominatedModal').modal('toggle');
+					$('#listNominationModal').modal('hide')
 
         			// Eliminate nomination
 					$(".eliminate-nomination-btn").click(function(e) {
-					
+
 						e.preventDefault();
 
 						if( category === "CompuMaster" || category === "CompuAdoptado" || category === "CompuTeam" ) {
@@ -367,13 +374,17 @@ $(document).on('click', '.btn-nominate', function() {
 								'studentID2':studentID2,
 							},
 							success: function (data) {
-					        		
+
 								data = JSON.parse(data);
 
 								if(studentID2 == undefined) {
 									$('#'+category+'-nominations-'+data.nominee_entity+'-None').remove();
 								} else {
 									$('#'+category+'-nominations-'+data.nominee_entity+'-'+data.nomineeOpt_entity).remove();
+								}
+
+								if ($(`#${category}-nom`).children().length === 0) {
+									$(`#${category}-nominations-title`).remove()
 								}
 
 								$('#alreadyNominatedModal').modal('toggle');
@@ -383,13 +394,13 @@ $(document).on('click', '.btn-nominate', function() {
 
 						e.stopImmediatePropagation();
 						return false;
-					});		
+					});
 				}
 			}
-		});	
+		});
 		e.stopImmediatePropagation();
 		return false;
 	});
 
-	
+
 });

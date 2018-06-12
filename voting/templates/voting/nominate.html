@@ -3,7 +3,6 @@
 {% block css %}
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/nominate.css' %}"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/slideineffect.css' %}"/>
 {% endblock css %}
 
 {% block bodydiv %}
@@ -11,8 +10,9 @@
 {% endblock bodydiv %}
 
 {% block body %}
-	
+
 	<div class="row">
+<<<<<<< HEAD
 		
 		<nav class="col-xs-2" id="categories-navbar">
 			<div class="aux">
@@ -90,10 +90,86 @@
 										<small><span class="glyphicon glyphicon-edit"></span></small>
 									</button>
 
+=======
+		<div class="col-xs-12 categories">
+			<div class="container-fluid" style="max-width: 80%;">
+				<div class="row">
+				{% for category in categories %}
+					<div class="col-xs-6 text-center category-container">
+						<div id="{{ category.name }}">
+							<div>
+								<img class="category-image cat-item slideanim" src="/static/voting/images/categoryImages/{{ category.image }}"/>
+								<div class="category-title cat-item slideanim">{{ category.name }}</div>
+								<div class="category-description cat-item slideanim">{{ category.description }}</div>
+								<div id="{{ category.name }}-form" class="cat-item form-nominate slideanim">
+									<form name="{{ category.name }}-form" class="nominate-form" action="/">
+										{% csrf_token %}
+										<div class="form-group">
+											<input list="student-id-{{ category.name }}" type="text" name="student-id" id="{{ category.name }}-name" class="text-input-1 form-control"required
+											{% if category.name == 'CompuMaster' %}placeholder="Nombre del profesor"
+											{% elif  category.name == 'CompuLove' %}placeholder="Nombre del 1er estudiante"
+											{% elif  category.name == 'CompuAdoptado' %}placeholder="Nombre del estudiante"
+											{% elif  category.name == 'CompuTeam' %}placeholder="Nombre del equipo"
+											{% else %}placeholder="Nombre del estudiante"
+											{% endif %}
+											/>
+
+											{% if category.name != "CompuMaster" and category.name != "CompuTeam" and category.name != "CompuAdoptado"%}
+												<datalist id="student-id-{{ category.name }}">
+													{% for student in students %}
+														<option value="{{ student.person__name }} {{ student.person__surname }}">{{ student.person__name }} {{ student.person__surname }}</option>
+													{% endfor %}
+												</datalist>
+											{% endif %}
+
+											{% if category.name == 'CompuLove' %}
+												<input list="student-id-2-{{ category.name }}" type="text" name="{{ category.name }}-name-2" id="{{ category.name }}-name-2" class="text-input-2 form-control" required placeholder="Nombre del 2do estudiante"/>
+
+												<datalist id="student-id-2-{{ category.name }}">
+													{% for student in students %}
+														<option value="{{ student.person__name }} {{ student.person__surname }}">{{ student.person__name }} {{ student.person__surname }}</option>
+													{% endfor %}
+												</datalist>
+											{% endif %}
+
+											{% if category.name == 'CompuCartoon' %}
+												<input type="text" name="{{ category.name }}-cartoon" id="{{ category.name }}-cartoon" class="text-input-4 form-control" required placeholder="Nombre de la caricatura"/>
+											{% endif %}
+
+											<textarea name="{{ category.name }}-comment" id="{{ category.name }}-comment" placeholder="Comentario (opcional)" class="text-input-3 form-control"></textarea>
+										</div>
+									</form>
+									<button id="{{ category.name }}-submitbtn" class="btn btn-info btn-block btn-nominate" value={{ category.name }}>Nominar</button>
+								</div>
+
+								</br>
+
+								{% for category_exists in categories_exist %}
+									{% if category_exists == category.name %}
+										<button id="{{ category.name }}-nominations-title" data-open="#{{category.name}}-nom" class="my-nominations-btn btn btn-info category-nominations cat-item slideanim">
+											Mis nominaciones
+										</button>
+									{% endif %}
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+					<div id="{{category.name}}-nom-container" class="col-xs-6 text-center hidden category-container nominations-container">
+						<div id="{{category.name}}-nom">
+							{% for nomination in nominations %}
+							{% if nomination.category == category.name %}
+								<div id="{{ category.name }}-nominations-{{ nomination.nominee_entity }}-{{ nomination.nomineeOpt_entity }}" class="cat-item box-nominate slideanim">
+
+									<button type="button" data-cat="{{category.name}}" class="close btn-close btn-nominate">
+										<small><span class="glyphicon glyphicon-edit"></span></small>
+									</button>
+
+>>>>>>> e02bc2bdec546e53922c12b6ad86d6fadfd3f9ca
 									{% if nomination.nominee is not None %}
 										<p class="p-nominee">{{ nomination.nominee }}</p>
 									{% endif %}
 
+<<<<<<< HEAD
 									{% if nomination.carnet is not None %}
 										<p>{{ nomination.carnet }}</p>
 									{% endif %}	
@@ -123,6 +199,38 @@
 								</div>
 							{% endif %}
 						{% endfor %}
+=======
+								{% if nomination.carnet is not None %}
+									<p>{{ nomination.carnet }}</p>
+								{% endif %}
+
+								{% if nomination.nomineeOpt is not None %}
+									<p>y</p>
+									<p class="p-nominee2">{{ nomination.nomineeOpt }}</p>
+								{% endif %}
+
+								{% if nomination.carnet2 is not None %}
+									<p>{{ nomination.carnet2 }}</p>
+								{% endif %}
+
+								{% if nomination.cartoon is not None %}
+									<p class="p-cartoon-outer">Carticatura: <span class="p-cartoon">{{ nomination.cartoon }}</span></p>
+								{% endif %}
+
+
+								{% if nomination.comment != "" %}
+									<p class="p-comment"><em>"{{ nomination.comment }}"</em></p>
+								{% endif %}
+
+								{% if nomination.comment == "" %}
+									<p class="p-comment">Sin comentarios adicionales.</p>
+								{% endif %}
+
+								</div>
+							{% endif %}
+							{% endfor %}
+						</div>
+>>>>>>> e02bc2bdec546e53922c12b6ad86d6fadfd3f9ca
 					</div>
 				{% endfor %}
 				</div>
@@ -142,7 +250,7 @@
 					<p class="h2 text-center" style="color:white;">Nominación</p>
 				</div>
 				<div id="modal-body-nominate" class="modal-body text-center">
-					
+
 				</div>
 				<div class="modal-footer">
 					<div class="row">
@@ -167,7 +275,7 @@
 				<div class="modal-header modal-header-nom">
 					<p class="h2 text-center" style="color:white;">Detalles de nominación</p>
 				</div>
-				<div id="modal-body-alreadynominated" class="modal-body text-center">	
+				<div id="modal-body-alreadynominated" class="modal-body text-center">
 				</div>
 				<div class="modal-footer">
 					<div class="row">
@@ -204,7 +312,25 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-body text-center">
-					<p class="h1">¡Nominación <span class='text-success'>exitosa</span>!</p>
+					<p class="h1">¡Nominación exitosa!</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success btn-block btn-close" data-dismiss="modal">Continuar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- List Nominations Modal (pop up window) -->
+	<div id="listNominationModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body text-center">
+					<p class="h1">Mis Nominaciones</p>
+					<div id="nomination-container">
+
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-success btn-block btn-close" data-dismiss="modal">Continuar</button>
@@ -218,5 +344,4 @@
 {% block javascript %}
 	{% load static %}
 	<script src="{% static 'voting/js/nominate.js' %}"></script>
-	<script src="{% static 'voting/js/slideineffect.js' %}"></script>
 {% endblock javascript %}
