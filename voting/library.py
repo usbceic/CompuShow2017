@@ -598,9 +598,10 @@ def account_activation_email(request, user):
 							   'uid': urlsafe_base64_encode(force_bytes(user.pk)),
 							   'token': account_activation_token.make_token(user),
 	})
-	mail_subject = '¡Bienvenido al CompuShow 2017!'
+	mail_subject = '¡Bienvenido al CompuShow 2018!'
 	to_email = user.email
 	email = EmailMessage(mail_subject, message, to=[to_email])
+	email.content_subtype = "html"
 	email.send()
 
 def get_comments_from_nomination(category, studentID, studentIDOpt, extra):
