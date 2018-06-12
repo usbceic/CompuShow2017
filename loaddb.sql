@@ -32,7 +32,7 @@ VALUES
 	(
 		'CompuCartoon',
 		'CompuCartoon.jpg',
-		'Lo confunden con Kenan'
+		'Ese amigo que parece que lo sacaron de la televisión.'
 	),
 	(
 		'CompuCono',
@@ -77,7 +77,7 @@ VALUES
 	(
 		'CompuPro',
 		'CompuPro.jpg',
-		'Se sabe todas las canciones de la banda underground de la que nunca habías escuchado'
+		'Aquel que aguanta todo el festival'
 	),
 	(
 		'CompuProductista',
