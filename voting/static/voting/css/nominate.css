@@ -137,10 +137,12 @@ body {
 
 .category-title {
 	font-size: 2.5em;
+	color:white;
 }
 
 .category-description {
 	font-size: 1.5em;
+	color: white;
 }
 
 /* Nomination boxes */
@@ -214,9 +216,11 @@ body {
 
 	.category-title, .category-nominations, {
 		font-size: 1.5em;
+		color: white;
 	}
 	.category-description{
 		font-size:1em;
+		color:white;
 	}
 
 	.alreadynom-btn-1 {
@@ -239,6 +243,7 @@ body {
 
 	.category-title, .category-nominations {
 		font-size: 1.5em;
+		color:white;
 	}
 }
 
@@ -275,8 +280,21 @@ body {
 	background-color: #f1c40f;
 }
 
+#CompuPapi .category-title,
+#CompuPapi .category-description,
+#CompuTeam .category-title,
+#CompuTeam .category-description,
+#CompuCartoon .category-title,
+#CompuCartoon .category-description,
+#CompuButt .category-title,
+#CompuButt .category-description,
+#CompuGordito .category-title,
+#CompuGordito .category-description{
+	color: #3f3536 !important;
+}
+
 #CompuMami {
-	background-color: #0496ff;
+	background-color: #001F3F;
 }
 
 #CompuGordito {
@@ -311,7 +329,7 @@ body {
 
 
 #CompuTukky {
-	background-color: #ad1489;
+	background-color: #85144B;
 }
 
 #CompuLolas {
@@ -319,7 +337,7 @@ body {
 }
 
 #CompuChévere {
-	background-color: #2980b9;
+	background-color: #fc2557;
 }
 
 #CompuCartoon {
@@ -335,7 +353,7 @@ body {
 }
 
 #CompuBully {
-	background-color: #ad1489;
+	background-color: #85144B;
 }
 
 .CompuCono {
@@ -347,8 +365,9 @@ body {
 	background-color: #f1c40f;
 }
 
+
 .CompuMami {
-	background-color: #0496ff;
+	background-color: #001F3F;
 }
 
 .CompuGordito {
@@ -383,7 +402,7 @@ body {
 
 
 .CompuTukky {
-	background-color: #ad1489;
+	background-color: #85144B;
 }
 
 .CompuLolas {
@@ -391,7 +410,7 @@ body {
 }
 
 .CompuChévere {
-	background-color: #2980b9;
+	background-color: #fc2557;
 }
 
 .CompuCartoon {
@@ -407,7 +426,7 @@ body {
 }
 
 .CompuBully {
-	background-color: #ad1489;
+	background-color: #85144B;
 }
 
 /*verde #72d54a
