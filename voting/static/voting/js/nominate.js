@@ -33,6 +33,8 @@ var comment;
 var cartoon;
 var curCategories = {};
 var category;
+var nominando = false;
+var eliminando = false;
 
 
 // Remove slide in effect from first category
@@ -227,7 +229,7 @@ $(document).ready(function() {
 								'cartoon':cartoon,
 							},
 							success: function (data) {
-
+								nominando = true;
 								data = JSON.parse(data);
 
 								if( category === "CompuMaster" || category === "CompuAdoptado" || category === "CompuTeam" ) {
@@ -305,7 +307,7 @@ $(document).ready(function() {
 								);
 
 								$('#nominateModal').modal('toggle');
-								$('#successfulNominationModal').modal('toggle');
+								
 
 							}
 						});
@@ -374,7 +376,7 @@ $(document).ready(function() {
 								'studentID2':studentID2,
 							},
 							success: function (data) {
-
+								eliminando = true;
 								data = JSON.parse(data);
 
 								if(studentID2 == undefined) {
@@ -388,7 +390,6 @@ $(document).ready(function() {
 								}
 
 								$('#alreadyNominatedModal').modal('toggle');
-								$('#deletedNominationModal').modal('toggle');
 							}
 						});
 
@@ -404,3 +405,17 @@ $(document).ready(function() {
 
 
 });
+$('#nominateModal').on('hidden.bs.modal', function (e) {
+	if (nominando) {
+		$('#successfulNominationModal').modal('toggle');
+		nominando = false;
+	}
+})
+
+
+$('#alreadyNominatedModal').on('hidden.bs.modal', function (e) {
+	if (eliminando) {
+		$('#deletedNominationModal').modal('toggle');
+		eliminando = false;
+	}
+})
