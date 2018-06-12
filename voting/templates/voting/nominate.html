@@ -1,5 +1,4 @@
 {% extends 'voting/base.html' %}
-
 {% block css %}
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'voting/css/nominate.css' %}"/>
@@ -92,12 +91,14 @@
 
 =======
 		<div class="col-xs-12 categories">
-			<div class="container-fluid" style="max-width: 80%;">
+			<div class="container-fluid main-container">
 				<div class="row">
 				{% for category in categories %}
-					<div class="col-xs-6 text-center category-container">
+					<div class="col-md-6 col-xs-12 text-center category-container">
 						<div id="{{ category.name }}">
 							<div>
+								<img src="{% static 'voting/images/tape-vector.png' %}" alt="tape" class="tape-img">
+								<img src="{% static 'voting/images/chichon-vector.png' %}" alt="tape" class="chichon-img">
 								<img class="category-image cat-item slideanim" src="/static/voting/images/categoryImages/{{ category.image }}"/>
 								<div class="category-title cat-item slideanim">{{ category.name }}</div>
 								<div class="category-description cat-item slideanim">{{ category.description }}</div>
@@ -154,7 +155,7 @@
 							</div>
 						</div>
 					</div>
-					<div id="{{category.name}}-nom-container" class="col-xs-6 text-center hidden category-container nominations-container">
+					<div id="{{category.name}}-nom-container" class="col-xs-12 col-md-6 text-center hidden category-container nominations-container">
 						<div id="{{category.name}}-nom">
 							{% for nomination in nominations %}
 							{% if nomination.category == category.name %}

@@ -2,5 +2,5 @@
 ¡Hola {{ full_name }}, bienvenido al CompuShow 2017!
 
 Por favor accede al siguiente link para confirmar tu registro.
-http://compushow2017.herokuapp.com{% url 'voting:activate' uidb64=uid token=token %}
+{{domain}}{% url 'voting:activate' uidb64=uid token=token %}
 {% endautoescape %}
