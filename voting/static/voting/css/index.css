@@ -26,6 +26,11 @@ body {
         font-size: 1.5rem;
     }
 }
+@media screen and (max-width: 600px){
+    .presentation > h1{
+        font-size: 3rem;
+    }
+}
 
 #goto-nomination-btn {
     font-size: 20px;
