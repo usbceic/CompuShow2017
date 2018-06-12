@@ -97,11 +97,11 @@ def log_in(request):
 
 @login_required()
 def nominate(request):
-	
+
 	categories  = get_categories()
 	students    = get_students()
 	nominations, categories_exist = get_nominations(request.user)
-
+	categories = [categories[0:6], categories[6:12], categories[12:]]
 	return render(request, 'voting/nominate.html', {
 		'nominate':True,
 		'categories':categories,
