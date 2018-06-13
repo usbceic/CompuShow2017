@@ -17,13 +17,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '!%^a8a3lf*rpjw!5wd8ni=6k5ubh2$+yv632%%=q_&+_k1uk$q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
-CUR_DOMAIN = os.environ.get('CUR_DOMAIN', 'localhost')
-
-
-DEBUG = CUR_DOMAIN == 'localhost'
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost','127.0.0.1','192.168.0.102', 'compushow2018.herokuapp.com']
+
+CUR_DOMAIN = os.environ.get('CUR_DOMAIN', 'localhost')
 
 # Application definition
 INSTALLED_APPS = [
