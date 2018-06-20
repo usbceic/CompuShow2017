@@ -19,6 +19,11 @@ var parentDIV;
 var category;
 var voted;
 
+$(window).scroll(function () {
+	const scroll = $(window).scrollTop();
+	$('.nav-categories')[scroll >= 40 ? 'addClass' : 'removeClass']('active')
+})
+
 $(document).ready(function(){
 	category = $(".category-title").text()
 	voted = ($('input#voted').val() === "True");

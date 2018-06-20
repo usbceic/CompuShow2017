@@ -1,7 +1,9 @@
 body {
 	height: 100%;
 	margin-bottom: 50px;
-	background-color: #111111;
+	/* background-color: #111111; */
+	background-image: url("../images/nominate-bg.png");
+
 	overflow: hidden;
 }
 
@@ -21,6 +23,8 @@ body {
 #categories-navbar {
 	padding: 20px;
 	overflow: hidden;
+	height: 100%;
+	background-color: #f1f1f1;
 }
 
 .aux {
@@ -39,7 +43,14 @@ body {
 .nav-categories {
 	overflow-y: scroll !important;
 	max-height: 100% !important;
-	bottom: 70px;
+	background-color: #f1f1f1;
+	position: fixed;
+	left: 0;
+	top: 53px;
+}
+
+.nav-categories.active {
+	top: 0;
 }
 
 .categories-navbar-item a {
@@ -48,8 +59,13 @@ body {
 
 .nav-pills >li>a:hover,
 .nav-pills2>li>a:hover {
-	color: white;
+	color: #555;
 }
+.nav-pills >li>a.active,
+.nav-pills2>li>a.active {
+	background-color: white !important;
+}
+
 
 .nav-pills >li>a, .nav-pills >li>a:focus, .nav-pills >li>a:hover,
 .nav-pills2>li>a, .nav-pills2>li>a:focus, .nav-pills2>li>a:hover{
@@ -69,7 +85,7 @@ body {
 
 .category-container {
 	padding: 30px;
-	width: 100%;
+	width: 50%;
 	height: 100%;
 }
 
@@ -95,6 +111,7 @@ body {
 /* Nomination box */
 .nomination-box {
 	text-align: center;
+	position: relative;
 	padding-top: 30px;
 }
 
