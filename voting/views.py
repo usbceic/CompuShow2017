@@ -392,12 +392,27 @@ def category(request):
 	if request.method == 'GET':
 		pk = request.GET.get('pk')
 		cat = Category.objects.filter(pk=pk)
-		nominates = cat[0].nominate_set.all()
+		nominates = cat[0].nominee_set.all()
 		nominados = []
 
 		for nom in nominates:
-			if nom.nominee:
-				nominados.append(Person.objects.get(entity=nom.nominee))
+			person = None
+			personOpt = None
+			nominate = None
+			if nom.entity:
+				person = json.loads(serializers.serialize('json',Person.objects.filter(entity=nom.entity)))
+				nominate = json.loads(serializers.serialize('json', Nominate.objects.filter(nominee=nom.entity)))
+
+			if nom.entityOpt:
+				personOpt = json.loads(serializers.serialize('json',Person.objects.filter(entity=nom.entityOpt)))
+
+			nominado = {
+				'person': person,
+				'personOpt': personOpt,
+				'nominee': json.loads(serializers.serialize('json', Nominee.objects.filter(pk=nom.pk))),
+				'nominate': nominate
+			}
+			nominados.append(nominado)
 
 		data = {
 			'categoria': json.loads(serializers.serialize('json', cat)),

@@ -89,7 +89,7 @@ DATABASES_LIST = {
 }
 
 DATABASES = {
-    'default': DATABASES_LIST[CUR_DOMAIN]
+    'default': DATABASES_LIST['produccion']
 }
 
 ####################################################
