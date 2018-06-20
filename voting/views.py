@@ -392,4 +392,10 @@ def category(request):
 	if request.method == 'GET':
 		pk = request.GET.get('pk')
 		cat = Category.objects.filter(pk=pk)
-		return HttpResponse(serializers.serialize('json', cat), content_type='application/json')
+		nominates = cat[0].nominate_set.all()
+
+		data = {
+			'categoria': cat,
+			'nominados': nominates
+		}
+		return HttpResponse(json.dumps(data), content_type='application/json')
