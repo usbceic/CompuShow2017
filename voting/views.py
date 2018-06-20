@@ -29,6 +29,9 @@ from .library import *
 
 from .models import *
 from django.core import serializers
+
+from django.views.decorators.csrf import csrf_exempt
+
 ##############################################
 # Flag to enable voting modules (important!) #
 ##############################################
@@ -382,16 +385,18 @@ def voting(request):
 
 	return HttpResponse(json.dumps(data))
 
+
+@csrf_exempt
 def voting_from_bot(request):
 	if request.method == "POST":
 		try:
-			entity = request.POST.get('nominee')
-			nominee = Nominee.objects.get(entity=Entity)
+			pk = request.POST.get('nominee')
+			nominee = Nominee.objects.get(pk=pk)
 			nominee.votes += 1
 			nominee.save()
-			return HttpResponse({'success': 1})
-		except:
-			return HttpResponse({'success': 0})
+			return HttpResponse(json.dumps({'success': 1}), content_type='application/json')
+		except Exception as e:
+			return HttpResponse(json.dumps({'error': str(e)}), content_type='application/json')
 
 ## Función que retorna las categorías:
 def categories(request):
