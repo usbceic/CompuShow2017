@@ -387,3 +387,9 @@ def categories(request):
 	if request.method == 'GET':
 		categories = Category.objects.all()
 		return HttpResponse(serializers.serialize('json', categories), content_type='application/json')
+
+def category(request):
+	if request.method == 'GET':
+		pk = request.GET.get('pk')
+		cat = Category.objects.get(pk)
+		return HttpResponse(serializers.serialize('json', cat), content_type='application/json')
