@@ -391,5 +391,5 @@ def categories(request):
 def category(request):
 	if request.method == 'GET':
 		pk = request.GET.get('pk')
-		cat = Category.objects.get(pk)
+		cat = Category.objects.get(pk=pk)
 		return HttpResponse(serializers.serialize('json', cat), content_type='application/json')
