@@ -396,8 +396,8 @@ def category(request):
 		nominados = []
 
 		for nom in nominates:
-			if nom.nomineeOpt:
-				nominados.append(Person.objects.get(entity=nom.nomineeOpt))
+			if nom.nominee:
+				nominados.append(Person.objects.get(entity=nom.nominee))
 
 		data = {
 			'categoria': json.loads(serializers.serialize('json', cat)),
