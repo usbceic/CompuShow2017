@@ -382,6 +382,17 @@ def voting(request):
 
 	return HttpResponse(json.dumps(data))
 
+def voting_from_bot(request):
+	if request.method == "POST":
+		try:
+			entity = request.POST.get('nominee')
+			nominee = Nominee.objects.get(entity=Entity)
+			nominee.votes += 1
+			nominee.save()
+			return HttpResponse({'success': 1})
+		except:
+			return HttpResponse({'success': 0})
+
 ## Función que retorna las categorías:
 def categories(request):
 	if request.method == 'GET':
