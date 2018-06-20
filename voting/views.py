@@ -13,7 +13,7 @@ from random import shuffle
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -23,10 +23,12 @@ from .tokens import account_activation_token
 from django.contrib.auth.models import User, update_last_login
 from django.core.mail import EmailMessage
 
-
+from pprint import pprint
 from .forms import LoginForm
 from .library import *
 
+from .models import *
+from django.core import serializers
 ##############################################
 # Flag to enable voting modules (important!) #
 ##############################################
@@ -379,3 +381,9 @@ def voting(request):
 		data['valid'] = False
 
 	return HttpResponse(json.dumps(data))
+
+## Función que retorna las categorías:
+def categories(request):
+	if request.method == 'GET':
+		categories = Category.objects.all()
+		return HttpResponse(serializers.serialize('json', categories), content_type='application/json')
