@@ -395,7 +395,7 @@ def category(request):
 		nominates = cat[0].nominate_set.all()
 
 		data = {
-			'categoria': serializers.serialize('json', cat),
-			'nominados': serializers.serialize('json',nominates)
+			'categoria': json.loads(serializers.serialize('json', cat)),
+			'nominados': json.loads(serializers.serialize('json',nominates))
 		}
 		return HttpResponse(json.dumps(data), content_type='application/json')
