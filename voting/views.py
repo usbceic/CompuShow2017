@@ -13,7 +13,7 @@ from random import shuffle
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -32,6 +32,7 @@ from django.core import serializers
 
 from django.views.decorators.csrf import csrf_exempt
 
+from django.core.exceptions import ObjectDoesNotExist
 ##############################################
 # Flag to enable voting modules (important!) #
 ##############################################
@@ -443,6 +444,8 @@ def login_bot(request):
 	if request.method == 'POST':
 		carnet = request.POST.get('carnet')
 		password = request.POST.get('password')
-		user = Student.objects.get(student_id=carnet).user
-		
-		return HttpResponse(json.dumps({'valid': user.check_password(password)}), content_type="application/json")
+		try:
+			user = Student.objects.get(student_id=carnet).user
+			return HttpResponse(json.dumps({'valid': user.check_password(password)}), content_type="application/json")
+		except Student.DoesNotExist as e:
+			return HttpResponse(json.dumps({'valid': False, 'error': str(e)}), content_type="application/json")
