@@ -435,3 +435,14 @@ def category(request):
 			'nominados': nominados
 		}
 		return HttpResponse(json.dumps(data), content_type='application/json')
+
+
+## Vista para validar usuario y contraseña 
+@csrf_exempt
+def login_bot(request):
+	if request.method == 'POST':
+		carnet = request.POST.get('carnet')
+		password = request.POST.get('password')
+		user = Student.objects.get(student_id=carnet).user
+		
+		return HttpResponse(json.dumps({'valid': user.check_password(password)}), content_type="application/json")
