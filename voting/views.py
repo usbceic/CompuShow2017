@@ -368,6 +368,7 @@ def get_vote_info(request):
 	return HttpResponse(json.dumps(data))
 
 @login_required()
+@csrf_exempt
 def voting(request):
 
 	user = request.user
@@ -392,10 +393,26 @@ def voting_from_bot(request):
 	if request.method == "POST":
 		try:
 			pk = request.POST.get('nominee')
-			nominee = Nominee.objects.get(pk=pk)
-			nominee.votes += 1
-			nominee.save()
-			return HttpResponse(json.dumps({'success': 1}), content_type='application/json')
+			student_id = request.POST.get('student_id')
+			categoria = request.POST.get('categoria')
+
+			print('already_voted', already_voted(student_id, categoria))
+
+			if not already_voted(student_id, categoria):
+				category = Category.objects.filter(name = categoria).first()
+				user = Student.objects.filter(student_id = student_id).first().user
+
+				nominee = Nominee.objects.get(pk=pk, category=category)
+				nominee.votes += 1
+				nominee.save()
+
+
+				Vote.objects.create(nominator=user, category=category)
+				return HttpResponse(json.dumps({'success': 1}), content_type='application/json')
+
+			else:
+				return HttpResponse(json.dumps({'success': 0}), content_type='application/json')
+
 		except Exception as e:
 			return HttpResponse(json.dumps({'error': str(e)}), content_type='application/json')
 
