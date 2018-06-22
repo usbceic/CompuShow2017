@@ -449,6 +449,6 @@ def login_bot(request):
 			return HttpResponse(json.dumps({'valid': user.check_password(password)}), content_type="application/json")
 		except Student.DoesNotExist as e:
 			return HttpResponse(json.dumps({'valid': False, 'error': 'No existe un estudiante con ese carnet'}), content_type="application/json")
-		except as e:
+		except Exception as e:
 			return HttpResponse(json.dumps({'valid': False, 'error': str(e)}), content_type="application/json")
 
