@@ -9,6 +9,7 @@
 #####################################################
 
 import json
+from functools import reduce
 from random import shuffle, randint
 from django.conf import settings
 from django.shortcuts import render, redirect
@@ -305,10 +306,20 @@ def vote(request):
     students = get_students()
     categories = get_categories()
     category = get_category(request.GET.get('category'))
-    
     # Get nominees and shuffle (because they come already sorted)
     nominees, voted = get_nominees_from_category(category, user)
+    all_comments = []
+    for nominee in nominees:
+        comments = nominee['comments'] + [nominee['firstcomment']]
+        name = nominee['name']
+        rotated = ['rotated', ''][randint(0, 1)]
+        for comment in comments:
+            all_comments.append({
+                'name': name, 'comment': comment, 'rotated': rotated
+            })
     shuffle(nominees)
+    shuffle(all_comments)
+    all_comments = all_comments[:14]
     order = randint(0, 1)
     return render(request, 'voting/vote.html', {
         'voting':True,
@@ -319,6 +330,7 @@ def vote(request):
         'category':category,
         'categories':categories,
         'nominees': nominees,
+        'all_comments': all_comments,
         'nominees_count':len(nominees),
         'safari': browser_safari(request.META['HTTP_USER_AGENT']),
     })
