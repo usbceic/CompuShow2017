@@ -310,7 +310,11 @@ def vote(request):
     nominees, voted = get_nominees_from_category(category, user)
     all_comments = []
     for nominee in nominees:
-        comments = nominee['comments'] + [nominee['firstcomment']]
+        comments = nominee['comments']
+        try:
+            comments +=  [nominee['firstcomment']]
+        except KeyError:
+            pass
         name = nominee['name']
         rotated = ['rotated', ''][randint(0, 1)]
         for comment in comments:
@@ -319,8 +323,10 @@ def vote(request):
             })
     shuffle(nominees)
     shuffle(all_comments)
-    all_comments = all_comments[:14]
+    all_comments = all_comments[:12]
     order = randint(0, 1)
+    nominees_lower = nominees[:3]
+    nominees_upper = nominees[3:]
     return render(request, 'voting/vote.html', {
         'voting':True,
         'order': order,
@@ -329,7 +335,8 @@ def vote(request):
         'enable_voting':enable_voting,
         'category':category,
         'categories':categories,
-        'nominees': nominees,
+        'nominees_upper': nominees_upper,
+        'nominees_lower': nominees_lower,
         'all_comments': all_comments,
         'nominees_count':len(nominees),
         'safari': browser_safari(request.META['HTTP_USER_AGENT']),
