@@ -9,7 +9,7 @@
 #####################################################
 
 import json
-from random import shuffle
+from random import shuffle, randint
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -309,18 +309,16 @@ def vote(request):
     # Get nominees and shuffle (because they come already sorted)
     nominees, voted = get_nominees_from_category(category, user)
     shuffle(nominees)
-    nominees_upper = nominees[:int((len(nominees)+1)/2)]
-    nominees_lower = nominees[int((len(nominees)+1)/2):]
-
+    order = randint(0, 1)
     return render(request, 'voting/vote.html', {
         'voting':True,
+        'order': order,
         'voted':voted,
         'students':students,
         'enable_voting':enable_voting,
         'category':category,
         'categories':categories,
-        'nominees_upper':nominees_upper,
-        'nominees_lower':nominees_lower,
+        'nominees': nominees,
         'nominees_count':len(nominees),
         'safari': browser_safari(request.META['HTTP_USER_AGENT']),
     })
