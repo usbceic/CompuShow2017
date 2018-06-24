@@ -69,12 +69,15 @@ STATICFILES_DIRS = (
 WSGI_APPLICATION = 'compusoft.wsgi.application'
 
 # DATABASES
+
+DB_PASS = os.environ.get('DB_PASS', '')
+
 DATABASES_LIST = {
     'produccion': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dap5u3ni1bfndq',
         'USER': 'egltmpehffvmtt',
-        'PASSWORD': '7000b7b0f3abb309ab8e7d63d069f5d9058f03aa0aacb0b342200c858d8c4eff',
+        'PASSWORD': DB_PASS,
         'HOST': 'ec2-204-236-239-225.compute-1.amazonaws.com',
         'PORT': '5432',
     },
