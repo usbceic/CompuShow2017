@@ -19,10 +19,12 @@ var parentDIV;
 var category;
 var voted;
 
-$(window).scroll(function () {
+function changeSideBar () {
 	const scroll = $(window).scrollTop();
 	$('.nav-categories')[scroll >= 40 ? 'addClass' : 'removeClass']('active')
-})
+}
+
+$(window).scroll(changeSideBar)
 
 $(document).ready(function(){
 	category = $(".category-title").text()
@@ -170,3 +172,7 @@ $(document).on('click', '.vote-btn', function() {
 		}
 	});	
 });
+
+$(function() {
+	changeSideBar()
+})

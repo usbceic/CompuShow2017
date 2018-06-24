@@ -10,7 +10,7 @@
 		<!-- Website icon -->
 		<!--<link rel="icon" href="">-->
 		<!-- Bootstrap core CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="{% static 'voting/css/bootstrap.min.css' %}">
 		<link rel="icon" href="{% static 'voting/images/favicon.png' %}">
 		{% load static %}
 		<link rel="stylesheet" type="text/css" href="{% static 'voting/css/base.css' %}"/>
@@ -178,9 +178,9 @@
 		</div>
 
 		<!-- JQuery -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		<script src="{% static 'voting/js/jquery.min.js' %}"></script>
 		<!-- Bootstrap core JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="{% static 'voting/js/boostrap.min.js' %}"></script>
 		<!-- Base script -->
 		<script src="{% static 'voting/js/base.js' %}"></script>
 		{% block javascript %}{% endblock javascript %}

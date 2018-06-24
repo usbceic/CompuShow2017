@@ -9,7 +9,7 @@
 {% block body %}
 
 	<div class="row">
-		
+
 		<nav class="col-xs-2" id="categories-navbar">
 			<ul class="nav nav-pills nav-stacked nav-categories">
 				<li><h2 class="nav-bar-title">CATEGORÍAS</h2></li>
@@ -24,78 +24,140 @@
 	    </nav>
 
 		<div class="col-xs-10 categories">
-
-			<nav id="collapsed-navbar2" class="navbar navbar-default navbar-static-top">
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2" aria-expanded="false" aria-controls="navbar2">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand navbar-brand2" data-toggle="collapse" data-target="#navbar2">CATEGORÍAS</a>
+				<nav id="collapsed-navbar2" class="col-xs-12 navbar navbar-default navbar-static-top">
+					<div class="container">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2" aria-expanded="false" aria-controls="navbar2">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand navbar-brand2" data-toggle="collapse" data-target="#navbar2">CATEGORÍAS</a>
+						</div>
+						<div id="navbar2" class="navbar-collapse collapse">
+							<ul id="navbar-collapsed2" class="nav nav-pills2">
+								{% for category in categories %}
+									<li class="collapsed-navbar2-element categories-navbar-item" style="font-size:15px;"><a href="{% url 'voting:vote' %}?category={{ category.name }}">{{ category.name }}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
 					</div>
-					<div id="navbar2" class="navbar-collapse collapse">
-						<ul id="navbar-collapsed2" class="nav nav-pills2">							
-							{% for category in categories %}
-								<li class="collapsed-navbar2-element categories-navbar-item" style="font-size:15px;"><a href="{% url 'voting:vote' %}?category={{ category.name }}">{{ category.name }}</a></li>
-							{% endfor %}
-						</ul>
-					</div>
-				</div>
-			</nav>
-
-			<div id="{{ category.name }}" class="category-container text-center">
-				<img class="category-image cat-item" src="/static/voting/images/categoryImages/{{ category.image }}"/>
-				<div class="category-title cat-item">{{ category.name }}</div>
-				<div class="category-description cat-item">{{ category.description }}</div>
-			
-
-				<div class="row">
-					{% for nominee in nominees %}
-						<div class="col-xs-6">
-							<div class="nomination-box hvr-float-shadow">
-								<a href="#" class="fill-div custom-a">
-
-									<input type=hidden class="nominee-id" value={{ nominee.id }}>
-
-									<img class="nominee-image slide" src="/static/voting/images/NominationImages/{{ category.name }}/{{ nominee.id }}.jpg"/>
-
-									{% if nominee.name %}
-										<div class="nominee-name slide">{{ nominee.name }}</div>
-									{% endif %}
-									
-									{% if nominee.carnet %}
-										<div class="nominee-carnet slide">{{ nominee.carnet }}</div>
-									{% endif %}
-
-									{% if nominee.nameOpt %}
-										<div class="nominee-auxtext slide">y</div>
-										<div class="nominee-nameOpt slide">{{ nominee.nameOpt }}</div>
-										<div class="nominee-carnetOpt slide">{{ nominee.carnetOpt }}</div>
-									{% endif %}
-
-									{% if nominee.extra %}
-										<div class="nominee-extra slide">{{ nominee.extra }}</div>
-									{% endif %}							
-
-									{% if nominee.cartoon %}
-										<div class="nominee-auxtext slide">Caricatura:</div>
-										<div class="nominee-cartoon slide">{{ nominee.cartoon }}</div>
-									{% endif %}
-
-								</a>
-								{% comment %} {% if nominee.vote %}
-										<span class="label label-success voted text-center slide">Voto</span>
-								{% endif %} {% endcomment %}
-
+				</nav>
+				<div id="{{ category.name }}" class="col-xs-12 {% if order == 1 %}col-md-push-6{% endif %} col-sm-6 category-container text-center">
+					<img class="category-image cat-item" src="/static/voting/images/categoryImages/{{ category.image }}"/>
+					<div class="category-title cat-item">{{ category.name }}</div>
+					<div class="category-description cat-item">{{ category.description }}</div>
+	
+	
+					<div class="row">
+						<div class="col-xs-12 col-md-6">
+							<div class="row">
+								{% for nominee in nominees_lower %}
+									<div class="col-xs-12">
+										<div class="nomination-box hvr-float-shadow">
+											<a href="#" class="fill-div custom-a">
+	
+												<input type=hidden class="nominee-id" value={{ nominee.id }}>
+	
+												<img class="nominee-image slide" src="/static/voting/images/NominationImages/{{ category.name }}/{{ nominee.carnet }}.jpg"/>
+	
+												{% if nominee.name %}
+													<div class="nominee-name slide">{{ nominee.name }}</div>
+												{% endif %}
+	
+												{% if nominee.carnet %}
+													<div class="nominee-carnet slide">{{ nominee.carnet }}</div>
+												{% endif %}
+	
+												{% if nominee.nameOpt %}
+													<div class="nominee-auxtext slide">y</div>
+													<div class="nominee-nameOpt slide">{{ nominee.nameOpt }}</div>
+													<div class="nominee-carnetOpt slide">{{ nominee.carnetOpt }}</div>
+												{% endif %}
+	
+												{% if nominee.extra %}
+													<div class="nominee-extra slide">{{ nominee.extra }}</div>
+												{% endif %}
+	
+												{% if nominee.cartoon %}
+													<div class="nominee-auxtext slide">Caricatura:</div>
+													<div class="nominee-cartoon slide">{{ nominee.cartoon }}</div>
+												{% endif %}
+	
+											</a>
+											{% comment %} {% if nominee.vote %}
+													<span class="label label-success voted text-center slide">Voto</span>
+											{% endif %} {% endcomment %}
+	
+										</div>
+									</div>
+								{% endfor %}
+	
 							</div>
 						</div>
-					{% endfor %}
+						<div class="col-xs-12 col-md-6">
+							<div class="row">
+								{% for nominee in nominees_upper %}
+									<div class="col-xs-12">
+										<div class="nomination-box hvr-float-shadow">
+											<a href="#" class="fill-div custom-a">
+	
+												<input type=hidden class="nominee-id" value={{ nominee.id }}>
+	
+												<img class="nominee-image slide" src="/static/voting/images/NominationImages/{{ category.name }}/{{ nominee.carnet }}.jpg"/>
+	
+												{% if nominee.name %}
+													<div class="nominee-name slide">{{ nominee.name }}</div>
+												{% endif %}
+	
+												{% if nominee.carnet %}
+													<div class="nominee-carnet slide">{{ nominee.carnet }}</div>
+												{% endif %}
+	
+												{% if nominee.nameOpt %}
+													<div class="nominee-auxtext slide">y</div>
+													<div class="nominee-nameOpt slide">{{ nominee.nameOpt }}</div>
+													<div class="nominee-carnetOpt slide">{{ nominee.carnetOpt }}</div>
+												{% endif %}
+	
+												{% if nominee.extra %}
+													<div class="nominee-extra slide">{{ nominee.extra }}</div>
+												{% endif %}
+	
+												{% if nominee.cartoon %}
+													<div class="nominee-auxtext slide">Caricatura:</div>
+													<div class="nominee-cartoon slide">{{ nominee.cartoon }}</div>
+												{% endif %}
+	
+											</a>
+											{% comment %} {% if nominee.vote %}
+													<span class="label label-success voted text-center slide">Voto</span>
+											{% endif %} {% endcomment %}
+	
+										</div>
+									</div>
+								{% endfor %}
+	
+							</div>
+						</div>
+		
+					</div>
+	
 				</div>
-
-			</div>
+				<div id="note-box" class="hidden-xs col-md-6 {% if order == 1 %}col-md-pull-6{% endif %}">
+					<div class="row">
+						{% for comment in all_comments %}
+						<div class="note col-xs-6">
+							<img class="img-responsive" src="{% static 'voting/images/postit-vector.png' %}" alt="">
+							<div class="comment">
+								<p class="">{{comment.comment}}</p>
+								<i><small>{{comment.name}}</small></i>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
 		</div>
 	</div>
 
@@ -108,7 +170,7 @@
 					<p class='h2 text-center' style='color:white;'>Nominado</p>
 				</div>
 				<div id="modal-body-vote" class="modal-body text-center">
-					
+
 					<div id="modal-body-vote-info">
 						<!-- fill in JQuery -->
 					</div>
@@ -116,7 +178,7 @@
 					<div id="carousel_{{ nominee.id }}_comments_modal" class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div id="carousel-inner-modal" class="carousel-inner">
-							<!-- fill in JQuery -->	
+							<!-- fill in JQuery -->
 						</div>
 
 						<!-- Left and right controls -->
