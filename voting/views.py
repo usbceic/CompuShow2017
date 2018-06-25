@@ -33,6 +33,9 @@ from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 
 from django.core.exceptions import ObjectDoesNotExist
+
+import os
+TOKEN_BOT = os.environ.get('TOKEN_BOT')
 ##############################################
 # Flag to enable voting modules (important!) #
 ##############################################
@@ -395,6 +398,8 @@ def voting_from_bot(request):
 			pk = request.POST.get('nominee')
 			student_id = request.POST.get('student_id')
 			categoria = request.POST.get('categoria')
+			token = request.POST.get('token')
+			assert token == TOKEN_BOT, 'Parece que no has enviado esta request desde el bot de Telegram.'
 
 			print('already_voted', already_voted(student_id, categoria))
 
@@ -461,7 +466,9 @@ def login_bot(request):
 	if request.method == 'POST':
 		carnet = request.POST.get('carnet')
 		password = request.POST.get('password')
+		token = request.POST.get('token')
 		try:
+			assert token == TOKEN_BOT, 'Parece que no has enviado esta request desde el bot de Telegram.'
 			user = Student.objects.get(student_id=carnet).user
 			return HttpResponse(json.dumps({'valid': user.check_password(password)}), content_type="application/json")
 		except Student.DoesNotExist as e:
