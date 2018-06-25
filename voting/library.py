@@ -542,7 +542,7 @@ def get_nominees_from_category(category, user):
 	voted = False
 	for cnt, nominee in enumerate(nominees):
 		results.append({
-			'id':cnt,
+			'id':nominee.id,
 			'name':get_full_name_from_entity(nominee.entity_id),
 			'carnet':get_carnet_from_entity(nominee.entity_id),
 		})
