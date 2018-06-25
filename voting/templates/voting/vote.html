@@ -60,7 +60,7 @@
 	
 												<input type=hidden class="nominee-id" value={{ nominee.id }}>
 												<div id="{{nominee.id}}" class="img-vote-container">
-													<img class="nominee-image slide" src="{% static 'voting' %}/images/NominationImages/{{ category.name }}/{{ nominee.id }}.jpg"/>
+													<img {% if category.name == 'CompuTeam' or category.name == 'CompuLove' %}style="border-radius: 30%;"{% endif %} class="nominee-image slide" src="{% static 'voting' %}/images/NominationImages/{{ category.name }}/{{ nominee.id }}.jpg"/>
 													<img src="{% static 'voting/images/tape-green-vector.png' %}"
 													alt="" class="{% if nominee.vote %}active {% endif %}img-responsive postit">
 												</div>
@@ -105,7 +105,7 @@
 	
 												<input type=hidden class="nominee-id" value={{ nominee.id }}>
 												<div id="{{nominee.id}}" class="img-vote-container">
-													<img class="nominee-image slide" src="{% static 'voting' %}/images/NominationImages/{{ category.name }}/{{ nominee.id }}.jpg"/>
+													<img {% if category.name == 'CompuTeam' or category.name == 'CompuLove' %}style="border-radius: 30%;"{% endif %} class="nominee-image slide" src="{% static 'voting' %}/images/NominationImages/{{ category.name }}/{{ nominee.id }}.jpg"/>
 													<img src="{% static 'voting/images/tape-green-vector.png' %}"
 													alt="" class="{% if nominee.vote %}active {% endif %}img-responsive postit">
 												</div>
