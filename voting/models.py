@@ -19,6 +19,12 @@ class Entity(models.Model):
     #nominee_photo = models.ImageField(upload_to=something,max_length=200, null=True)
     #winner_photo = models.ImageField(upload_to=something,max_length=200, null=True)
 
+    def __unicode__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return str(Person.objects.get(entity=self))
+
     class Meta:
         db_table = 'entity'
         verbose_name = "Entity"
