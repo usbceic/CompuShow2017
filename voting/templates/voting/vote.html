@@ -149,7 +149,7 @@
 				<div id="note-box" class="hidden-xs col-md-6 {% if order == 1 %}col-md-pull-6{% endif %}">
 					<div id="draggable-container" class="row">
 						{% for comment in all_comments %}
-						<div class="note col-xs-6">
+						<div class="note col-xs-6 {{comment.rotated}}">
 							<img class="img-responsive" src="{% static 'voting/images/postit-vector.png' %}" alt="">
 							<div class="comment">
 								<p class="">{{comment.comment}}</p>

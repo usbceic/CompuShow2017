@@ -516,8 +516,12 @@ body {
 .note {
 	position: relative;
 	padding: 0;
+	transform: rotateZ(10deg);
 }
 
+.note.rotated {
+	transform: rotateZ(-10deg);
+}
 .note .comment {
 	position: absolute;
 	top: 50%;
