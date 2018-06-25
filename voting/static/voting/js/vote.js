@@ -86,15 +86,6 @@ function displayVote(data) {
 		$('#modal-body-vote-info').append("<p><strong>"+studentName+"</strong></p>");
 	}
 
-	if(studentID !== "") {        			
-		$('#modal-body-vote-info').append("<p>"+studentID+"</p>");
-	}
-
-	if(studentIDOpt !== "") {
-		$('#modal-body-vote-info').append("y</p>"
-			+"<p><strong>"+studentNameOpt+"</strong></p>"
-			+"<p>"+studentIDOpt+"</p>");
-	}
 
 	if(cartoon !== "") {
 		$('#modal-body-vote-info').append(
