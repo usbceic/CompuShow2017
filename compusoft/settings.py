@@ -88,6 +88,14 @@ DATABASES_LIST = {
         'PASSWORD': 'compusoft',
         'HOST': '127.0.0.1',
         'PORT': '',
+    },
+    'testing': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'debq3251djvgu9',
+        'USER': 'yrndhlrvagjtqd',
+        'PORT': '5432',
+        'PASSWORD': '895a8c8ab829258ae88220196262a225e4f729eabb33999935266f95cda1c9b8',
+        'HOST': 'ec2-54-204-18-53.compute-1.amazonaws.com',
     }
 }
 

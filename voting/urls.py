@@ -28,4 +28,8 @@ urlpatterns = [
 	url(r'^view_profile/$', views.view_profile, name='view_profile'),
 	url(r'^pswd/$', views.upd_pswd, name='upd_pswd'),
 	url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.activate, name='activate'),
+	url(r'^categories/$', views.categories, name='categories'),
+	url(r'^category/$', views.category, name='category'),
+	url(r'^voting_from_bot/$', views.voting_from_bot, name='voting_from_bot'),
+	url(r'^login_bot/$', views.login_bot, name='login_bot')
 ]
