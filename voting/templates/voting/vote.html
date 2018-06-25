@@ -45,7 +45,7 @@
 					</div>
 				</nav>
 				<div id="{{ category.name }}" class="col-xs-12 {% if order == 1 %}col-md-push-6{% endif %} col-sm-6 category-container text-center">
-					<img class="category-image cat-item" src="/static/voting/images/categoryImages/{{ category.image }}"/>
+					<img class="category-image cat-item" src="{% static 'voting/' %}images/categoryImages/{{ category.image }}"/>
 					<div class="category-title cat-item">{{ category.name }}</div>
 					<div class="category-description cat-item">{{ category.description }}</div>
 	
