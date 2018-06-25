@@ -59,8 +59,11 @@
 											<a href="#" class="fill-div custom-a">
 	
 												<input type=hidden class="nominee-id" value={{ nominee.id }}>
-	
-												<img class="nominee-image slide" src="/static/voting/images/NominationImages/{{ category.name }}/{{ nominee.id }}.jpg"/>
+												<div id="{{nominee.id}}" class="img-vote-container">
+													<img class="nominee-image slide" src="{% static 'voting' %}/images/NominationImages/{{ category.name }}/{{ nominee.id }}.jpg"/>
+													<img src="{% static 'voting/images/tape-green-vector.png' %}"
+													alt="" class="{% if nominee.vote %}active {% endif %}img-responsive postit">
+												</div>
 	
 												{% if nominee.name %}
 													<div class="nominee-name slide">{{ nominee.name }}</div>
@@ -86,9 +89,6 @@
 												{% endif %}
 	
 											</a>
-											{% comment %} {% if nominee.vote %}
-													<span class="label label-success voted text-center slide">Voto</span>
-											{% endif %} {% endcomment %}
 	
 										</div>
 									</div>
@@ -104,8 +104,12 @@
 											<a href="#" class="fill-div custom-a">
 	
 												<input type=hidden class="nominee-id" value={{ nominee.id }}>
-	
-												<img class="nominee-image slide" src="/static/voting/images/NominationImages/{{ category.name }}/{{ nominee.id }}.jpg"/>
+												<div id="{{nominee.id}}" class="img-vote-container">
+													<img class="nominee-image slide" src="{% static 'voting' %}/images/NominationImages/{{ category.name }}/{{ nominee.id }}.jpg"/>
+													<img src="{% static 'voting/images/tape-green-vector.png' %}"
+													alt="" class="{% if nominee.vote %}active {% endif %}img-responsive postit">
+												</div>
+		
 	
 												{% if nominee.name %}
 													<div class="nominee-name slide">{{ nominee.name }}</div>
@@ -131,9 +135,6 @@
 												{% endif %}
 	
 											</a>
-											{% comment %} {% if nominee.vote %}
-													<span class="label label-success voted text-center slide">Voto</span>
-											{% endif %} {% endcomment %}
 	
 										</div>
 									</div>

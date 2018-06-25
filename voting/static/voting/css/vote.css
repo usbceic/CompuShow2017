@@ -484,6 +484,18 @@ body {
 }
 
 
-/* .note .comment.active {
+.img-vote-container {
+	position: relative;
+}
 
-} */
+.img-vote-container .postit {
+	position: absolute;
+	display: none;
+	top: 10px;
+}
+
+.img-vote-container .postit.active {
+	position: absolute;
+	display: block;
+	top: 10px;
+}

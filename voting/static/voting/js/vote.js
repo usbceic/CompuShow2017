@@ -40,8 +40,6 @@ $(document).on('click', '.custom-a', function() {
 	studentIDOpt   = ($(this).children(".nominee-carnetOpt")).text();
 	extra          = ($(this).children(".nominee-extra")).text();
 	cartoon        = ($(this).children(".nominee-cartoon")).text();
-	parentDIV      = $(this).parent();
-
 	$.ajax({
 		type: 'GET',
 		url: '/voteinfo/',
@@ -166,8 +164,8 @@ $(document).on('click', '.vote-btn', function() {
 			data = JSON.parse(data);
 
 			if(data['valid']) {
-				parentDIV.append("<span class='label label-success voted text-center slide'>Voto</span>");
-				$('#successfulVotingModal').modal('toggle');
+				$('#successfulVotingModal').modal('toggle')
+				$(`#${nomineeID} .postit`).addClass('active')
 			}
 		}
 	});	
