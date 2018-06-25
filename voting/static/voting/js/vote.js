@@ -71,7 +71,7 @@ function displayVote(data) {
 					+"<img class='big-image' src='https://compushow2018.s3.amazonaws.com/static/voting/images/Cartoon/"+studentID+".png'>"
 				+"</div>"
 				+"<div class='col-xs-6'>"
-					+"<img class='big-image' src='https://compushow2018.s3.amazonaws.com//static/voting/images/NominationImages/"+category+"/"+nomineeID+".jpg'/>"
+					+"<img class='big-image' src='https://compushow2018.s3.amazonaws.com/static/voting/images/NominationImages/"+category+"/"+nomineeID+".jpg'/>"
 				+"</div>"
 			
 			+"</div>"
