@@ -251,6 +251,8 @@ body {
 
 	#collapsed-navbar2 {
 		display: inline;
+		background-color: #DDDDDD;
+		margin-bottom: 0;
 	}
 
 	.categories {
