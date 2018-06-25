@@ -424,9 +424,9 @@ def voting_from_bot(request):
             pk = request.POST.get('nominee')
             student_id = request.POST.get('student_id')
             categoria = request.POST.get('categoria')
-			person = request.POST.get('person')
-			personOpt = request.POST.get('personOpt')
-			extra = request.POST.get('extra')
+            person = request.POST.get('person')
+            personOpt = request.POST.get('personOpt')
+            extra = request.POST.get('extra')
             token = request.POST.get('token')
             assert token == TOKEN_BOT, 'Parece que no has enviado esta request desde el bot de Telegram.'
 
@@ -440,10 +440,10 @@ def voting_from_bot(request):
                 nominee.votes += 1
                 nominee.save()
 
-				if person:
-					person = Entity.objects.get(pk=person)
-				if personOpt:
-					personOpt = Entity.objects.get(pk=personOpt)
+                if person:
+                    person = Entity.objects.get(pk=person)
+                if personOpt:
+                    personOpt = Entity.objects.get(pk=personOpt)
                 Vote.objects.create(nominator=user, category=category, nominee=person, nomineeOpt=personOpt, extra=extra)
                 return HttpResponse(json.dumps({'success': 1}), content_type='application/json')
 
