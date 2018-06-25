@@ -10,7 +10,7 @@
 		<div class="profile-wrapper">	
 			<div class="container-fluid text-center basic-info">
 				<div class="basic-info-content">
-					<img class="profile-image profile-item" src="/static/voting/images/profilePhotos/{% if nominations %}{{ student_id }}.jpg{% else %}defaultProfilePhoto.jpg{% endif %}"/>
+					<img class="profile-image profile-item" src="{% static 'voting/' %}images/profilePhotos/{% if nominations %}{{ student_id }}.jpg{% else %}defaultProfilePhoto.jpg{% endif %}"/>
 					<div class="profile-name profile-item">{{ student_name }}</div>
 					<div class="profile-id profile-item">{{ student_id }}</div>
 				</div>
