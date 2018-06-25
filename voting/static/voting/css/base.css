@@ -1,11 +1,11 @@
 @font-face {
 	font-family: "CompuSoft Font";
-	src: url("https://compushow2018.herokuapp.com/static/fonts/NunitoSans/NunitoSans-Regular.ttf") format("opentype");
+	src: url("../fonts/NunitoSans/NunitoSans-Regular.ttf") format("opentype");
 }
 
 @font-face {
 	font-family: "CompuSoft Title";
-	src: url('https://compushow2018.herokuapp.com/static/fonts/ChellaType/ChellaType-Regular.ttf') format('opentype');
+	src: url('../fonts/ChellaType/ChellaType-Regular.ttf') format('opentype');
 }
 html {
 	position: relative;
