@@ -318,6 +318,7 @@ def vote(request):
     # Get nominees and shuffle (because they come already sorted)
     nominees, voted = get_nominees_from_category(category, user)
     all_comments = []
+    print(nominees)
     for nominee in nominees:
         comments = nominee['comments']
         try:
@@ -326,9 +327,17 @@ def vote(request):
             pass
         name = nominee['name']
         rotated = ['rotated', ''][randint(0, 1)]
+        try:
+            nameOpt = nominee['nameOpt']
+        except:
+            nameOpt = None
+        try:
+            extra = nominee['extra']
+        except:
+            extra = None
         for comment in comments:
             all_comments.append({
-                'name': name, 'comment': comment, 'rotated': rotated
+                'name': name, 'extra': extra, 'nameOpt':nameOpt, 'comment': comment, 'rotated': rotated
             })
     shuffle(nominees)
     shuffle(all_comments)

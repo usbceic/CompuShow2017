@@ -153,7 +153,7 @@
 							<img class="img-responsive" src="{% static 'voting/images/postit-vector.png' %}" alt="">
 							<div class="comment">
 								<p class="">{{comment.comment}}</p>
-								<i><small>{{comment.name}}</small></i>
+								<i><small>{{comment.name|default:comment.extra}} {% if comment.nameOpt %}y {{comment.nameOpt}}{% endif %}</small></i>
 							</div>
 						</div>
 						{% endfor %}
