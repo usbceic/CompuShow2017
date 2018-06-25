@@ -23,7 +23,10 @@ class Entity(models.Model):
         return self.__str__()
 
     def __str__(self):
-        return str(Person.objects.get(entity=self))
+        try:
+            return str(Person.objects.get(entity=self))
+        except Person.DoesNotExist:
+            return 'entity'
 
     class Meta:
         db_table = 'entity'
