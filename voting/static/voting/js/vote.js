@@ -173,4 +173,14 @@ $(document).on('click', '.vote-btn', function() {
 
 $(function() {
 	changeSideBar()
+	const draggable = new Draggable.Swappable(document.querySelector('#draggable-container'), {
+		draggable: '.note',
+		mirror: {
+		constrainDimensions: true,
+		},
+		plugins: [Draggable.Plugins.ResizeMirror]
+	})
+	draggable.on('drag:start', function (obj) {
+		console.log(obj.data)
+	})
 })

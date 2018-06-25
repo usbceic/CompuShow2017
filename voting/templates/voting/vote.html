@@ -147,7 +147,7 @@
 	
 				</div>
 				<div id="note-box" class="hidden-xs col-md-6 {% if order == 1 %}col-md-pull-6{% endif %}">
-					<div class="row">
+					<div id="draggable-container" class="row">
 						{% for comment in all_comments %}
 						<div class="note col-xs-6">
 							<img class="img-responsive" src="{% static 'voting/images/postit-vector.png' %}" alt="">
@@ -230,5 +230,6 @@
 
 {% block javascript %}
 	{% load static %}
+	<script src="{% static 'voting/js/draggable.js' %}"></script>
 	<script src="{% static 'voting/js/vote.js' %}"></script>
 {% endblock javascript %}

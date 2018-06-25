@@ -483,6 +483,9 @@ body {
 	hyphens: auto;
 }
 
+.draggable-source--is-dragging {
+	visibility: hidden;
+}
 
 .img-vote-container {
 	position: relative;
